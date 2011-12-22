@@ -1,0 +1,155 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Awesome clothing - eStore{% endblock %}
+{% block keywords %}clothing, store, estore, eStore, fashion, mens, womens, kids, tshirts, t-shirts, shirts, clothes, style{% endblock %}
+{% block description %}Online clothing shop. Most awesome products on the web{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Sans+Caption' rel='stylesheet' type='text/css' />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/estoreshop/css/main.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/estoreshop/css/dropDownMenu.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/dropDownMenu.js') }}" ></script>
+{% endblock %}
+    
+{% block body %}
+   <div id="container">
+        <div id="header">
+            <div id="header-content">
+                <ul id="nav">
+                    {% render "eStoreShopBundle:Store:headerNavigation" %}
+                <!-- nav end -->
+                </ul>
+                <div id="cart-widget" class="shadow">
+                    {% render "eStoreShopBundle:Store:cartWidget" %}
+                <!-- cart-widget end -->
+                </div>
+            <!-- header-content end -->
+            </div>
+        <!-- header end -->
+        </div>
+        
+        
+        <div id="page">
+            <div id="top-nav">
+            	<ul>
+                    <li><a href="">MEN'S</a></li>
+                    <li><a href="">WOMEN'S</a></li>
+                    <li><a href="">UNI'S</a></li>
+                    <li><a href="">KID'S</a></li>
+                    <li><a href="index.html">FEATURED</a></li>
+                </ul>
+            </div>
+            
+                
+        	<div id="sidebar">
+                {% block sidebar %}
+            	<h2>Search</h2>
+                <div class="line"></div>
+                <div id="search-container">
+                	<form class="search-form">
+                    	<fieldset>
+                            <input id="mens" type="checkbox">
+                            <label for="mens">Men's</label>
+                            <input id="womens" type="checkbox">
+                            <label for="womens">Women's</label><br /><br />
+                            <input id="kids" type="checkbox">
+                            <label for="kids">Kid's&nbsp;&nbsp;</label>
+                            <input id="unis" type="checkbox">
+                            <label for="unis">Uni's</label>
+                        </fieldset>
+                        
+                        <select id="search-brand">
+                        	<option>All brands</option>
+                        	<option>Shirts</option>
+                            <option>Pants</option>
+                            <option>Shoes</option>
+                        </select>               
+    					<br />
+                        
+                        <select id="search-category">
+                        	<option>All categories</option>
+                        	<option>Shirts</option>
+                            <option>Pants</option>
+                            <option>Shoes</option>
+                        </select>
+                         <br />     
+                         
+                         <select id="search-size">
+                        	<option>All sizes</option>
+                        	<option>Shirts</option>
+                            <option>Pants</option>
+                            <option>Shoes</option>
+                        </select>
+                         <br />   
+                         
+                        <select id="search-color">
+                        	<option>All colors</option>
+                        	<option>Shirts</option>
+                            <option>Pants</option>
+                            <option>Shoes</option>
+                        </select>               
+    					<br /><br />   
+                        
+                        <input  type="text" placeholder="Search..." style="display:block;" /> <br /> 
+                        
+                        <div class="layout-slider" style="width: 100%">
+                        	<span style="display: block; width: 160px; padding-left: 5px;"><input id="slider-search" type="slider" name="price" value="1;5000" /></span>
+                        </div><br />
+                        
+                        <input type="submit" />
+                        
+                    </form>
+                </div>
+                
+            	<h2>Categories</h2>
+                <div class="line"></div>
+                <ul class="categories">
+                	<li>Shoes >></li>
+                    <li>Shirts >></li>
+                    <li>Underware >></li>
+                    <li>Pants >></li>
+                    <li>Hoodies >></li>
+                    <li>Accesories >></li>
+                </ul>
+                
+                <h2>Products</h2>
+                <div class="line"></div>
+                <ul class="categories">
+                	<li>New >></li>
+                    <li>Popular >></li>
+                    <li>Cheap >></li>
+                    <li>Expensive >></li>
+                    <li>Accessories >></li>
+                </ul>
+            {% endblock %}
+            <!-- left-container end -->
+            </div>
+            
+            
+            <div id="main">
+            	{% block main %}
+                
+            <!-- products-container end -->
+            {% endblock %}
+            </div>
+        <!-- page end -->
+        </div>
+    <!-- container end -->
+    </div>
+    
+    
+    <div id="footer">
+    	<div id="footer-content">
+        	<h3>Shop</h3>
+            <h3>Vote & Submit</h3>
+            <h3>Community</h3>
+            <h3>Help</h3>        
+        <!-- footer-content end -->
+        </div>
+    <!-- footer end -->
+    </div>
+{% endblock %}

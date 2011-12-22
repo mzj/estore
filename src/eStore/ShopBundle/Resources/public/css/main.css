@@ -1,0 +1,321 @@
+/**
+ * File: css/main.css
+ * Desc: Main css styles file
+ * Author: markozjovanovic@gmail.com
+ * Date: Dec. 2011
+ * Google Font: 'PT Sans', sans-serif;
+ */
+
+body {
+	background-color:#FFF;	
+	font-family: "PT Sans",Arial,Helvetica,sans-serif;
+}
+
+h2 {
+	font-size:18px;
+	font-weight:bold;	
+}
+
+h3 {
+	font-weight:bold;	
+}
+
+#container {
+	height: auto; 
+	min-height: 100%;
+}
+
+#header {
+	width: 100%;
+	height: 45px;
+	background:url(../img/header.png) top repeat;	
+}
+
+#header-content {
+        position: relative;
+	margin-left:auto;
+	margin-right:auto;
+	width:960px;
+}
+
+
+/* Cart Widget */
+#cart-widget {
+        position: absolute;
+	font-size:13px;
+	width: 120px;
+	height: 75px;
+	right:0;
+        top:0;
+	border:1px solid #ECECEC;
+	border-top:0px;
+	text-align:center;
+	padding:10px;
+	background:#FFF url(../img/cart-widget-gradient.png) bottom repeat-x;
+	border-bottom-left-radius:65px;
+	border-bottom-right-radius:65px;
+}
+
+#cart-widget div {
+	max-width: 100px;
+	float:left;
+	display:block;
+	height: 100%;
+}
+
+#cart-widget p {
+	margin-bottom:10px;
+	border-bottom:1px dotted #CCC;
+}
+
+#cart-widget a {
+	color: #E81144;
+}
+
+#cart-widget img {
+	margin-bottom:-5px;
+}
+
+#cart-widget a:hover {
+	color: #3F70B0;
+}
+
+.cart-items-number {
+	font-size:20px;
+	font-weight:bold;
+}
+
+
+
+.shadow {
+	-moz-box-shadow: 0 0 3px #525760;
+	 -webkit-box-shadow: 0 0 3px #525760;
+	 box-shadow: 0px 0px 3px #525760;
+}
+
+.clear {
+	clear:both;	
+}
+
+
+
+#page {
+	width: 960px;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#FFF;
+	margin-top: 50px;
+	padding-bottom: 150px;
+}
+
+/* Clear Fix - Need for web kit based browsers */
+#page:after {
+	content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+#top-nav {
+	text-align:center;
+	float:left;
+	width:100%;
+	font-size:14px;
+	margin-top:-16px;
+	
+}
+
+#top-nav ul {
+	display:inline;	
+	border-bottom:1px dotted #ECECEC;
+}
+
+#top-nav li {
+	display:inline;
+	margin-left:20px;
+	padding-right:20px;
+	padding-left:20px;
+}
+
+#top-nav li:first-child {
+	margin-left:-40px;
+}
+
+#top-nav li:hover a {
+	color:#E81144;
+}
+
+#top-nav li a {
+	color:#525760;
+	text-decoration:none;
+}
+
+#top-nav a:active {
+	color:#3F70B0;
+}
+
+#top-nav a:visited {
+	/*color:#3F70B0;*/
+}
+
+
+.signup {
+	color:#E81144;
+}
+
+.login {
+	color:#3F70B0;
+}
+
+
+
+.line {
+	border-bottom:1px dotted #E1E1E1;
+	width: 90%;
+	margin-bottom:10px;
+	margin-top:3px;
+	height:1px;
+}
+
+.line-products {
+	width:100%;
+	margin-bottom:10px;
+}
+
+
+
+#sidebar {
+	float:left;
+	width:20%;
+	height:100%;
+	margin-top:-20px;
+}
+
+#sidebar ul {
+	border-right:1px solid #ECECEC;
+	width:150px;
+}
+
+.categories li {
+	margin-bottom: 15px;
+	font-size:13px;
+}
+
+#search-container {
+	background-color:#F7F7F7;
+	border:1px solid #ECECEC;
+	padding:10px;
+	height:270px;
+	margin-bottom:10px;
+	font-size:13px;
+}
+
+#search-category {
+	width:156px;
+}
+
+.search-form fieldset {
+	margin-left:auto;
+	margin-right:auto;
+	width:150px;
+	margin-bottom:15px;;	
+}
+
+/*
+.search-form input[type="checkbox"]:last-child {
+}*/
+
+
+
+#main {
+	float:left;
+	width:77%;
+	margin-left:3%;
+}
+
+
+#products-wrapper {
+	float:left;
+	width:100%;
+	margin-top:41px;	
+}
+
+.products img {
+	height:150px;
+	width:150px;
+	border:0px;
+}
+
+.products li {
+	height:150px;
+	width:150px;
+	float:left;
+	margin-left:10px;
+	padding:5px;
+	margin-bottom:10px;
+	border-radius:5px;
+}
+
+
+
+#filter-container {
+	padding:10px;
+	width:97%;
+	background-color:#F7F7F7;
+	border:1px solid #ECECEC;
+	position:relative;
+}
+
+#filter-close {
+	position:absolute;
+	width: 20px;
+	right: 0px;	
+	top: 0px;
+	cursor:pointer;
+}
+
+#filter-container form {
+	font-size:13px;
+}
+
+#filter-container > fieldset {
+	padding-top:10px;
+}
+
+#filter-container legend {
+	font-size:15px;
+	font-weight:bold;
+}
+
+#filter-container label {
+}
+
+.btn-submit {
+}
+
+
+
+#footer {
+	position: relative;
+	width:100%;
+	background-color:#EFEFEF;
+	font-size: 20px;
+	color: #525760;
+	font-weight: bold;
+    line-height: 1;
+	border-top:1px solid #D2D2D2;
+	
+	margin-top: -150px; /* negative value of footer height */
+	height: 150px;
+}
+
+#footer-content {
+	margin-left:31%;
+	margin-top:10px;	
+}
+
+#footer h3 {
+	display:inline;	
+	margin-left:50px;
+}

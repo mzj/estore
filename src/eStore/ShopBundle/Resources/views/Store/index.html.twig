@@ -1,0 +1,249 @@
+{% extends 'eStoreShopBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock%}
+{% block stylesheets %}
+    {{ parent() }}
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/estoreshop/css/products.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/themes/eStore/eStore.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/nivo-slider.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/uniform/css/uniform.eStore.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/jSlider/stylesheets/jslider.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/jSlider/stylesheets/jslider.eStore.css') }}" type="text/css" />
+{% endblock%}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/jquery.nivo.slider.pack.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jSlider/javascripts/jquery.slider-min.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jSlider/javascripts/jquery.dependClass.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/uniform/jquery.uniform.min.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/filterSlide.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/bootstrap.js') }}" ></script>
+{% endblock %}
+    
+{% block main %}
+
+    <div class="slider-wrapper theme-default">
+                	<div class="ribbon"></div>
+                	<div id="slider" class="nivoSlider">
+                    	<img src="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/demo/images/BHBANNER.jpg') }}" alt="" />
+                    	<img src="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/demo/images/men-nautical.jpg') }}" alt="" />
+                        <img src="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/demo/images/fashion.jpg') }}" alt="" />
+                        <img src="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/demo/images/326375799_952.jpg') }}" alt="" />
+                        <img src="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/demo/images/125817u.jpg') }}" alt="" />
+                	</div>
+                <!-- slider-wrapper end -->
+        		</div>
+                
+                
+                <div id="products-wrapper">
+                	<h2>Popular products</h2>
+                    <div class="line line-products"></div>
+                    
+                    <div id="filter-container">
+                    	<div id="filter-close">
+                        	<img id="filter-collapse-btn" src="{{ asset('bundles/estoreshop/img/arrow-up.png') }}" title="Collapse/Expand filter" alt="Collapse/Expand filter"/>
+                        </div>
+                        
+                        <h3>Filter</h3>
+                        <form>
+                        	<div style="margin-left:50px;">
+                                <label for="mens">Men's</label>  
+                                <input id="mens" type="checkbox">
+                                <label for="womens">Women's</label>
+                                <input id="womens" type="checkbox">
+                                <label for="unis">Uni's</label>  
+                                <input id="unis" type="checkbox"> 
+                                <label for="kids">Kid's</label>  
+                                <input id="kids" type="checkbox">
+                                 
+                                <select id="categories">
+                               		<option>All categories</option>
+                                    <option>Shirts</option>
+                                    <option>Pants</option>
+                                    <option>Shoes</option>
+                                </select>
+                                
+                                <select id="per-page">
+                                	<option>Products per page</option>
+                                    <option>10</option>
+                                    <option>20</option>
+                                    <option>50</option>
+                                    <option>100</option>
+                                </select>
+                            </div>
+                            
+                            <div style="margin-left:114px;">
+                                <div class="layout-slider" style="width:170px; float:left; margin-top:20px;">
+                                    <span style=" width:170px;"><input id="slider-filter" type="slider" name="price-filter" value="1;5000"/></span>
+                                </div>
+                            <br />
+                                <label for="price-order" style="margin-left:20px; margin-top:20px;"></label> 
+                                <select id="price-order" style="">
+                               		<option>Order by price</option>
+                                    <option>Lower to higher</option>
+                                    <option>Higher to lower</option>
+                                </select>
+                                
+                                <input type="submit" value="Filter" class="btn-submit"/>
+                    		</div>
+                            
+                            
+                        </form>
+                    <!-- filter-container end -->
+                    </div>
+                    
+                    <ul id="products">
+                    	<li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                        </li>
+                        
+                        <li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                        </li>
+                        
+                        <li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                        	
+                            <div>
+                            	<p style="margin-bottom:10px;">
+                                	<span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                                </p>
+                                <p>
+                               		<span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                                </p>
+                            </div>
+                    	</li>
+                    <!-- products end -->
+                    </ul>
+                <!-- products-wrapper end -->
+                {% for product in products %}
+                    <h3>{{ product.name }}</h3>
+                {% endfor %}
+                </div>
+
+{% endblock %}   

@@ -1,0 +1,14 @@
+<li><a href="{{ path('eStoreShopBundle_home') }}">E-STORE</a></li>
+
+<li>
+    <a href="">CATEGORIES</a>
+    <ul>
+        {% for category in categories %}
+                    <li>{{ category.name }}</li>
+        {% endfor %}
+    </ul>
+</li>
+
+<li><a href="{{ path('eStoreShopBundle_home') }}">POPULAR</a></li>
+<li><a href="{{ path('eStoreShopBundle_about') }}">ABOUT</a></li>
+<li><a href="{{ path('eStoreShopBundle_contact') }}">CONTACT</a></li>

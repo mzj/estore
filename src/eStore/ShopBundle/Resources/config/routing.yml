@@ -1,0 +1,11 @@
+eStoreShopBundle_home:
+    pattern:  /
+    defaults: { _controller: eStoreShopBundle:Store:index }
+    
+eStoreShopBundle_about:
+    pattern:  /about
+    defaults: { _controller: eStoreShopBundle:Store:about }
+    
+eStoreShopBundle_contact:
+    pattern:  /contact
+    defaults: { _controller: eStoreShopBundle:Store:contact }

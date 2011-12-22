@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        <title>{% block title %}{% endblock %}</title>
+        
+        <meta name="keywords" content="{% block keywords %}{% endblock %}" />
+        <meta name="description" content="{% block description %}{% endblock %}" />
+        
+        {% block stylesheets %}
+            <link type="text/css" rel="stylesheet" href="{{ asset('bundles/estoreshop/css/reset.css') }}" />
+        {% endblock %}
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jquery/jquery-1.7.1.min.js') }}" ></script>
+        {% endblock %}
+        
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+        
+    <body>
+        {% block body %}{% endblock %}
+    </body>
+        
+</html>

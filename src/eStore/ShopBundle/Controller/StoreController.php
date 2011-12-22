@@ -41,8 +41,6 @@ class StoreController extends Controller
         return $this->render('eStoreShopBundle:Store:headerNavigation.html.twig', array(
             'categories' => $categories
         ));
-        
-        return $this->render('eStoreShopBundle:Store:headerNavigation.html.twig');
     }
     
     public function cartWidgetAction()

@@ -75,4 +75,9 @@
     git=http://github.com/symfony/DoctrineMigrationsBundle.git
     target=/bundles/Symfony/Bundle/DoctrineMigrationsBundle
 
+[gedmo-doctrine-extensions]
+   git=http://github.com/l3pp4rd/DoctrineExtensions.git
 
+[Stof-DoctrineExtensionsBundle]
+   git=https://github.com/stof/StofDoctrineExtensionsBundle.git
+   target=/bundles/Stof/DoctrineExtensionsBundle

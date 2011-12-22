@@ -47,7 +47,14 @@ doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
-
+        
+# Doctrine Extensions Configuration
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            tree: true
+            
 # Swiftmailer Configuration
 swiftmailer:
     transport: %mailer_transport%

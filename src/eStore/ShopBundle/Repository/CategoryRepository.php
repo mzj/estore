@@ -16,6 +16,9 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
         
 class CategoryRepository extends NestedTreeRepository
 {
-    public function testing() {
+    public function categoryMenu() {
+        return $this->childrenHierarchy(null, false, array('decorate' => true, 'nodeDecorator' => function($node) {
+            return '<a href="categories/' . $node['id'] . '/' . $node['slug'] . '">' . $node['name'] . '</a>';
+        }));
     }
 }

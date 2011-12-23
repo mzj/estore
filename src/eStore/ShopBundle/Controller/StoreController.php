@@ -37,7 +37,7 @@ class StoreController extends Controller
                    ->getEntityManager();
         $repo = $em->getRepository('eStoreShopBundle:Category');
 
-        $categories = $repo->childrenHierarchy(null, false, array('decorate' => true));
+        $categories = $repo->categoryMenu();
         
         return $this->render('eStoreShopBundle:Store:headerNavigation.html.twig', array(
             'categories' => $categories

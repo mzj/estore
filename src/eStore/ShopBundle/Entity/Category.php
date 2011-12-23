@@ -74,6 +74,12 @@ class Category
      */
     private $children;
     
+    /**
+     * @Gedmo\Slug(fields={"name", "id"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+    
 
     public function __toString()
     {

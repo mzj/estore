@@ -24,7 +24,7 @@
 	display:inline-block;
 }
 
-#nav > li ul {
+#nav > li > ul {
 	display:none;
 	margin-top:-33px;	
 }

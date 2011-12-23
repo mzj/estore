@@ -2,7 +2,7 @@
 namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
+use eStore\ShopBundle\Entity\Category;
 
 class StoreController extends Controller
 {
@@ -30,18 +30,21 @@ class StoreController extends Controller
         return $this->render('eStoreShopBundle:Store:contact.html.twig');
     }
     
+    
     public function headerNavigationAction()
     {
         $em = $this->getDoctrine()
                    ->getEntityManager();
+        $repo = $em->getRepository('eStoreShopBundle:Category');
 
-        $categories = $em->getRepository('eStoreShopBundle:Category')
-                    ->findAll();
-
+        $categories = $repo->childrenHierarchy(null, false, array('decorate' => true));
+        
         return $this->render('eStoreShopBundle:Store:headerNavigation.html.twig', array(
             'categories' => $categories
         ));
     }
+    
+    
     
     public function cartWidgetAction()
     {

@@ -12,7 +12,7 @@ function DropDownMenu() {
 	// In IE, the top level LIs dont get the right border applied until the mouseover and not at all
 	// if there's no child list (UL). Setting the CSS in the HTML fixes this (why?).
 	$('#nav').css({'list-style':'none','padding':'0'});
-	$('#nav ul').css({'position':'absolute','list-style':'none','padding':'0', 'background' : '#fff url(img/cart-widget-gradient6.png) bottom repeat-x'});
+	$('#nav ul').css({'position':'absolute','list-style':'none','padding':'0', 'background' : '#fff url(/bundles/estoreshop/img/dropdown-menu-gradient.png) bottom repeat-x'});
 	$('#nav li').css({'padding':'4px','position':'relative','cursor':'pointer'}); // style the menu items
 	$('#nav li li').addClass("menuitem"); // is width necessary? how can we customize the widths better?
 	$('#nav li ul').addClass("menu");
@@ -58,7 +58,7 @@ function DropDownMenu() {
 		}
 	);
 	
-	$('#nav ul li:has(ul)').css('background','url(img/arrow-right.png) no-repeat 98% 50%');
+	$('#nav ul li:has(ul)').css('background','url(/bundles/estoreshop/img/arrow-right.png) no-repeat 98% 50%');
 	//$('#nav ul li:has(ul)').css('background-color','#fff');
 	$('#nav ul li:has(ul)').hover(
 		function() {

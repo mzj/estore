@@ -60,9 +60,9 @@ class CategoryController extends Controller
         $em->persist($carrots);
         $em->flush();*/
     
-        $cats = $repo->findOneById(33);
-        
-        return $this->render('eStoreShopBundle:Category:index.html.twig', array( 'children' => $repo->getPath($cats, true) ));
+        $cats = $repo->childrenHierarchy(null, false, array('decorate' => true));
+        exit($cats);
+        return $this->render('eStoreShopBundle:Category:index.html.twig', array( 'children' => $cats ));
         //return $this->render('eStoreShopBundle:Category:index.html.twig');
     }
 }

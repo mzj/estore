@@ -3,6 +3,7 @@ namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use eStore\ShopBundle\Entity\Category;
+use eStore\ShopBundle\Entity\Product;
 
 class CategoryController extends Controller
 {
@@ -15,53 +16,47 @@ class CategoryController extends Controller
                    ->getEntityManager();
          
         $repo = $em->getRepository('eStoreShopBundle:Category');
+        $category = $repo->find(23);
         
-        /*$tshirts    = new Category();
-        $tshirts->setName('T-shirts');
-        $shirts     = new Category();
-        $shirts->setName('Shirts');
-        $pants      = new Category();
-        $pants->setName('Pants');
-        $sweatshirt = new Category();
-        $sweatshirt->setName('Sweatshirt');
-        $vests      = new Category();
-        $vests->setName('Vests');
         
-        $hoodie = new Category();
-        $hoodie->setName('Hoodie');
-        $hoodie->setParent($sweatshirt);
+       // $product = $repo->find(26);
         
-        $em->persist($tshirts);
-        $em->persist($shirts);
-        $em->persist($pants);
-        $em->persist($sweatshirt);
-        $em->persist($vests);
-        $em->persist($hoodie);
+        /*$category1 = new Category();
+        $category1->setName('Shirts');
+        $category2 = new Category();
+        $category2->setName('TShirts');
+        $category3 = new Category();
+        $category3->setName('Vests');
+        $category4 = new Category();
+        $category4->setName('Pants');
+        
+        $em->persist($category1);
+        $em->persist($category2);
+        $em->persist($category3);
+        $em->persist($category4);
         $em->flush();*/
         
-        /* $food = new Category();
-        $food->setName('Food');
-
-        $fruits = new Category();
-        $fruits->setName('Fruits');
-        $fruits->setParent($food);
-
-        $vegetables = new Category();
-        $vegetables->setName('Vegetables');
-        $vegetables->setParent($food);
-
-        $carrots = new Category();
-        $carrots->setName('Carrots');
-        $carrots->setParent($vegetables);
-
-        $em->persist($food);
-        $em->persist($fruits);
-        $em->persist($vegetables);
-        $em->persist($carrots);
-        $em->flush();*/
+        
+        $product = new Product();
+        $product->setName('Bread');
+        $product->setDescription('Breadsddf dfddf');
+        $product->setPrice(100);
+        $product->setImage('lime-t-shirt.png');
+        $product->setCreated(new \DateTime());
+        $product->setUpdated($product->getCreated());
+        
+        $category->addProduct($product);
+       // $em->persist($category);
+        $em->persist($product);
+        $em->flush();
+       // $category->addProduct($product);
+        
+      // $em->persist($product);
+        
+        //$em->flush();
     
-        $cats = $repo->categoryMenu();
-        exit(print_r($cats));
+        //$cats = $repo->categoryMenu();
+        //exit(print_r($cats));
         
         /*$category = new Category();
         $category->setName('Ovo je mioj da jakatego tijna!');
@@ -70,8 +65,8 @@ class CategoryController extends Controller
 
         $slug = $category->getSlug();*/
         // prints: the-title-my-code
-        
-        return $this->render('eStoreShopBundle:Category:index.html.twig', array( 'slug' => $slug ));
+        exit('hello');
+        //return $this->render('eStoreShopBundle:Category:index.html.twig', array( 'slug' => $slug ));
         //return $this->render('eStoreShopBundle:Category:index.html.twig');
     }
 }

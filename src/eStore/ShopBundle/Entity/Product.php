@@ -33,7 +33,7 @@ class Product
     /**
      * @var text $description
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -94,7 +94,7 @@ class Product
     
     public function __toString()
     {
-        return $this->getTitle();
+        return $this->getName();
     }
     
     /**

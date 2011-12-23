@@ -304,6 +304,7 @@ class Category
     public function addProduct(\eStore\ShopBundle\Entity\Product $products)
     {
         $this->products[] = $products;
+        $products->addCategory($this);
     }
 
     /**

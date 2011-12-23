@@ -3,6 +3,7 @@
 namespace eStore\ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * eStore\ShopBundle\Entity\Product
@@ -60,10 +61,18 @@ class Product
      */
     protected $updated;
     
+    /**
+     * Bidirectional - Many products are in many categories (INVERSE SIDE)
+     *
+     * @ORM\ManyToMany(targetEntity="Category", mappedBy="products")
+     */
+    private $categories;
+    
     public function __construct()
     {
         $this->setCreated(new \DateTime());
         $this->setUpdated(new \DateTime());
+        $this->categories = new ArrayCollection();
     }
 
     /**
@@ -216,5 +225,25 @@ class Product
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param eStore\ShopBundle\Entity\Category $categories
+     */
+    public function addCategory(\eStore\ShopBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

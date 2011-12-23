@@ -3,6 +3,7 @@
 namespace eStore\ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
@@ -80,6 +81,24 @@ class Category
      */
     private $slug;
     
+    /**
+     * Bidirectional - Many categories can have many products (OWNING SIDE)
+     *
+     * @ORM\ManyToMany(targetEntity="Product", inversedBy="categories")
+     * @ORM\JoinTable(name="category_product",
+     *   joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")},
+     *   inverseJoinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")}
+     * )
+     */    
+    private $products;
+    
+    
+    public function __construct() 
+    {
+        $this->products = new ArrayCollection();
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
     public function __toString()
     {
@@ -134,10 +153,6 @@ class Category
     public function getDescription()
     {
         return $this->description;
-    }
-    public function __construct()
-    {
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
 
@@ -279,5 +294,25 @@ class Category
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add products
+     *
+     * @param eStore\ShopBundle\Entity\Product $products
+     */
+    public function addProduct(\eStore\ShopBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+    }
+
+    /**
+     * Get products
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 }

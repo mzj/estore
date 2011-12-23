@@ -10,41 +10,64 @@ class CategoryFixtures implements FixtureInterface
 {
     public function load($manager)
     {
-        $category1 = new Category();
-        $category1->setName('T-Shirts');
-        $category1->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        $manager->persist($category1);
+        $tshirts = new Category();
+        $tshirts->setName('T-Shirts');
+        $tshirts->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
+        $manager->persist($tshirts);
+        
       
-        $category2 = new Category();
-        $category2->setName('Vests');
-        $category2->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        $manager->persist($category2);
+        $vests = new Category();
+        $vests->setName('Vests');
+        $vests->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
+        $manager->persist($vests);
         
-        $category3 = new Category();
-        $category3->setName('Shirts');
-        $category3->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        $manager->persist($category3);
         
-        $category4 = new Category();
-        $category4->setName('Shoes');
-        $category4->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        $manager->persist($category4);
+        $shirts = new Category();
+        $shirts->setName('Shirts');
+        $shirts->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
+        $manager->persist($shirts);
         
-        $category5 = new Category();
-        $category5->setName('Pants');
-        $category5->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        $manager->persist($category5);
+        $longSleeves = new Category();
+        $longSleeves->setName('Long sleeves');
+        $longSleeves->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
+        $longSleeves->setParent($shirts);
+        $manager->persist($longSleeves);
         
-        $category6 = new Category();
-        $category6->setName('Sweatshirts');
-        $category6->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        $manager->persist($category6);
+        $elasticBanded = new Category();
+        $elasticBanded->setName('Elastic Banded');
+        $elasticBanded->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
+        $elasticBanded->setParent($longSleeves);
+        $manager->persist($elasticBanded);
         
-        $category7 = new Category();
-        $category7->setName('Hoodies');
-        $category7->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        $category7->setParent($category6);
-        $manager->persist($category7);
+        $shortSleeves = new Category();
+        $shortSleeves->setName('Short sleeves');
+        $shortSleeves->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
+        $shortSleeves->setParent($shirts);
+        $manager->persist($shortSleeves);
+        
+        
+        $shoes = new Category();
+        $shoes->setName('Shoes');
+        $shoes->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
+        $manager->persist($shoes);
+        
+        
+        $pants = new Category();
+        $pants->setName('Pants');
+        $pants->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
+        $manager->persist($pants);
+        
+        
+        $sweatshirts = new Category();
+        $sweatshirts->setName('Sweatshirts');
+        $sweatshirts->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
+        $manager->persist($sweatshirts);
+        
+        $hoodies = new Category();
+        $hoodies->setName('Hoodies');
+        $hoodies->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
+        $hoodies->setParent($sweatshirts);
+        $manager->persist($hoodies);
         
         $manager->flush();
     }

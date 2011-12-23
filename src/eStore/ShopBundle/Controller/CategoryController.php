@@ -60,11 +60,20 @@ class CategoryController extends Controller
         $em->persist($carrots);
         $em->flush();*/
     
-        $cats = $repo->childrenHierarchy(null, false, array('decorate' => true, 'nodeDecorator' => function($node) {
+        /*$cats = $repo->childrenHierarchy(null, false, array('decorate' => true, 'nodeDecorator' => function($node) {
             return '<a href="' . $node['id'] . '">' . $node['name'] . '</a>';
         }));
-        exit(print_r($cats));
-        return $this->render('eStoreShopBundle:Category:index.html.twig', array( 'children' => $cats ));
+        exit(print_r($cats));*/
+        
+        $category = new Category();
+        $category->setName('Ovo je mioj da jakatego tijna!');
+        $em->persist($category);
+        $em->flush();
+
+        $slug = $category->getSlug();
+        // prints: the-title-my-code
+        
+        return $this->render('eStoreShopBundle:Category:index.html.twig', array( 'slug' => $slug ));
         //return $this->render('eStoreShopBundle:Category:index.html.twig');
     }
 }

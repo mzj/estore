@@ -16,29 +16,53 @@ class CategoryController extends Controller
          
         $repo = $em->getRepository('eStoreShopBundle:Category');
         
-        /*$food = new Category();
+        /*$tshirts    = new Category();
+        $tshirts->setName('T-shirts');
+        $shirts     = new Category();
+        $shirts->setName('Shirts');
+        $pants      = new Category();
+        $pants->setName('Pants');
+        $sweatshirt = new Category();
+        $sweatshirt->setName('Sweatshirt');
+        $vests      = new Category();
+        $vests->setName('Vests');
+        
+        $hoodie = new Category();
+        $hoodie->setName('Hoodie');
+        $hoodie->setParent($sweatshirt);
+        
+        $em->persist($tshirts);
+        $em->persist($shirts);
+        $em->persist($pants);
+        $em->persist($sweatshirt);
+        $em->persist($vests);
+        $em->persist($hoodie);
+        $em->flush();*/
+        
+        /* $food = new Category();
         $food->setName('Food');
 
         $fruits = new Category();
         $fruits->setName('Fruits');
+        $fruits->setParent($food);
 
         $vegetables = new Category();
         $vegetables->setName('Vegetables');
+        $vegetables->setParent($food);
 
         $carrots = new Category();
         $carrots->setName('Carrots');
+        $carrots->setParent($vegetables);
 
-        $treeRepository
-            ->persistAsFirstChild($food)
-            ->persistAsFirstChildOf($fruits, $food)
-            ->persistAsLastChildOf($vegetables, $food)
-            ->persistAsNextSiblingOf($carrots, $fruits);
-
-        $em->flush();
-        ///$repo = $em->getRepository('eStoreShopBundle:Category');*/
+        $em->persist($food);
+        $em->persist($fruits);
+        $em->persist($vegetables);
+        $em->persist($carrots);
+        $em->flush();*/
     
-        $food = $repo->findOneByName('Food');
+        $cats = $repo->findOneById(33);
         
-        return $this->render('eStoreShopBundle:Category:index.html.twig', array( 'countt' => $repo->childCount($food, true) ));
+        return $this->render('eStoreShopBundle:Category:index.html.twig', array( 'children' => $repo->getPath($cats, true) ));
+        //return $this->render('eStoreShopBundle:Category:index.html.twig');
     }
 }

@@ -16,9 +16,15 @@ class CategoryController extends Controller
                    ->getEntityManager();
          
         $repo = $em->getRepository('eStoreShopBundle:Category');
-        $category = $repo->find(23);
+        $category = $repo->find(32);
         
+        $products = $category->getProducts();
         
+        foreach($products as $product) {
+            
+            echo $product->getName() . '<br />';            
+        }
+        exit();
        // $product = $repo->find(26);
         
         /*$category1 = new Category();
@@ -37,7 +43,7 @@ class CategoryController extends Controller
         $em->flush();*/
         
         
-        $product = new Product();
+        /*$product = new Product();
         $product->setName('Bread');
         $product->setDescription('Breadsddf dfddf');
         $product->setPrice(100);
@@ -53,7 +59,7 @@ class CategoryController extends Controller
         
         $em->persist($product);
         
-        $em->flush();
+        $em->flush();*/
     
         //$cats = $repo->categoryMenu();
         //exit(print_r($cats));

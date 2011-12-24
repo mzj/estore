@@ -4,6 +4,7 @@ namespace eStore\ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * eStore\ShopBundle\Entity\Product
@@ -33,7 +34,7 @@ class Product
     /**
      * @var text $description
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -60,6 +61,12 @@ class Product
      * @ORM\Column(type="datetime")
      */
     protected $updated;
+    
+    /**
+     * @Gedmo\Slug(fields={"name", "id"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
     
     /**
      * Bidirectional - Many products are in many categories (INVERSE SIDE)
@@ -94,7 +101,7 @@ class Product
     
     public function __toString()
     {
-        return $this->getTitle();
+        return $this->getName();
     }
     
     /**
@@ -225,5 +232,26 @@ class Product
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param eStore\ShopBundle\Entity\Category $categories
+     */
+    public function addCategory(\eStore\ShopBundle\Entity\Category $category)
+    {
+        $this->categories[] = $category;
+        $category->addProduct($this);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

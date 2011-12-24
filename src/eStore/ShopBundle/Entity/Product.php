@@ -4,6 +4,7 @@ namespace eStore\ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * eStore\ShopBundle\Entity\Product
@@ -60,6 +61,12 @@ class Product
      * @ORM\Column(type="datetime")
      */
     protected $updated;
+    
+    /**
+     * @Gedmo\Slug(fields={"name", "id"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
     
     /**
      * Bidirectional - Many products are in many categories (INVERSE SIDE)
@@ -246,5 +253,25 @@ class Product
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

@@ -295,4 +295,24 @@ class Category
     {
         return $this->slug;
     }
+
+    /**
+     * Add products
+     *
+     * @param eStore\ShopBundle\Entity\Product $products
+     */
+    public function addProduct(\eStore\ShopBundle\Entity\Product $product)
+    {
+        $this->products[] = $product;
+    }
+
+    /**
+     * Get products
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
 }

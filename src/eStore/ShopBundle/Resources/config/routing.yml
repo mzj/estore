@@ -9,7 +9,14 @@ eStoreShopBundle_about:
 eStoreShopBundle_contact:
     pattern:  /contact
     defaults: { _controller: eStoreShopBundle:Store:contact }
-    
+
+eStoreShopBundle_product:
+    pattern:  /{id}/{slug}
+    defaults: { _controller: eStoreShopBundle:Product:index }
+    requirements:
+        _method:  GET
+        id: \d+
+        
 eStoreShopBundle_categories:
     pattern:  /categories/{id}/{slug}
     defaults: { _controller: eStoreShopBundle:Category:index }

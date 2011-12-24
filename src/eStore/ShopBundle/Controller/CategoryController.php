@@ -16,15 +16,32 @@ class CategoryController extends Controller
                    ->getEntityManager();
          
         $repo = $em->getRepository('eStoreShopBundle:Category');
-        $category = $repo->find($id);
+        $category = $repo->getAllProducts($repo->find($id));
         
-        $products = $category->getProducts();
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        $products = $repo2->getProductsFromCategory($category);
+        $names = array();
+        $categories = array();
         foreach($products as $product) {
-            
-            echo $product->getName() . '<br />';            
+           $names[] = $product->getName();
+           $categories = $product->getCategories();
         }
-        exit();
+        $titles = array();
+        foreach($categories as $category) {
+           $titles[] = $category->getName();
+        }
+        
+        exit(print_r($titles));
        // $product = $repo->find(26);
         
         /*$category1 = new Category();

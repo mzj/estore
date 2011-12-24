@@ -21,4 +21,34 @@ class CategoryRepository extends NestedTreeRepository
             return '<a href="categories/' . $node['id'] . '/' . $node['slug'] . '">' . $node['name'] . '</a>';
         }));
     }
+    
+    public function getAllProducts($category) 
+    {
+        $categories =  $this->children($category, false);
+        $categories[] = $category;
+        $products = array();
+        
+        foreach($categories as $category) {
+           $titles[] = $category->getName();
+           $productsArr[] = $category->getProducts();
+        }
+        
+        $titles = array();
+        foreach($productsArr as $products) {
+            foreach($products as $product) {
+                $titles[] = $product->getName();
+            }
+        }
+        
+        exit(print_r($titles));
+       
+    }
+    
+    
+    private function flatten(array $array) 
+    {
+        $return = array();
+        array_walk_recursive($array, function($a) use (&$return) { $return[] = $a; });
+        return $return;
+    }
 }

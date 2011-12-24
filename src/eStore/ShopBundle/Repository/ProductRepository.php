@@ -17,9 +17,6 @@ class ProductRepository extends EntityRepository
                    ->select('p')
                    ->addOrderBy('p.id', 'ASC');
     
-        /*if (false === is_null($limit))
-            $qb->setMaxResults($limit);*/
-    
         return $qb->getQuery()
                   ->getResult();
     }

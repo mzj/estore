@@ -1,6 +1,6 @@
 {% extends 'eStoreShopBundle::layout.html.twig' %}
 
-{% block title %}{{ category.name }} - {{ parent() }}{% endblock%}
+{% block title %}{{ product.name }} - {{ parent() }}{% endblock%}
 {% block stylesheets %}
     {{ parent() }}
     <link type="text/css" rel="stylesheet" href="{{ asset('bundles/estoreshop/css/products.css') }}" />
@@ -21,9 +21,5 @@
 {% endblock %}
 
 {% block main %}
-    {% for product in products %}
-    <p><a href="{{ path('eStoreShopBundle_product', { 'id': product.id , 'slug': product.slug }) }}"> {{ product.name }} </a></p>
-    {% else %}
-        There are no products in this category
-    {% endfor %}
+   {{ product.name }}
 {% endblock %}

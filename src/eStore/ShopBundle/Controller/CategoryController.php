@@ -8,7 +8,7 @@ use eStore\ShopBundle\Entity\Product;
 class CategoryController extends Controller
 {
     
-    public function indexAction()
+    public function indexAction($id, $slug)
     {
         //$cat = new Category();
         
@@ -16,7 +16,7 @@ class CategoryController extends Controller
                    ->getEntityManager();
          
         $repo = $em->getRepository('eStoreShopBundle:Category');
-        $category = $repo->find(32);
+        $category = $repo->find($id);
         
         $products = $category->getProducts();
         

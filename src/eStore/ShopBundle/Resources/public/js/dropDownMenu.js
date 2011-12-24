@@ -50,7 +50,6 @@ function DropDownMenu() {
 			$('> ul',this)
 			.css({'left':-borderOffset+'px','top':$('#nav li').height()+paddingOffset+'px'})
 			.stop(true, true)
-			.hide()
 			.fadeIn(100);
 		},
 		function() {
@@ -69,7 +68,7 @@ function DropDownMenu() {
 	
 			if($(this).css('z-index')=='auto') $(this).css('z-index',1);
 			if($(this).offset().left + $(this).width()*2 >= $(document).width()) paddingOffsetFix=-$(this).width()*2;
-			$(this).children().css({'left':$(this).width()+paddingOffsetFix-overlap+'px','top':-borderOffset+'px'}).stop(true, true).hide().fadeIn(100);
+			$(this).children().css({'left':$(this).width()+paddingOffsetFix-overlap+'px','top':-borderOffset+'px'}).stop(true, true).fadeIn(100);
 		},
 		function() { // problem when adding links as this alters the hierarchy. specifcy target
 			$(this).children('ul').fadeOut(100);

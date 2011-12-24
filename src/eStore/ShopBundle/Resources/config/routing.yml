@@ -11,5 +11,8 @@ eStoreShopBundle_contact:
     defaults: { _controller: eStoreShopBundle:Store:contact }
     
 eStoreShopBundle_categories:
-    pattern:  /categories
-    defaults: { _controller: eStoreShopBundle:Category:index }    
+    pattern:  /categories/{id}/{slug}
+    defaults: { _controller: eStoreShopBundle:Category:index }
+    requirements:
+        _method:  GET
+        id: \d+

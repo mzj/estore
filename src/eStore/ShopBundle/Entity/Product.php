@@ -232,9 +232,10 @@ class Product
      *
      * @param eStore\ShopBundle\Entity\Category $categories
      */
-    public function addCategory(\eStore\ShopBundle\Entity\Category $categories)
+    public function addCategory(\eStore\ShopBundle\Entity\Category $category)
     {
-        $this->categories[] = $categories;
+        $this->categories[] = $category;
+        $category->addProduct($this);
     }
 
     /**

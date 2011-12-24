@@ -301,10 +301,9 @@ class Category
      *
      * @param eStore\ShopBundle\Entity\Product $products
      */
-    public function addProduct(\eStore\ShopBundle\Entity\Product $products)
+    public function addProduct(\eStore\ShopBundle\Entity\Product $product)
     {
-        $this->products[] = $products;
-        $products->addCategory($this);
+        $this->products[] = $product;
     }
 
     /**

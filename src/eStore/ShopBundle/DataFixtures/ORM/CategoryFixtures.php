@@ -3,10 +3,11 @@
 
 namespace eStore\ShopBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use eStore\ShopBundle\Entity\Category;
 
-class CategoryFixtures implements FixtureInterface
+class ProductFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load($manager)
     {
@@ -70,6 +71,21 @@ class CategoryFixtures implements FixtureInterface
         $manager->persist($hoodies);
         
         $manager->flush();
+        
+        $this->addReference('tshirts',   $tshirts);
+        $this->addReference('vests', $vests);
+        $this->addReference('shirts', $shirts);
+        $this->addReference('longSleeves', $longSleeves);
+        $this->addReference('elasticBanded', $elasticBanded);
+        $this->addReference('shortSleeves', $shortSleeves);
+        $this->addReference('shoes', $shoes);
+        $this->addReference('pants', $pants);
+        $this->addReference('sweatshirts', $sweatshirts);
+        $this->addReference('hoodies', $hoodies);
     }
-
+    
+    public function getOrder()
+    {
+        return 1;
+    }
 }

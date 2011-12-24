@@ -3,10 +3,12 @@
 
 namespace eStore\ShopBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use eStore\ShopBundle\Entity\Product;
+use eStore\ShopBundle\Entity\Category;
 
-class ProductFixtures implements FixtureInterface
+class ProductFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load($manager)
     {
@@ -18,6 +20,7 @@ class ProductFixtures implements FixtureInterface
         $product1->setImage('lime-t-shirt.png');
         $product1->setCreated(new \DateTime());
         $product1->setUpdated($product1->getCreated());
+        $product1->addCategory($manager->merge($this->getReference('tshirts')));
         $manager->persist($product1);
         
         $product2 = new Product();
@@ -27,6 +30,7 @@ class ProductFixtures implements FixtureInterface
         $product2->setImage('lime-t-shirt.png');
         $product2->setCreated(new \DateTime());
         $product2->setUpdated($product2->getCreated());
+        $product2->addCategory($manager->merge($this->getReference('tshirts')));
         $manager->persist($product2);
         
         $product3 = new Product();
@@ -36,6 +40,7 @@ class ProductFixtures implements FixtureInterface
         $product3->setImage('lime-t-shirt.png');
         $product3->setCreated(new \DateTime());
         $product3->setUpdated($product3->getCreated());
+        $product3->addCategory($manager->merge($this->getReference('vests')));
         $manager->persist($product3);
         
         $product4 = new Product();
@@ -45,6 +50,7 @@ class ProductFixtures implements FixtureInterface
         $product4->setImage('lime-t-shirt.png');
         $product4->setCreated(new \DateTime());
         $product4->setUpdated($product4->getCreated());
+        $product4->addCategory($manager->merge($this->getReference('pants')));
         $manager->persist($product4);
         
         $product5 = new Product();
@@ -54,9 +60,15 @@ class ProductFixtures implements FixtureInterface
         $product5->setImage('lime-t-shirt.png');
         $product5->setCreated(new \DateTime());
         $product5->setUpdated($product5->getCreated());
+        $product5->addCategory($manager->merge($this->getReference('elasticBanded')));
         $manager->persist($product5);
 
         $manager->flush();
+    }
+    
+    public function getOrder()
+    {
+        return 2;
     }
 
 }

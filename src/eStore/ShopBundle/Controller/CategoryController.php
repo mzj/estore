@@ -45,15 +45,15 @@ class CategoryController extends Controller
         $product->setCreated(new \DateTime());
         $product->setUpdated($product->getCreated());
         
-        $category->addProduct($product);
+        //$category->addProduct($product);
        // $em->persist($category);
-        $em->persist($product);
-        $em->flush();
-       // $category->addProduct($product);
-        
-      // $em->persist($product);
-        
+        //$em->persist($product);
         //$em->flush();
+        $product->addCategory($category);
+        
+        $em->persist($product);
+        
+        $em->flush();
     
         //$cats = $repo->categoryMenu();
         //exit(print_r($cats));

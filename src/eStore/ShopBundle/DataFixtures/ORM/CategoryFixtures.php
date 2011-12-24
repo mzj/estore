@@ -7,7 +7,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use eStore\ShopBundle\Entity\Category;
 
-class ProductFixtures extends AbstractFixture implements OrderedFixtureInterface
+class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load($manager)
     {

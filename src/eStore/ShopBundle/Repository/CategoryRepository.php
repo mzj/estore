@@ -16,10 +16,20 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
         
 class CategoryRepository extends NestedTreeRepository
 {
-    public function categoryMenu() {
-        return $this->childrenHierarchy(null, false, array('decorate' => true, 'nodeDecorator' => function($node) {
-            return '<a href="categories/' . $node['id'] . '/' . $node['slug'] . '">' . $node['name'] . '</a>';
-        }));
+    public function categoryMenu($helper) 
+    {
+       
+        return $this->childrenHierarchy(null, false, array('decorate' => true, 'nodeDecorator' => 
+            function($node) use ($helper) {
+                return '<a href="' . $helper->generateUrl('eStoreShopBundle_categories', array('id' => $node['id'],'slug' => $node['slug'])) . '">' 
+                        . $node['name'] . '</a>';
+            })
+        );
+    }
+    
+    public function categoryMenuArray() {
+        
+        return $this->childrenHierarchy(null, false);
     }
     
     public function getAllProducts($category) 
@@ -30,25 +40,13 @@ class CategoryRepository extends NestedTreeRepository
         
         foreach($categories as $category) {
            $titles[] = $category->getName();
-           $productsArr[] = $category->getProducts();
+           
+           foreach($category->getProducts() as $product) {
+               $products[] = $product;
+           }
         }
         
-        $titles = array();
-        foreach($productsArr as $products) {
-            foreach($products as $product) {
-                $titles[] = $product->getName();
-            }
-        }
-        
-        exit(print_r($titles));
+        return $products;
        
-    }
-    
-    
-    private function flatten(array $array) 
-    {
-        $return = array();
-        array_walk_recursive($array, function($a) use (&$return) { $return[] = $a; });
-        return $return;
-    }
+    }    
 }

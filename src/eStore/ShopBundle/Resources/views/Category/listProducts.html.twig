@@ -1,0 +1,28 @@
+{% extends 'eStoreShopBundle::layout.html.twig' %}
+
+{% block title %}{{ category.name }} - {{ parent() }}{% endblock%}
+{% block stylesheets %}
+    {{ parent() }}
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/estoreshop/css/products.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/themes/eStore/eStore.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/nivo-slider.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/uniform/css/uniform.eStore.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/jSlider/stylesheets/jslider.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/jSlider/stylesheets/jslider.eStore.css') }}" type="text/css" />
+{% endblock%}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/jquery.nivo.slider.pack.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jSlider/javascripts/jquery.slider-min.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jSlider/javascripts/jquery.dependClass.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/uniform/jquery.uniform.min.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/filterSlide.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/bootstrap.js') }}" ></script>
+{% endblock %}
+
+{% block main %}
+    {% for product in products %}
+        {{ product.name }} <br />
+    {% else %}
+    {% endfor %}
+{% endblock %}

@@ -37,14 +37,12 @@ class StoreController extends Controller
                    ->getEntityManager();
         $repo = $em->getRepository('eStoreShopBundle:Category');
 
-        $categories = $repo->categoryMenu();
+        $categories = $repo->categoryMenu($this);
         
         return $this->render('eStoreShopBundle:Store:headerNavigation.html.twig', array(
             'categories' => $categories
         ));
     }
-    
-    
     
     public function cartWidgetAction()
     {

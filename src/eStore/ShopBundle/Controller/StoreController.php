@@ -14,11 +14,14 @@ class StoreController extends Controller
 
         $products = $em->getRepository('eStoreShopBundle:Product')
                     ->getPopularProducts();
-
+        
+        $productsArr = $this->productsDataToArray($products);
+        //exit(print_r($productsArr));
         return $this->render('eStoreShopBundle:Store:index.html.twig', array(
-            'products' => $products
+            'products' => $productsArr
         ));
     }
+    
     
     public function aboutAction()
     {
@@ -47,5 +50,38 @@ class StoreController extends Controller
     public function cartWidgetAction()
     {
         return $this->render('eStoreShopBundle:Store:cartWidget.html.twig');
+    }
+    
+    private function productsDataToArray($products) 
+    {
+        
+        $productsArr = array();
+        $productHolder = array();
+        foreach($products as $product) {
+            $productHolder['id'] = $product->getId();
+            $productHolder['name'] = $product->getName();
+            $productHolder['slug'] = $product->getSlug();
+            
+            $productHolder['categories'] = $this->categoriesDataToArray(
+                            $product->getCategories()
+                    );
+            $productsArr[] = $productHolder;
+        }
+        return $productsArr;
+    }
+    
+    private function categoriesDataToArray($categories) 
+    {
+        $categoriesArr = array();
+        $categoryHolder = array();
+        foreach($categories as $category) {
+            $categoryHolder['id']  = $category->getId();
+            $categoryHolder['name']  = $category->getName();
+            $categoryHolder['slug']  = $category->getSlug();
+            
+            $categoriesArr[] = $categoryHolder;
+        }
+        
+        return $categoriesArr;
     }
 }

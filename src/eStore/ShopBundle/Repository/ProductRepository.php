@@ -13,11 +13,12 @@ class ProductRepository extends EntityRepository
 {
     public function getPopularProducts()
     {
-        $query = $this->_em->createQuery("SELECT p, c
-                                FROM eStore\ShopBundle\Entity\Product p
-                                JOIN p.categories c
-                               ");
-        
+        $query = $this->_em
+                      ->createQuery("SELECT p, c
+                                     FROM eStore\ShopBundle\Entity\Product p
+                                     JOIN p.categories c
+                                     ORDER BY p.id DESC
+                                   ");
         return $query;
     }
     

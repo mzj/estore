@@ -25,7 +25,7 @@ class StoreController extends Controller
         try {
             $pagedProducts->setCurrentPage($request->query->get('page', 1));
         } catch(NotValidCurrentPageException $e) {
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException('Page not found.');
         }
 
         return $this->render('eStoreShopBundle:Store:index.html.twig', array(

@@ -2,27 +2,34 @@
 namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use eStore\ShopBundle\Entity\Category;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\NotValidCurrentPageException;
 
 class StoreController extends Controller
 {
     
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()
                    ->getEntityManager();
 
-        $products = $em->getRepository('eStoreShopBundle:Product')
-                    ->getPopularProducts2($em);
+        $query =  $em->getRepository('eStoreShopBundle:Product')
+                     ->getPopularProducts();
         
-        //$productsArr = $this->productsDataToArray($products);
-        //exit(print_r($productsArr));
-        /*foreach($products as $p) { 
-            echo $p->getName() . "<br />";
+        $pagedProducts = new Pagerfanta(new DoctrineORMAdapter($query));
+        $pagedProducts->setMaxPerPage(5);
+
+        try {
+            $pagedProducts->setCurrentPage($request->query->get('page', 1));
+        } catch(NotValidCurrentPageException $e) {
+            throw $this->createNotFoundException();
         }
-        exit();*/
+
         return $this->render('eStoreShopBundle:Store:index.html.twig', array(
-            'products' => $products
+            'products' => $pagedProducts
         ));
     }
     

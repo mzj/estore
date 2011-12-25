@@ -91,17 +91,20 @@
                         </form>
                     <!-- filter-container end -->
                     </div>
-                    
                     <ul id="products">
                         {% for product in products %}
                             <li>
                                 <div>
                                     {{ product.name }}
                                     <p style="margin-bottom:10px;">
+                                        
                                             <span>
                                                 {% for category in product.categories %}
-                                                    {{ category.name }}
+                                                    <a href="{{ path('eStoreShopBundle_categories', { 'id': category.id , 'slug': category.slug }) }}">
+                                                        {{ category.name }}
+                                                    </a>
                                                 {% endfor %}
+                                                    
                                             </span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
                                     </p>
                                     <p>
@@ -113,6 +116,7 @@
                     <!-- products end -->
                     </ul>
                 <!-- products-wrapper end -->
+                    {{ pagerfanta(products, 'default', pagerfanta_opts) }}
                 </div>
 
 {% endblock %}   

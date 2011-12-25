@@ -11,26 +11,14 @@ use eStore\ShopBundle\Entity\Product;
  */
 class ProductRepository extends EntityRepository
 {
-    public function getPopularProducts($limit = 10)
+    public function getPopularProducts()
     {
-        $qb = $this->createQueryBuilder('p')
-                   ->select('p')
-                   ->addOrderBy('p.id', 'ASC');
-        if (!is_null($limit)) {
-                $qb->setMaxResults($limit);
-        }
-        return $qb->getQuery()
-                  ->getResult();
-    }
-    
-    public function getPopularProducts2($em, $limit = 10)
-    {
-        $qb = $em->createQuery("SELECT p, c
+        $query = $this->_em->createQuery("SELECT p, c
                                 FROM eStore\ShopBundle\Entity\Product p
                                 JOIN p.categories c
                                ");
         
-        return $qb->getResult();
+        return $query;
     }
     
     public function getProductCategories($product)

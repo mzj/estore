@@ -13,12 +13,16 @@ class StoreController extends Controller
                    ->getEntityManager();
 
         $products = $em->getRepository('eStoreShopBundle:Product')
-                    ->getPopularProducts();
+                    ->getPopularProducts2($em);
         
-        $productsArr = $this->productsDataToArray($products);
+        //$productsArr = $this->productsDataToArray($products);
         //exit(print_r($productsArr));
+        /*foreach($products as $p) { 
+            echo $p->getName() . "<br />";
+        }
+        exit();*/
         return $this->render('eStoreShopBundle:Store:index.html.twig', array(
-            'products' => $productsArr
+            'products' => $products
         ));
     }
     

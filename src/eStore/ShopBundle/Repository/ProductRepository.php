@@ -2,7 +2,7 @@
 namespace eStore\ShopBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-
+use eStore\ShopBundle\Entity\Product;
 /**
  * ProductRepository
  *
@@ -21,6 +21,16 @@ class ProductRepository extends EntityRepository
         }
         return $qb->getQuery()
                   ->getResult();
+    }
+    
+    public function getPopularProducts2($em, $limit = 10)
+    {
+        $qb = $em->createQuery("SELECT p, c
+                                FROM eStore\ShopBundle\Entity\Product p
+                                JOIN p.categories c
+                               ");
+        
+        return $qb->getResult();
     }
     
     public function getProductCategories($product)

@@ -95,7 +95,9 @@
                         {% for product in products %}
                             <li>
                                 <div>
-                                    {{ product.name }}
+                                    <a href="{{ path('eStoreShopBundle_product', { 'id': product.id , 'slug': product.slug }) }}">
+                                                    {{ product.name }}
+                                    </a>
                                     <p style="margin-bottom:10px;">
                                         <span>
                                             In categories: 
@@ -119,5 +121,15 @@
                 <!-- products-wrapper end -->
                     {{ pagerfanta(products, 'default', pagerfanta_opts) }}
                 </div>
+    
+    <form action="" method="post" {{ form_enctype(form) }}>
+    {{ form_errors(form) }}
+
+    
+
+    {{ form_rest(form) }}
+
+    <input type="submit" />
+</form>
 
 {% endblock %}   

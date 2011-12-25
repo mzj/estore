@@ -7,6 +7,7 @@ use eStore\ShopBundle\Entity\Category;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\NotValidCurrentPageException;
+use eStore\ShopBundle\Form\FilterType;
 
 class StoreController extends Controller
 {
@@ -20,16 +21,18 @@ class StoreController extends Controller
                      ->getPopularProducts();
         
         $pagedProducts = new Pagerfanta(new DoctrineORMAdapter($query));
-        $pagedProducts->setMaxPerPage(5);
+        $pagedProducts->setMaxPerPage(2);
 
         try {
             $pagedProducts->setCurrentPage($request->query->get('page', 1));
         } catch(NotValidCurrentPageException $e) {
             throw $this->createNotFoundException('Page not found.');
         }
+        
+        $form = $this->createForm(new FilterType());
 
         return $this->render('eStoreShopBundle:Store:index.html.twig', array(
-            'products' => $pagedProducts
+            'products' => $pagedProducts, 'form' => $form->createView()
         ));
     }
     

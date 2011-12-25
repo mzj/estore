@@ -14,40 +14,22 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
         
 class CategoryRepository extends NestedTreeRepository
 {
-    public function categoryMenu($helper) 
-    {
-       
-        return $this->childrenHierarchy(null, false, array('decorate' => true, 'nodeDecorator' => 
-            function($node) use ($helper) {
-                return '<a href="' . $helper->generateUrl('eStoreShopBundle_categories', array('id' => $node['id'],'slug' => $node['slug'])) . '">' 
-                        . $node['name'] . '</a>';
-            })
-        );
-    }
-    
-    public function categoryMenuArray() {
-        
-        return $this->childrenHierarchy(null, false);
-    }
     
     /**
-     * @todo Find more eficiant and right way to get all products
+     * @todoChecked >Find more eficiant and the right way to get all products<
+     * 
      */
     public function getAllProducts($category) 
     {
-        $categories =  $this->children($category, false);
-        $categories[] = $category;
-        $products = array();
+        $left  = $category->getLft();
+        $right = $category->getRgt();
+        $root  = $category->getRoot();
         
-        foreach($categories as $category) {
-           $titles[] = $category->getName();
-           
-           foreach($category->getProducts() as $product) {
-               $products[] = $product;
-           }
-        }
-        
-        return $products;
+        $query = $this->_em->createQuery("SELECT p 
+                                          FROM eStore\ShopBundle\Entity\Product p
+                                          JOIN p.categories c
+                                          WHERE c.lft BETWEEN $left AND $right AND c.root = $root");
+        return $query->getResult();
        
     }    
 }

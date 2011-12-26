@@ -12,6 +12,8 @@
 {% endblock%}
 {% block javascripts %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/underscore/underscore-min.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/backbone/backbone-min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/jquery.nivo.slider.pack.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jSlider/javascripts/jquery.slider-min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jSlider/javascripts/jquery.dependClass.js') }}" ></script>
@@ -19,6 +21,18 @@
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/filterSlide.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/bootstrap.js') }}" ></script>
 {% endblock %}
+ 
+{% block head %}
+    <script type="text/template" id="main_template">
+	<!-- Normal loop that iterates over products -->
+        <% for(i=0,l=messages.length;i<l;++i) { m = messages[i]; %>
+            <li class="message shadow">
+                <div class="m-subject"><a href="#msg/<%= m.id %>"><%= m.subject %></a></div>
+                <div class="m-body"> <%= m.body %></div>
+            </li>
+        <% } %>
+    </script>
+{% endblock %}    
     
 {% block main %}
 

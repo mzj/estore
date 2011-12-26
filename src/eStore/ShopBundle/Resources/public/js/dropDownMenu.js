@@ -6,7 +6,7 @@
  * Date: Dec. 2011
  */
 
-function DropDownMenu() {
+function dropDownMenu() {
 	// .selected-nav
 	// how to best handle the widths of the various menus?
 	// In IE, the top level LIs dont get the right border applied until the mouseover and not at all

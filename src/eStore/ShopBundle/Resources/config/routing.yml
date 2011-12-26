@@ -23,3 +23,9 @@ eStoreShopBundle_categories:
     requirements:
         _method:  GET
         id: \d+
+        
+eStoreShopBundle_api_products:
+    pattern:  /api/products/{page}
+    defaults: { _controller: eStoreShopBundle:Api:getProducts, page: 1 }
+    requirements:
+        _method:  GET      

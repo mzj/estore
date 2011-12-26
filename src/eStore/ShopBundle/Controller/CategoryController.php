@@ -15,7 +15,7 @@ class CategoryController extends Controller
          
         $repo = $em->getRepository('eStoreShopBundle:Category');
         $category = $repo->find($id);
-        $products = $repo->getAllProducts($category);
+        $products = $repo->getAllProductsByCategory($category);
       
         return $this->render('eStoreShopBundle:Category:listProducts.html.twig', array( 'category'=> $category, 'products' => $products));
     }

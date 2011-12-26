@@ -11,6 +11,11 @@ use eStore\ShopBundle\Entity\Product;
  */
 class ProductRepository extends EntityRepository
 {
+    /**
+     *
+     * @todo You could use DISTINCT clause
+     * or simulate with GROUP BY
+     */
     public function getPopularProducts()
     {
         $query = $this->_em
@@ -20,18 +25,5 @@ class ProductRepository extends EntityRepository
                                      ORDER BY p.id DESC
                                    ");
         return $query;
-    }
-    
-    public function getProductCategories($product)
-    {
-        $pid = $product->getId();
-        
-         $qb = $this->createQueryBuilder('c')
-                    ->select('c')
-                    ->from('eStore\StoreBundle\Entity\Categoty', 'c')
-                    ->innerJoin('category_product.category_id WHERE category_product.product_id=privati.id');
-
-        return $qb->getQuery()
-                  ->getResult();
     }
 }

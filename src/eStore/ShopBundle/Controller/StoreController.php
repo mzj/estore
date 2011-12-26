@@ -55,7 +55,7 @@ class StoreController extends Controller
         $repo = $em->getRepository('eStoreShopBundle:Category');
         $helper = $this;
         
-        // Generating hierarchical categories menu
+        // Generate hierarchical categories menu
         $categories = $repo->childrenHierarchy(null, false, array('decorate' => true, 
                     'nodeDecorator' => function($node) use ($helper) {
                         return '<a href="' . $helper->generateUrl('eStoreShopBundle_categories', 
@@ -72,38 +72,5 @@ class StoreController extends Controller
     public function cartWidgetAction()
     {
         return $this->render('eStoreShopBundle:Store:cartWidget.html.twig');
-    }
-    
-    private function productsDataToArray($products) 
-    {
-        
-        $productsArr = array();
-        $productHolder = array();
-        foreach($products as $product) {
-            $productHolder['id'] = $product->getId();
-            $productHolder['name'] = $product->getName();
-            $productHolder['slug'] = $product->getSlug();
-            
-            $productHolder['categories'] = $this->categoriesDataToArray(
-                            $product->getCategories()
-                    );
-            $productsArr[] = $productHolder;
-        }
-        return $productsArr;
-    }
-    
-    private function categoriesDataToArray($categories) 
-    {
-        $categoriesArr = array();
-        $categoryHolder = array();
-        foreach($categories as $category) {
-            $categoryHolder['id']  = $category->getId();
-            $categoryHolder['name']  = $category->getName();
-            $categoryHolder['slug']  = $category->getSlug();
-            
-            $categoriesArr[] = $categoryHolder;
-        }
-        
-        return $categoriesArr;
     }
 }

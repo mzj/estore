@@ -19,7 +19,7 @@ class CategoryRepository extends NestedTreeRepository
      * @todoChecked >Find more eficiant and the right way to get all products<
      * 
      */
-    public function getAllProducts($category) 
+    public function getAllProductsByCategory($category) 
     {
         $left  = $category->getLft();
         $right = $category->getRgt();
@@ -30,6 +30,5 @@ class CategoryRepository extends NestedTreeRepository
                                           JOIN p.categories c
                                           WHERE c.lft BETWEEN $left AND $right AND c.root = $root");
         return $query->getResult();
-       
     }    
 }

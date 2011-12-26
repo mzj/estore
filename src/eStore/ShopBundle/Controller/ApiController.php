@@ -30,15 +30,24 @@ class ApiController extends Controller
         }
         
         $products = $pagedProducts->getCurrentPageResults();
-
+        
         $view = View::create();
-        $handler = $this->get('fos_rest.view_handler');
-        if ('html' === $this->getRequest()->getRequestFormat())
+        
+        if ('html' === $this->getRequest()->getRequestFormat()) {
             $view->setData(array('products' => $products));
-        else
+        } else {
             $view->setData($products);
+        }
         $view->setTemplate('eStoreShopBundle:Api:getProducts.html.twig');
-
-        return $view;
+        
+        return $this->get('fos_rest.view_handler')->handle($view);
+        
+    }
+    
+    
+    private function merge($arr1, $arr2)
+    {
+        array_splice($arr1, count($arr1), 0, $arr2);
+        return $arr1;
     }
 }

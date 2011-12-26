@@ -24,6 +24,7 @@
 {% endblock %}
  
 {% block head %}
+    
     <script type="text/template" id="products-template">
 	<!-- Normal loop that iterates over products -->
         <% _.each(products, function(p) { %>
@@ -36,7 +37,9 @@
                 </div>
            </li>
         <% }); %>
+        
     </script>
+    
 {% endblock %}    
     
 {% block main %}
@@ -115,17 +118,7 @@
                     <!-- products end -->
                     </ul>
                 <!-- products-wrapper end -->
-                    {{ pagerfanta(products, 'default', pagerfanta_opts) }}
+                    {{ pagerfanta(products, 'default') }}
                 </div>
-    
-    <form action="" method="post" {{ form_enctype(form) }}>
-    {{ form_errors(form) }}
-
-    
-
-    {{ form_rest(form) }}
-
-    <input type="submit" />
-</form>
 
 {% endblock %}   

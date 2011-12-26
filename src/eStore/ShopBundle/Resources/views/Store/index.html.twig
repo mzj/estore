@@ -24,14 +24,18 @@
 {% endblock %}
  
 {% block head %}
-    <script type="text/template" id="main_template">
+    <script type="text/template" id="products-template">
 	<!-- Normal loop that iterates over products -->
-        <% for(i=0,l=products.length;i<l;++i) { p = products[i]; %>
+        <% _.each(products, function(p) { %>
             <li>
-                <div><a href="#product/<%= p.id %>"><%= p.name %></a></div>
-                <div> <%= p.slug %></div>
-            </li>
-        <% } %>
+                <div><a href="#product/<%= p.id %>/<%= p.slug %>"><%= p.name %></a></div>
+                <div> 
+                    <% _.each(p.categories, function(c) { %>
+                    <a href="#category/<%= c.id %>/<%= c.slug %>"><%= c.name %></a>
+                    <% }); %>
+                </div>
+           </li>
+        <% }); %>
     </script>
 {% endblock %}    
     
@@ -107,30 +111,7 @@
                     <!-- filter-container end -->
                     </div>
                     <ul id="products">
-                        {% for product in products %}
-                            <li>
-                                <div>
-                                    <a href="{{ path('eStoreShopBundle_product', { 'id': product.id , 'slug': product.slug }) }}">
-                                                    {{ product.name }}
-                                    </a>
-                                    <p style="margin-bottom:10px;">
-                                        <span>
-                                            In categories: 
-                                            {% for category in product.categories %} 
-                                                <a href="{{ path('eStoreShopBundle_categories', { 'id': category.id , 'slug': category.slug }) }}">
-                                                    {{ category.name }}
-                                                </a>
-                                            {% if not loop.last %},{% endif %} 
-                                            {% endfor %}
-                                         </span> 
-                                         <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
-                                    </p>
-                                    <p>
-                                        <span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
-                                    </p>
-                                </div>
-                            </li>
-                        {% endfor %}
+                        
                     <!-- products end -->
                     </ul>
                 <!-- products-wrapper end -->

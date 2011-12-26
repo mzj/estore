@@ -71,7 +71,7 @@ class Category
      
     /**
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
-     * @ORM\OrderBy({"left" = "ASC"})
+     * @ORM\OrderBy({"lft" = "ASC"})
      */
     private $children;
     

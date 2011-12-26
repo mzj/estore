@@ -1,3 +1,8 @@
+eStoreShopBundleApi:
+    resource: "@eStoreShopBundle/Resources/config/routing_api.yml"
+    prefix:   /api
+    type: rest
+    
 eStoreShopBundle_home:
     pattern:  /
     defaults: { _controller: eStoreShopBundle:Store:index }
@@ -23,9 +28,3 @@ eStoreShopBundle_categories:
     requirements:
         _method:  GET
         id: \d+
-        
-eStoreShopBundle_api_products:
-    pattern:  /api/products/{page}
-    defaults: { _controller: eStoreShopBundle:Api:getProducts, page: 1 }
-    requirements:
-        _method:  GET      

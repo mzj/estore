@@ -1,0 +1,6 @@
+products:
+    type:     rest
+    resource: eStore\ShopBundle\Controller\ApiController
+    name_prefix:  api_
+    
+    

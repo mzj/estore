@@ -1,18 +1,12 @@
 function productsApp() {
 	//
 	var Product = Backbone.Model.extend({
-		//collection: Messages,
-		/*url: function() {
-			if (this.isNew()) return 'api/messages';
-			return 'api/messages/'+this.get('id');
-		  }	*/
-		  
-		  url: 'api/products'
+		  url: 'api/products.json'
 	});
 	
 	//
-	var Messages = Backbone.Collection.extend({
-		model: Message,
+	var Products = Backbone.Collection.extend({
+		model: Product,
 		
         initialize: function(models, options) {
         	this.url = options.url;
@@ -35,89 +29,56 @@ function productsApp() {
 	});
 	
 	//	
-	var MessagesView = Backbone.View.extend({
-		template: $("#main_template").html(),
-		el: $('#main'),
+	var ProductsView = Backbone.View.extend({
+		template: $("#products-template").html(),
+		el: $('#products'),
 		
-		events: {
-			"click #btn-add" : "add"
-		},
+		
 		
 		initialize: function() {
-			this.collection.bind('add', this.render, this);
 			this.collection.bind('reset', this.render, this);
 			this.render();
 		},
 		
-		add: function(e) {
-			e.preventDefault();
-			
-			message = new Message({
-			  subject: $('#subject-add').val(),
-			  body: $('#body-add').val()
-			});
-			
-			this.collection.create(message);
-		},
-		
 		render: function() {
-			this.el.html(_.template(this.template, {'messages': this.collection.toJSON()}));
+			this.el.html(_.template(this.template, {'products': this.collection.toJSON()}));
 			return this;
 		}
 		
 	
 	});
 	
-	//
-	var MessageView = Backbone.View.extend({
-		template: $("#message_template").html(),
-		el: $('#main'),
-		
-		initialize: function() {
-			this.render();
-		},
-		
-		render: function() {
-			this.el.html(_.template(this.template, {'message': this.model.toJSON()}));
-			return this;
-		}
-	});
+	
 	
 	//
 	var App = Backbone.Router.extend({
 		views: {},
-		messagesView: null,
+		productsView: null,
 		routes: {
 			"" : "index",
-			"msg/:id" : "message"
+			"product/:id" : "product"
 		},
 		
 		// Ovde stavis index stranu ili 
 		// mozes cak da je i izdvojis u posebnu metodu/funkc
 		initialize: function(data) {
-			messages = new Messages([], {url: 'api/messages'});		
+			products = new Products([], {url: 'api/products.json'});		
 		},
 		 
 		// Index route
 		index: function() {
-			messages.fetch({success: function(){
-				if(!this.messagesView) {
-					this.messagesView = new MessagesView({ 
-						collection: messages
+			products.fetch({success: function(){
+				if(!this.productsView) {
+					this.messagesView = new ProductsView({ 
+						collection: products
 					});
 				}
 			}});
-		},
-		
-		// Ovde je za pojedinacnu poruku
-		// Kreiras modele/kolekciju i view i povezs 
-		message: function(id) {
-			messageView = new MessageView({
-					model: messages.get(id)
-				});	 
 		}
+		
 	});
-	
+    
+	new App;
 	Backbone.history.start();	 
 
 	

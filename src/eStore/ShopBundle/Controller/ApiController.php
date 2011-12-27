@@ -32,12 +32,7 @@ class ApiController extends Controller
         $products = $pagedProducts->getCurrentPageResults();
         
         $view = View::create();
-        
-        if ('html' === $this->getRequest()->getRequestFormat()) {
-            $view->setData(array('products' => $products));
-        } else {
-            $view->setData($products);
-        }
+        $view->setData(array('products' => $products, 'pagerfanta' => array('6', '53')));
         $view->setTemplate('eStoreShopBundle:Api:getProducts.html.twig');
         
         return $this->get('fos_rest.view_handler')->handle($view);

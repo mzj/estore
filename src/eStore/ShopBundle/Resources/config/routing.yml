@@ -3,6 +3,7 @@ eStoreShopBundleApi:
     prefix:   /api
     type: rest
     
+    
 eStoreShopBundle_home:
     pattern:  /
     defaults: { _controller: eStoreShopBundle:Store:index }

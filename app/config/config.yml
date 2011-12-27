@@ -74,7 +74,7 @@ jms_security_extra:
 
 fos_rest:
     routing_loader:
-        default_format: null
+        default_format: json
     view:
         default_engine: twig
         force_redirects:
@@ -95,7 +95,7 @@ fos_rest:
             xml: fos_rest.decoder.xml
     format_listener:
         default_priorities: [json, html, '*/*']
-        fallback_format: html
+        fallback_format: xml
         prefer_extension: true
     service:
         router: router

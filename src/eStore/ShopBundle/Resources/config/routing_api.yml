@@ -1,6 +1,10 @@
+#products:
+#    type:     rest
+#    resource: eStore\ShopBundle\Controller\ApiController
+#    name_prefix:  api_
+    
 products:
-    type:     rest
-    resource: eStore\ShopBundle\Controller\ApiController
-    name_prefix:  api_
+    pattern:  /products/{page}.{_format}
+    defaults: { _controller: eStoreShopBundle:Api:getProducts, _format: json, page: 1 }
     
     

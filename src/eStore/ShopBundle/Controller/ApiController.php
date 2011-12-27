@@ -12,8 +12,13 @@ use FOS\RestBundle\View\View;
 
 class ApiController extends Controller
 {
-    
-    public function getProductsAction(Request $request)
+    /**
+     *
+     * @param Request $request
+     * @param type $page
+     * @return Response 
+     */
+    public function getProductsAction(Request $request, $page)
     {
         $em = $this->getDoctrine()
                    ->getEntityManager();       
@@ -21,10 +26,10 @@ class ApiController extends Controller
         $query =  $em->getRepository('eStoreShopBundle:Product')
                      ->getPopularProducts();
         $pagedProducts = new Pagerfanta(new DoctrineORMAdapter($query));
-        $pagedProducts->setMaxPerPage(2);
+        $pagedProducts->setMaxPerPage(10);
 
         try {
-            $pagedProducts->setCurrentPage($request->query->get('page', 1));
+            $pagedProducts->setCurrentPage($page);
         } catch(NotValidCurrentPageException $e) {
             throw $this->createNotFoundException('Page not found.');
         }
@@ -32,17 +37,16 @@ class ApiController extends Controller
         $products = $pagedProducts->getCurrentPageResults();
         
         $view = View::create();
-        $view->setData(array('products' => $products, 'pagerfanta' => array('6', '53')));
+        $view->setData(array('products' => $products, 'pagerfanta' => array(
+            'currentPage'  => $pagedProducts->getCurrentPage(),
+            'nbPages'      => $pagedProducts->getNbPages(), 
+            'nbResults'    => $pagedProducts->getNbResults(),
+            )
+          ));
+        
         $view->setTemplate('eStoreShopBundle:Api:getProducts.html.twig');
         
         return $this->get('fos_rest.view_handler')->handle($view);
         
-    }
-    
-    
-    private function merge($arr1, $arr2)
-    {
-        array_splice($arr1, count($arr1), 0, $arr2);
-        return $arr1;
     }
 }

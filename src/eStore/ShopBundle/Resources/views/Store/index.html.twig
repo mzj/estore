@@ -4,6 +4,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link type="text/css" rel="stylesheet" href="{{ asset('bundles/estoreshop/css/products.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/estoreshop/css/pagination.css') }}" />
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/themes/eStore/eStore.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/nivo-slider.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/uniform/css/uniform.eStore.css') }}" type="text/css" media="screen" />
@@ -31,13 +32,21 @@
             <li>
                 <div><a href="#product/<%= p.id %>/<%= p.slug %>"><%= p.name %></a></div>
                 <div> 
+                    In:
                     <% _.each(p.categories, function(c) { %>
-                    <a href="#category/<%= c.id %>/<%= c.slug %>"><%= c.name %></a>
+                        <% if (c.parent != null) { %>
+                            <a href="#category/<%= c.id %>/<%= c.slug %>" title="<%= 'Subcategory of ' + c.parent.name %>"><%= c.name %></a>
+                        <% } else { %>
+                            <a href="#category/<%= c.id %>/<%= c.slug %>"><%= c.name %></a>
+                        <% } %>
                     <% }); %>
                 </div>
            </li>
         <% }); %>
-        
+    </script>
+    
+    <script type="text/template" id="pagination-template">
+	<!-- Pagination controls -->
     </script>
     
 {% endblock %}    
@@ -113,12 +122,24 @@
                         </form>
                     <!-- filter-container end -->
                     </div>
+                    
                     <ul id="products">
-                        
                     <!-- products end -->
                     </ul>
+                    
+                    <ul id="pagination">
+                        <li><img src="/bundles/estoreshop/img/arrow-right.png" /></li>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li><img src="/bundles/estoreshop/img/arrow-right.png" /></li>
+                    <!-- pagination end -->
+                    </ul>
+                    
                 <!-- products-wrapper end -->
-                    {{ pagerfanta(products, 'default') }}
                 </div>
 
 {% endblock %}   

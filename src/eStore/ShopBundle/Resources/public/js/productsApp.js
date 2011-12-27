@@ -33,7 +33,7 @@ function productsApp() {
           *  return response.products
           */
         parse: function(response) {
-            console.log(response.pagerfanta);
+           console.log(response.pagerfanta);
            return response.products;
         }
     });
@@ -72,7 +72,7 @@ function productsApp() {
             // Ovde stavis index stranu ili 
             // mozes cak da je i izdvojis u posebnu metodu/funkc
             initialize: function(data) {
-                    products = new Products([], {url: 'api/products.json?page=2'});		
+                    products = new Products([], {url: 'api/products'});		
             },
 
             // Index route

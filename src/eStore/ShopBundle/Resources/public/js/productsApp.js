@@ -1,7 +1,7 @@
 function productsApp() {
     //
     var Product = Backbone.Model.extend({
-              url: 'api/products.json'
+             // url: 'api/products'
     });
 
     //
@@ -33,7 +33,7 @@ function productsApp() {
           *  return response.products
           */
         parse: function(response) {
-           console.log(response.pagerfanta);
+           //console.log(response.pagerfanta);
            return response.products;
         }
     });
@@ -65,27 +65,38 @@ function productsApp() {
             views: {},
             productsView: null,
             routes: {
-                    "" : "index",
-                    "product/:id" : "product"
+                    ":page" : "index",
+                    "marko" : "marko"
             },
 
             // Ovde stavis index stranu ili 
             // mozes cak da je i izdvojis u posebnu metodu/funkc
             initialize: function(data) {
-                    products = new Products([], {url: 'api/products'});		
+                    		
             },
 
             // Index route
-            index: function() {
-                    products.fetch({success: function(){
-                            if(!this.productsView) {
-                                    this.messagesView = new ProductsView({ 
-                                            collection: products
-                                    });
-                            }
+            index: function(page) {
+                this.productsView = null;
+                products = null;
+                page = page > 0 ? page : 1;
+                products = new Products([], {url: 'api/products/' + page + '.json'});
+                products.fetch({
+                    success: function() {
+                            this.productsView = new ProductsView({ 
+                                collection: products
+                            });
+                        
                     }});
+            },
+            
+            // Index route
+            marko: function() {
+               // this.index();
+               console.log("sdsdsd");
             }
-
+            
+            
     });
 
     new App;

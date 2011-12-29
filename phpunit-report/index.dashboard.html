@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="jquery.min.js" type="text/javascript"></script>
+    <script src="highcharts.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+          var classCoverageDistribution = new Highcharts.Chart({
+             chart: {
+                renderTo: 'classCoverageDistribution',
+                type: 'column'
+             },
+             title: {text: ''},
+             legend: {enabled: false},
+             credits: {enabled: false},
+             tooltip: {enabled: false},
+             xAxis: {
+                 labels: {style: {fontSize: '8px'}},
+                 categories: [
+                 '0%','0-10%','10-20%','20-30%','30-40%','40-50%','50-60%','60-70%','70-80%','80-90%','90-100%','100%'
+                 ]
+            },
+            yAxis: {
+                title: '',
+                labels: {style: {fontSize: '8px'}},
+            },
+            series: [{
+                data: [14,1,0,0,0,0,0,0,0,0,0,1]
+            }],
+          });
+
+        var classComplexity = new Highcharts.Chart({
+            chart: {
+              renderTo: 'classComplexity',
+              type: 'scatter'
+            },
+            title: {text: ''},
+            legend: {enabled: false},
+            credits: {enabled: false},
+            xAxis: {
+               labels: {enabled: false},
+            },
+            yAxis: {
+              title: '',
+              labels: {enabled: false},
+            },
+            tooltip: {
+                formatter: function() {
+                    return this.point.config[2];
+                }
+            },
+            series: [{
+              data: [[0,2,"<a href=\"Controller_ApiController.php.html#13\">ApiController<\/a>"],[0,1,"<a href=\"Controller_CategoryController.php.html#8\">CategoryController<\/a>"],[0,1,"<a href=\"Controller_ProductController.php.html#8\">ProductController<\/a>"],[0,7,"<a href=\"Controller_StoreController.php.html#12\">StoreController<\/a>"],[0,2,"<a href=\"DataFixtures_ORM_CategoryFixtures.php.html#10\">CategoryFixtures<\/a>"],[0,2,"<a href=\"DataFixtures_ORM_ProductFixtures.php.html#11\">ProductFixtures<\/a>"],[0,1,"<a href=\"DependencyInjection_Configuration.php.html#13\">Configuration<\/a>"],[0,1,"<a href=\"DependencyInjection_eStoreShopExtension.php.html#15\">eStoreShopExtension<\/a>"],[8.5714285714286,23,"<a href=\"Entity_Category.php.html#16\">Category<\/a>"],[100,21,"<a href=\"Entity_Product.php.html#16\">Product<\/a>"],[0,2,"<a href=\"Form_CategoryType.php.html#8\">CategoryType<\/a>"],[0,2,"<a href=\"Form_FilterType.php.html#8\">FilterType<\/a>"],[0,2,"<a href=\"Form_ProductType.php.html#8\">ProductType<\/a>"],[0,1,"<a href=\"Repository_CategoryRepository.php.html#15\">CategoryRepository<\/a>"],[0,1,"<a href=\"Repository_ProductRepository.php.html#12\">ProductRepository<\/a>"],[0,0,"<a href=\"eStoreShopBundle.php.html#7\">eStoreShopBundle<\/a>"]],
+              marker: {
+                  symbol: 'diamond'
+              }
+            }],
+        });
+    });
+    </script>
+  </head>
+
+  <body>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="title"></td></tr>
+      <tr><td><div align="center"><p><a href="index.html">Back to Code Coverage report</a></p></div></td></tr>
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+    </table>
+
+    <br />
+
+    <center>
+      <table width="90%" cellpadding="2" cellspacing="1" border="0">
+        <tr>
+          <td valign="top">
+            <h2>Class Coverage Distribution</h2>
+            <div id="classCoverageDistribution"></div>
+          </td>
+
+          <td valign="top">
+            <h2>Class Complexity</h2>
+            <div id="classComplexity"></div>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">
+            <h2>Top Project Risks</h2>
+            <ul>
+              <li><a href="Controller_StoreController.php.html#12">StoreController</a> (56)</li>
+              <li><a href="Controller_ApiController.php.html#13">ApiController</a> (6)</li>
+
+            </ul>
+          </td>
+
+          <td valign="top">
+            <h2>Least Tested Methods</h2>
+            <ul>
+              <li><a href="Entity_Category.php.html#254">Category::getLft</a> (0%)</li>
+              <li><a href="Entity_Category.php.html#264">Category::setRgt</a> (0%)</li>
+              <li><a href="Entity_Category.php.html#274">Category::getRgt</a> (0%)</li>
+              <li><a href="Entity_Category.php.html#284">Category::setSlug</a> (0%)</li>
+              <li><a href="Entity_Category.php.html#244">Category::setLft</a> (0%)</li>
+              <li><a href="Entity_Category.php.html#234">Category::getChildren</a> (0%)</li>
+              <li><a href="Entity_Category.php.html#194">Category::getRoot</a> (0%)</li>
+              <li><a href="Entity_Category.php.html#204">Category::setParent</a> (0%)</li>
+              <li><a href="Entity_Category.php.html#214">Category::getParent</a> (0%)</li>
+              <li><a href="Entity_Category.php.html#224">Category::addCategory</a> (0%)</li>
+
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </center>
+
+    <br />
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.1</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.6-13ubuntu3.3</a> and PHPUnit 3.6.5 at Thu Dec 29 20:38:43 CET 2011.</td></tr>
+    </table>
+
+    <br/>
+  </body>
+</html>

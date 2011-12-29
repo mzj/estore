@@ -41,7 +41,7 @@ class Product
     /**
      * @var decimal $price
      *
-     * @ORM\Column(name="price", type="decimal")
+     * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
      */
     private $price;
 
@@ -77,6 +77,7 @@ class Product
     
     public function __construct()
     {
+        // When creating entity as POPO
         $this->setCreated(new \DateTime());
         $this->setUpdated(new \DateTime());
         $this->categories = new ArrayCollection();

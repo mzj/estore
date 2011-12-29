@@ -96,7 +96,7 @@ class Category
     public function __construct() 
     {
         $this->products = new ArrayCollection();
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
 

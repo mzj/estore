@@ -66,13 +66,12 @@ function productsApp() {
             productsView: null,
             routes: {
                     ":page" : "index",
-                    "marko" : "marko"
+                   "test" : "testR"
             },
 
-            // Ovde stavis index stranu ili 
-            // mozes cak da je i izdvojis u posebnu metodu/funkc
             initialize: function(data) {
-                    		
+                //this.route(":number", "page", function(number){ alert(number) });
+                
             },
 
             // Index route
@@ -91,9 +90,8 @@ function productsApp() {
             },
             
             // Index route
-            marko: function() {
-               // this.index();
-               console.log("sdsdsd");
+            testR: function() {
+               alert("Test route!");
             }
             
             

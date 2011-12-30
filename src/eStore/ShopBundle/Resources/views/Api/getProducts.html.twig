@@ -1,3 +1,9 @@
-{% for product in products %}
-    {{ product.name }} <br/>
-{% endfor %}
+{% extends 'eStoreShopBundle::layout.html.twig' %}
+
+{% block main %}
+
+    {% for product in products %}
+        {{ product.name }} <br/>
+    {% endfor %}
+        
+{% endblock %}

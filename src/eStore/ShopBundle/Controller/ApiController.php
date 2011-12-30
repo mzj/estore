@@ -26,7 +26,7 @@ class ApiController extends Controller
         $query =  $em->getRepository('eStoreShopBundle:Product')
                      ->getPopularProducts();
         $pagedProducts = new Pagerfanta(new DoctrineORMAdapter($query));
-        $pagedProducts->setMaxPerPage(2);
+        $pagedProducts->setMaxPerPage(5);
 
         try {
             $pagedProducts->setCurrentPage($page);
@@ -46,7 +46,7 @@ class ApiController extends Controller
         
         $view->setTemplate('eStoreShopBundle:Api:getProducts.html.twig');
         
-        return $this->get('fos_rest.view_handler')->handle($view);
+        return $view;
         
     }
 }

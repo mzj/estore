@@ -19,9 +19,10 @@ class ProductRepository extends EntityRepository
     public function getPopularProducts()
     {
         $query = $this->_em
-                      ->createQuery("SELECT p, c
+                      ->createQuery("SELECT p, c, cp
                                      FROM eStore\ShopBundle\Entity\Product p
                                      JOIN p.categories c
+                                     LEFT JOIN c.parent cp
                                      ORDER BY p.id DESC
                                    ");
         return $query;

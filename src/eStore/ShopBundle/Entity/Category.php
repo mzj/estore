@@ -5,13 +5,14 @@ namespace eStore\ShopBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\SerializerBundle\Annotation\ExclusionPolicy;
+use JMS\SerializerBundle\Annotation\Exclude;
 
 /**
- * eStore\ShopBundle\Entity\Category
- *
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="eStore\ShopBundle\Repository\CategoryRepository")
  * @Gedmo\Tree(type="nested")
+ * @ExclusionPolicy("none")
  */
 class Category
 {
@@ -72,6 +73,7 @@ class Category
     /**
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
+     * @Exclude
      */
     private $children;
     
@@ -89,6 +91,7 @@ class Category
      *   joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")},
      *   inverseJoinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")}
      * )
+     * @Exclude
      */    
     private $products;
     

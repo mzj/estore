@@ -14,25 +14,11 @@ class StoreController extends Controller
     
     public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()
-                   ->getEntityManager();
-
-        $query =  $em->getRepository('eStoreShopBundle:Product')
-                     ->getPopularProducts();
-        
-        $pagedProducts = new Pagerfanta(new DoctrineORMAdapter($query));
-        $pagedProducts->setMaxPerPage(2);
-
-        try {
-            $pagedProducts->setCurrentPage($request->query->get('page', 1));
-        } catch(NotValidCurrentPageException $e) {
-            throw $this->createNotFoundException('Page not found.');
-        }
         
         $form = $this->createForm(new FilterType());
 
         return $this->render('eStoreShopBundle:Store:index.html.twig', array(
-            'products' => $pagedProducts, 'form' => $form->createView()
+            'form' => $form->createView()
         ));
     }
     
@@ -58,7 +44,7 @@ class StoreController extends Controller
         // Generate hierarchical categories menu
         $categories = $repo->childrenHierarchy(null, false, array('decorate' => true, 
                     'nodeDecorator' => function($node) use ($helper) {
-                        return '<a href="' . $helper->generateUrl('eStoreShopBundle_categories', 
+                        return '<a href="' . $helper->generateUrl('eStoreShopBundle_category', 
                                 array('id' => $node['id'],'slug' => $node['slug'])) . '">' 
                                 . $node['name'] . '</a>';
                     })

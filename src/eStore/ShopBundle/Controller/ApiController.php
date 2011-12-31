@@ -1,4 +1,7 @@
 <?php
+/**
+ * 
+ */
 namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,6 +13,9 @@ use Pagerfanta\Exception\NotValidCurrentPageException;
 use eStore\ShopBundle\Form\FilterType;
 use FOS\RestBundle\View\View;
 
+/**
+ * 
+ */
 class ApiController extends Controller
 {
     /**

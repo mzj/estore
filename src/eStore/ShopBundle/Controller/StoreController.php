@@ -1,4 +1,7 @@
 <?php
+/**
+ * 
+ */
 namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -9,12 +12,18 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use eStore\ShopBundle\Form\FilterType;
 
+/**
+ * 
+ */
 class StoreController extends Controller
 {
-    
+    /**
+     *
+     * @param Request $request
+     * @return type 
+     */
     public function indexAction(Request $request)
     {
-        
         $form = $this->createForm(new FilterType());
 
         return $this->render('eStoreShopBundle:Store:index.html.twig', array(
@@ -22,18 +31,25 @@ class StoreController extends Controller
         ));
     }
     
-    
+    /**
+     * About route - About page
+     */
     public function aboutAction()
     {
         return $this->render('eStoreShopBundle:Store:about.html.twig');
     }
     
+    /**
+     * Contact route - Contact page 
+     */
     public function contactAction()
     {
         return $this->render('eStoreShopBundle:Store:contact.html.twig');
     }
     
-    
+    /**
+     *  
+     */
     public function headerNavigationAction()
     {
         $em = $this->getDoctrine()
@@ -41,7 +57,10 @@ class StoreController extends Controller
         $repo = $em->getRepository('eStoreShopBundle:Category');
         $helper = $this;
         
-        // Generate hierarchical categories menu
+        /**
+         * Generate hierarchical categories menu
+         * @todo refactor - it needs to be used in multiple places
+         */
         $categories = $repo->childrenHierarchy(null, false, array('decorate' => true, 
                     'nodeDecorator' => function($node) use ($helper) {
                         return '<a href="' . $helper->generateUrl('eStoreShopBundle_category', 
@@ -55,6 +74,10 @@ class StoreController extends Controller
         ));
     }
     
+    /**
+     *
+     * @return type 
+     */
     public function cartWidgetAction()
     {
         return $this->render('eStoreShopBundle:Store:cartWidget.html.twig');

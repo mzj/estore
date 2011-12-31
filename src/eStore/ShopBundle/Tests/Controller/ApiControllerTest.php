@@ -70,7 +70,7 @@ class ApiControllerTest extends WebTestCase
     }
     
     /**
-     * If page doesn't exist show 404 error page
+     * Check If page doesn't exist show 404 error page
      */
     public function testExpectException() 
     {

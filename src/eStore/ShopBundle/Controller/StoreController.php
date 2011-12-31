@@ -1,7 +1,11 @@
 <?php
 /**
- * 
+ * File: eStore/ShopBundle/Controller/StoreController.php
+ * Desc: Store controller - Main pages, and navigation actions
+ * Author: markozjovanovic@gmail.com 
+ * Date: Dec. 2011
  */
+
 namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -12,15 +16,13 @@ use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use eStore\ShopBundle\Form\FilterType;
 
-/**
- * 
- */
+
 class StoreController extends Controller
 {
     /**
      *
      * @param Request $request
-     * @return type 
+     * @return Response
      */
     public function indexAction(Request $request)
     {
@@ -33,6 +35,7 @@ class StoreController extends Controller
     
     /**
      * About route - About page
+     * @return Response
      */
     public function aboutAction()
     {
@@ -40,15 +43,18 @@ class StoreController extends Controller
     }
     
     /**
-     * Contact route - Contact page 
+     * Contact route - Contact page
+     * @return Response 
      */
     public function contactAction()
     {
         return $this->render('eStoreShopBundle:Store:contact.html.twig');
     }
     
+
     /**
-     *  
+     *
+     * @return Response 
      */
     public function headerNavigationAction()
     {
@@ -76,7 +82,7 @@ class StoreController extends Controller
     
     /**
      *
-     * @return type 
+     * @return Response 
      */
     public function cartWidgetAction()
     {

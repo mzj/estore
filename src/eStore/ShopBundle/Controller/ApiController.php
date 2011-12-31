@@ -24,7 +24,7 @@ class ApiController extends Controller
     /**
      * Returns paged collection of product entity, 
      * in one of the tree types - JSON, XML, HMTL. 
-     * Depending on the requested format (by extension (or lack of one) in he url)
+     * Depending on the requested format (by extension (or lack of one) in the url)
      * 
      * @param Request $request
      * @param int $page

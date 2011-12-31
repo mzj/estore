@@ -1,7 +1,12 @@
 <?php
 /**
- * 
+ * File: eStore/ShopBundle/Controller/ApiController.php
+ * Desc: RESTFul Api controller - Uses FOSRestBundle for content negotiation
+ * as well as serialization of the entities 
+ * Author: markozjovanovic@gmail.com 
+ * Date: Dec. 2011
  */
+
 namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -13,15 +18,16 @@ use Pagerfanta\Exception\NotValidCurrentPageException;
 use eStore\ShopBundle\Form\FilterType;
 use FOS\RestBundle\View\View;
 
-/**
- * 
- */
+
 class ApiController extends Controller
 {
     /**
-     *
+     * Returns paged collection of product entity, 
+     * in one of the tree types - JSON, XML, HMTL. 
+     * Depending on the requested format (by extension (or lack of one) in he url)
+     * 
      * @param Request $request
-     * @param type $page
+     * @param int $page
      * @return Response 
      */
     public function getProductsAction(Request $request, $page)
@@ -40,6 +46,7 @@ class ApiController extends Controller
             throw $this->createNotFoundException('Page not found.');
         }
         
+        // gets products collection for currnet page
         $products = $pagedProducts->getCurrentPageResults();
         
         $view = View::create();
@@ -53,6 +60,5 @@ class ApiController extends Controller
         $view->setTemplate('eStoreShopBundle:Api:getProducts.html.twig');
         
         return $view;
-        
     }
 }

@@ -1,0 +1,3 @@
+parameters:
+    # eSore contact email address
+    estore_shop.emails.contact_email: markotmp@gmail.com

@@ -11,10 +11,12 @@ namespace eStore\ShopBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use eStore\ShopBundle\Entity\Category;
+use eStore\ShopBundle\Entity\Contact;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use eStore\ShopBundle\Form\FilterType;
+use eStore\ShopBundle\Form\ContactType;
 
 
 class StoreController extends Controller
@@ -48,7 +50,31 @@ class StoreController extends Controller
      */
     public function contactAction()
     {
-        return $this->render('eStoreShopBundle:Store:contact.html.twig');
+        $contact = new Contact();
+        $form = $this->createForm(new ContactType(), $contact);
+
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+
+            if ($form->isValid()) {
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('Contact enquiry from estore.com')
+                    ->setFrom('contact@estore.com')
+                    ->setTo($this->container->getParameter('estore_shop.emails.contact_email'))
+                    ->setBody($this->renderView('eStoreShopBundle:Store:contactEmail.txt.twig', array('contact' => $contact)));
+                $this->get('mailer')->send($message);
+
+                $this->get('session')->setFlash('estore-notice', 'Your contact data was successfully sent. Thank you!');
+
+                // Redirect - This is important to prevent users re-posting
+                // the form if they refresh the page
+                return $this->redirect($this->generateUrl('eStoreShopBundle_contact'));
+            }
+        }
+        return $this->render('eStoreShopBundle:Store:contact.html.twig', 
+                    array('form' => $form->createView())
+               );
     }
     
 

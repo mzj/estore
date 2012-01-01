@@ -2,9 +2,26 @@
 
 {% block title %}Contact{% endblock%}
 
-{%block body %}
+{%block main %}
 
-    Contact
-    {{ app.environment }}
+    {% if app.session.hasFlash('estore-notice') %}
+        <div class="estore-notice">
+            {{ app.session.flash('estore-notice') }}
+        </div>
+    {% endif %}
+    <p>Want to contact symblog?</p>
+
+    <form action="{{ path('eStoreShopBundle_contact') }}" method="post" {{ form_enctype(form) }} class="estore">
+        {{ form_errors(form) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.body) }}
+
+        {{ form_rest(form) }}
+
+        <input type="submit" value="Submit" />
+    </form>
 
 {% endblock %}

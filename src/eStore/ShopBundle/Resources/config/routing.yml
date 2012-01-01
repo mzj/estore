@@ -9,6 +9,8 @@ eStoreShopBundle_about:
 eStoreShopBundle_contact:
     pattern:  /contact
     defaults: { _controller: eStoreShopBundle:Store:contact }
+    requirements:
+        _method:  GET|POST
 
 eStoreShopBundle_product:
     pattern:  /{id}/{slug}

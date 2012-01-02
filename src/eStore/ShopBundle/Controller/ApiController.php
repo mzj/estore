@@ -37,8 +37,10 @@ class ApiController extends Controller
 
         $query =  $em->getRepository('eStoreShopBundle:Product')
                      ->getPopularProducts();
+        
         $pagedProducts = new Pagerfanta(new DoctrineORMAdapter($query));
-        $pagedProducts->setMaxPerPage(2);
+        $pagedProducts->setMaxPerPage($this->container
+                            ->getParameter('estore_shop.products.max_per_page'));
 
         try {
             $pagedProducts->setCurrentPage($page);

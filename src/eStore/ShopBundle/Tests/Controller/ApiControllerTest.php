@@ -39,9 +39,11 @@ class ApiControllerTest extends WebTestCase
             $queryNumber = $profile->getCollector('db')->getQueryCount();
             $exTime = $profile->getCollector('timer')->getTime();
             
-            // Check the number of requests
+            // Check the number of queries 
+            // needs to be under 6 to pass the test
             $this->assertTrue($queryNumber <= 5, 'Number of queries is ' . $queryNumber);
-            // Check the time spent in the framework
+            // Check the time spent in the framework 
+            // needs to be under 5 sec. to pass the test
             $this->assertTrue($exTime < 5, 'Execution time is ' . $exTime);
         }
     }
@@ -62,15 +64,17 @@ class ApiControllerTest extends WebTestCase
             $queryNumber = $profile->getCollector('db')->getQueryCount();
             $exTime = $profile->getCollector('timer')->getTime();
             
-            // Check the number of requests
+            // Check the number of queries
+            // needs to be under 6 to pass the test
             $this->assertTrue($queryNumber <= 5, 'Number of queries is ' . $queryNumber);
             // Check the time spent in the framework
+            // needs to be under 6 to pass the test
             $this->assertTrue($exTime < 5, 'Execution time is ' . $exTime);
         }
     }
     
     /**
-     * Check If page doesn't exist show 404 error page
+     * Check If page doesn't exists - show 404 error page
      */
     public function testExpectException() 
     {

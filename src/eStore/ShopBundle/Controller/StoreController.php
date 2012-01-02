@@ -51,7 +51,7 @@ class StoreController extends Controller
     public function contactAction()
     {
         $contact = new Contact();
-        $form = $this->createForm(new ContactType(), $contact);
+        $form = $this->createForm(new ContactType());
 
         $request = $this->getRequest();
         if ($request->getMethod() == 'POST') {

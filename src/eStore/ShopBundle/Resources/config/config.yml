@@ -1,3 +1,4 @@
 parameters:
     # eSore contact email address
     estore_shop.emails.contact_email: markotmp@gmail.com
+    estore_shop.products.max_per_page: 2

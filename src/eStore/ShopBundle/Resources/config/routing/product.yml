@@ -1,0 +1,30 @@
+admin:
+    pattern:  /
+    defaults: { _controller: "eStoreShopBundle:Product:index" }
+
+admin_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "eStoreShopBundle:Product:show" }
+
+admin_new:
+    pattern:  /new
+    defaults: { _controller: "eStoreShopBundle:Product:new" }
+
+admin_create:
+    pattern:  /create
+    defaults: { _controller: "eStoreShopBundle:Product:create" }
+    requirements: { _method: post }
+
+admin_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "eStoreShopBundle:Product:edit" }
+
+admin_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "eStoreShopBundle:Product:update" }
+    requirements: { _method: post }
+
+admin_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "eStoreShopBundle:Product:delete" }
+    requirements: { _method: post }

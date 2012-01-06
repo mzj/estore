@@ -1,0 +1,50 @@
+{% extends 'eStoreShopBundle::adminLayout.html.twig' %}
+
+{% block container %}
+
+<h1>Product list</h1>
+
+<ul>
+    <li>
+        <a href="">
+            Create a new entry
+        </a>
+    </li>
+</ul>
+
+<table id="entity-list" class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for product in products %}
+        <tr>
+            <td><a href="">{{ product.id }}</a></td>
+            <td>{{ product.name }}</td>
+            <td><img src="uploads/products/{{ product.imageName }}" /></td>
+            <td>{% if product.created %}{{ product.created|date('Y-m-d H:i:s') }}{% endif%}</td>
+            <td>{% if product.updated %}{{ product.updated|date('Y-m-d H:i:s') }}{% endif%}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="">show</a>
+                    </li>
+                    <li>
+                        <a href="">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

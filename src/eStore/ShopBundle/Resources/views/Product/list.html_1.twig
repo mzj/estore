@@ -1,3 +1,7 @@
+{% extends 'eStoreShopBundle::adminLayout.html.twig' %}
+
+{% block container %}
+
 <h1>Product list</h1>
 
 <table class="records_list">
@@ -21,7 +25,7 @@
             <td>{{ entity.name }}</td>
             <td>{{ entity.description }}</td>
             <td>{{ entity.price }}</td>
-            <td>{{ entity.image }}</td>
+            <td>{{ entity.imageName }}</td>
             <td>{% if entity.created %}{{ entity.created|date('Y-m-d H:i:s') }}{% endif%}</td>
             <td>{% if entity.updated %}{{ entity.updated|date('Y-m-d H:i:s') }}{% endif%}</td>
             <td>{{ entity.slug }}</td>
@@ -47,3 +51,4 @@
         </a>
     </li>
 </ul>
+{% endblock %}

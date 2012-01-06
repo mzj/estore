@@ -18,4 +18,13 @@ class ProductController extends Controller
       
         return $this->render('eStoreShopBundle:Product:view.html.twig', array( 'product'=> $product ));
     }
+    
+    public function listAction()
+    {       
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $products = $em->getRepository('eStoreShopBundle:Product')->findAll();
+
+        return $this->render('eStoreShopBundle:Product:list.html.twig', array( 'products' => $products ));
+    }
 }

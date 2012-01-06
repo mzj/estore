@@ -1,3 +1,7 @@
-AdminIndex:
+eStoreShopBundleAdminIndex:
     pattern:  /
     defaults: { _controller: eStoreShopBundle:Admin:index }
+    
+eStoreShopBundleAdmin_product_list:
+    pattern:  /products/list
+    defaults: { _controller: eStoreShopBundle:Product:list }

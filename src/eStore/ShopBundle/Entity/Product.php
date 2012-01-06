@@ -46,11 +46,11 @@ class Product
     private $price;
 
     /**
-     * @var string $image
+     * @var string $imageName
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="image_name", type="string", length=255)
      */
-    private $image;
+    private $imageName;
 
     /**
      * @ORM\Column(type="datetime")
@@ -180,9 +180,9 @@ class Product
      *
      * @param string $image
      */
-    public function setImage($image)
+    public function setImageName($image)
     {
-        $this->image = $image;
+        $this->imageName = $image;
     }
 
     /**
@@ -190,9 +190,9 @@ class Product
      *
      * @return string 
      */
-    public function getImage()
+    public function getImageName()
     {
-        return $this->image;
+        return $this->imageName;
     }
 
     /**

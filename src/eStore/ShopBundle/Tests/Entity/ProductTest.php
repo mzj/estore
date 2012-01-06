@@ -51,16 +51,16 @@ class ProductTest extends \PHPUnit_Framework_TestCase
                 "Method setPrice didn't set up price.");
     }
 
-    public function testGetImage()
+    public function testGetImageName()
     {
-        $this->assertEquals(null, $this->product->getImage(),
+        $this->assertEquals(null, $this->product->getImageName(),
                 "Method getImage in class/entity Product didn't return NULL.");
     }
     
-    public function testSetImage()
+    public function testSetImageName()
     {
-        $this->product->setImage('image');
-        $this->assertEquals('image', $this->product->getImage(), 
+        $this->product->setImageName('image');
+        $this->assertEquals('image', $this->product->getImageName(), 
                 "Method setImage didn't set up name.");
     }
     

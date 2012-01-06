@@ -1,0 +1,3 @@
+AdminIndex:
+    pattern:  /
+    defaults: { _controller: eStoreShopBundle:Admin:index }

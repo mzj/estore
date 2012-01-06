@@ -30,3 +30,8 @@ eStoreShopBundleApi:
     resource: "@eStoreShopBundle/Resources/config/routing_api.yml"
     prefix:   /api
     type: rest
+    
+eStoreShopBundleAdmin:
+    resource: "@eStoreShopBundle/Resources/config/routing_admin.yml"
+    prefix:   /admin
+    type: rest

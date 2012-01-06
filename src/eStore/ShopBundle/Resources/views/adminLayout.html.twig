@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}eStore - Admin Control Panel{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,600,700|PT+Sans+Caption' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+
+    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/estoreshop/css/admin.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/dropDownMenu.js') }}" ></script>
+{% endblock %}
+    
+{% block body %}
+    
+    <div id="header" class="shadow">
+        <div id="header-content">
+            <h1>eStore - Admin control panel</h1>
+        <!-- header-content end -->
+        </div>
+    <!-- header end -->
+    </div>
+    
+    <div id="container" class="shadow">
+        {% block container %}{% endblock %}
+    <!-- container end -->
+    </div>
+    
+    
+{% endblock %}

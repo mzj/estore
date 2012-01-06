@@ -38,16 +38,34 @@ body {
 #entity-list {
     width:840px;
     margin-left: 30px;
-    margin-top:50px;
-    margin-bottom: 50px;
     border:1px solid #ECECEC;
     color: #0069d6;
+}
+
+.entity-list {
+    margin-top: 50px;
+}
+
+#entity-list a {
+    color: #0069d6;
+    text-decoration: none;
+}
+
+#entity-list a:hover {
+    color: #f33db9;
+    text-decoration: underline;
+}
+
+#entity-list img {
+    float: left;
+    margin-top: 2px;
+    margin-right: 10px;
 }
 
 #entity-list caption {
     border:1px solid #ECECEC;
     border-bottom: 0;
-    height: 70px;
+    height: 60px;
 }
 
 #entity-list caption h2 {
@@ -57,11 +75,20 @@ body {
 
 #entity-list tr {
     border-top: 1px solid #ECECEC;
-    height: 60px;    
+    height: 50px;    
 }
 
 #entity-list tr:hover {
     background-color: #FAFAFA;
+    color: #f33db9;
+}
+
+#entity-list tr:hover td a {
+    color: #f33db9;
+}
+
+#entity-list tr td {
+    width: 250px;
 }
 
 #entity-list td {
@@ -72,4 +99,9 @@ body {
 
 .darker {
     background-color: #FCFCFC;
+}
+
+.user-managment {
+    margin-bottom: 50px;
+    margin-top:30px;
 }

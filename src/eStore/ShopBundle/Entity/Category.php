@@ -16,7 +16,6 @@ use JMS\SerializerBundle\Annotation\Exclude;
  */
 class Category
 {
-    const ROOT = 1;
     
     /**
      * @var integer $id
@@ -99,6 +98,9 @@ class Category
     private $products;
     
     
+    private $indentName;
+
+
     public function __construct() 
     {
         $this->products = new ArrayCollection();
@@ -112,7 +114,17 @@ class Category
 
     public function __toString()
     {
-        return $this->getName();
+        return $this->getNestedPrint();
+    }
+    
+    
+    public function getIndentName()
+    {
+        $lvl = $this->getLvl();
+        $indent = ($lvl >= 1) ? $lvl - 1 : $lvl;
+        $name = $this->parent ? $this->getName() : '-- Without parent --';       
+        
+        return str_repeat(' |— ', $indent) . ' ' . $name;
     }
     
     /**

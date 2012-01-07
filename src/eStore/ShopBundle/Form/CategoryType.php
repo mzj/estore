@@ -11,7 +11,13 @@ class CategoryType extends AbstractType
     {
         $builder->add('name')
                 ->add('description')
-                ->add('parent');
+                ->add('parent', 'entity',
+                       array(
+                             'class'=>'eStore\ShopBundle\Entity\Category',
+                             'property'=>'indentName'
+                            )
+                      );
+                //->add('parent');
     }
 
     public function getName()

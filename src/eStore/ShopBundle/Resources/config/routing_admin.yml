@@ -16,3 +16,10 @@ eStoreShopBundleAdmin_category_movedown:
     requirements:
         _method:  GET
         id: \d+
+        
+eStoreShopBundleAdmin_category_moveup:
+    pattern:  /categories/move/up/{id}
+    defaults: { _controller: eStoreShopBundle:Category:moveUp }
+    requirements:
+        _method:  GET
+        id: \d+

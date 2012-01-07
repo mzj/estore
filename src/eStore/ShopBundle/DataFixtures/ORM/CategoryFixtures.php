@@ -11,22 +11,26 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
 {
     public function load($manager)
     {
+        $cat = new Category();
+        $cat->setName('root');
+        $cat->setDescription('lorem');
+            
         $tshirts = new Category();
         $tshirts->setName('T-Shirts');
         $tshirts->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        
+        $tshirts->setParent($cat);
         
       
         $vests = new Category();
         $vests->setName('Vests');
         $vests->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        
+        $vests->setParent($cat);
         
         
         $shirts = new Category();
         $shirts->setName('Shirts');
         $shirts->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        
+        $shirts->setParent($cat);
         
         $longSleeves = new Category();
         $longSleeves->setName('Long sleeves');
@@ -49,19 +53,19 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
         $shoes = new Category();
         $shoes->setName('Shoes');
         $shoes->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        
+        $shoes->setParent($cat);
         
         
         $pants = new Category();
         $pants->setName('Pants');
         $pants->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        
+        $pants->setParent($cat);
         
         
         $sweatshirts = new Category();
         $sweatshirts->setName('Sweatshirts');
         $sweatshirts->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. ');
-        
+        $sweatshirts->setParent($cat);
         
         $hoodies = new Category();
         $hoodies->setName('Hoodies');
@@ -70,7 +74,7 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
         
         
         
-        
+        $manager->persist($cat);
         $manager->persist($tshirts);
         $manager->persist($vests);
         $manager->persist($shirts);

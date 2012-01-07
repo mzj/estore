@@ -61,7 +61,7 @@ class Category
     private $rgt;
      
     /**
-     * @Gedmo\TreeRoot
+     * Gedmo\TreeRoot
      * @ORM\Column(name="root", type="integer", nullable=true)
      */
     private $root;
@@ -104,6 +104,10 @@ class Category
         $this->children = new ArrayCollection();
     }
 
+    public function setId($id) 
+    {
+        $this->id = $id;
+    }
 
     public function __toString()
     {

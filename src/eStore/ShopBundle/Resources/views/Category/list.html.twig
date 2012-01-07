@@ -3,7 +3,13 @@
 {% block container %}
 
     <div id="categories">
-        {{ categories|raw }}
+        
+        {% for category in categories %}
+            {{ category.name }}
+        {% else %}
+            {{ categories|raw }}
+        {% endfor %}
+        
     </div>
 
 

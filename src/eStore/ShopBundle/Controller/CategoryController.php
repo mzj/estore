@@ -26,16 +26,24 @@ class CategoryController extends Controller
         $repo = $em->getRepository('eStoreShopBundle:Category');
         $helper = $this;
         
-        $categories = $repo->childrenHierarchy(null, false, array('decorate' => true, 
-                    'nodeDecorator' => function($node) use ($helper) {
+        $categories = $repo->childrenQuery()->getArrayResult();
+        
+        unset($categories[0]);
+        
+        $categories = $repo->buildTree($categories, array('decorate' => true, 'nodeDecorator' => function($node) use ($helper) {
                         return '<a href="' . $helper->generateUrl('eStoreShopBundle_category', 
                                 array('id' => $node['id'],'slug' => $node['slug'])) . '">' 
                                 . $node['name'] . '</a>'
                             . '<a href="' . $helper->generateUrl('eStoreShopBundleAdmin_category_movedown',
                                     array('id' => $node['id'])) . '">'
-                                    . ' | down' . '</a>';
+                                    . ' | ↓' . '</a>'
+                            . '<a href="' . $helper->generateUrl('eStoreShopBundleAdmin_category_moveup',
+                                    array('id' => $node['id'])) . '">'
+                                    . ' | ↑' . '</a>';
                     })
                 );
+        
+               
         
         return $this->render('eStoreShopBundle:Category:list.html.twig', array( 'categories' => $categories ));
     }
@@ -46,8 +54,19 @@ class CategoryController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $repo = $em->getRepository('eStoreShopBundle:Category');
         $category = $repo->find($id);
-        $repo->moveDown($category, true);
+        $repo->moveDown($category, 1);
         $em->clear();
         return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_category_list'));
     }
+    
+    public function moveUpAction($id)
+    {       
+        $em = $this->getDoctrine()->getEntityManager();
+        $repo = $em->getRepository('eStoreShopBundle:Category');
+        $category = $repo->find($id);
+        $repo->moveUp($category, 1);
+        $em->clear();
+        return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_category_list'));
+    }
+
 }

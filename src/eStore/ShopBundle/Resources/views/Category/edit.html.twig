@@ -2,7 +2,7 @@
 
 {% block container %}
 
-    <h1>Product edit</h1>
+    <h1>Category edit</h1>
 
     <form action="{{ path('eStoreShopBundleAdmin_category_update', { 'id': category.id }) }}" method="post" {{ form_enctype(edit_form) }}>
         {{ form_widget(edit_form) }}

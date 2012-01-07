@@ -90,6 +90,48 @@ class CategoryController extends Controller
      * @param type $id
      * @return type 
      */
+    public function newAction() 
+    {
+        $category = new Category();
+        $form   = $this->createForm(new CategoryType(), $category);
+
+        return $this->render('eStoreShopBundle:Category:new.html.twig', array(
+            'category' => $category,
+            'form'     => $form->createView()
+        ));        
+    }
+    
+    /**
+     *
+     * @return type 
+     */
+    public function createAction()
+    {
+        $category  = new Category();
+        $request = $this->getRequest();
+        $form    = $this->createForm(new CategoryType(), $category);
+        $form->bindRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($category);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_category_edit', 
+                    array('id' => $category->getId())));
+        }
+
+        return $this->render('eStoreShopBundle:Category:new.html.twig', array(
+            'category' => $category,
+            'form'     => $form->createView()
+        ));  
+    }
+    
+    /**
+     *
+     * @param type $id
+     * @return type 
+     */
     public function editAction($id) 
     {
         $em = $this->getDoctrine()->getEntityManager();

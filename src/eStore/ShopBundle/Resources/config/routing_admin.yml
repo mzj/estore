@@ -9,7 +9,19 @@ eStoreShopBundleAdmin_product_list:
 eStoreShopBundleAdmin_category_list:
     pattern:  /categories/list
     defaults: { _controller: eStoreShopBundle:Category:list }
-    
+
+eStoreShopBundleAdmin_category_new:
+    pattern:  /categories/new
+    defaults: { _controller: eStoreShopBundle:Category:new }
+    requirements:
+        _method:  GET
+        
+eStoreShopBundleAdmin_category_create:
+    pattern:  /categories/create
+    defaults: { _controller: eStoreShopBundle:Category:create }
+    requirements:
+        _method:  POST
+ 
 eStoreShopBundleAdmin_category_movedown:
     pattern:  /categories/move/down/{id}
     defaults: { _controller: eStoreShopBundle:Category:moveDown }

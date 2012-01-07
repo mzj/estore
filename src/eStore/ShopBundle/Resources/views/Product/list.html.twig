@@ -2,7 +2,7 @@
 
 {% block container %}
 
-<h1>Product list</h1>
+
 
 <ul>
     <li>
@@ -13,6 +13,7 @@
 </ul>
 
 <table id="entity-list" class="records_list">
+    <caption><h2>Product list</h2></caption>
     <thead>
         <tr>
             <th>Id</th>
@@ -28,9 +29,9 @@
         <tr>
             <td><a href="">{{ product.id }}</a></td>
             <td>{{ product.name }}</td>
-            <td><img src="uploads/products/{{ product.imageName }}" /></td>
-            <td>{% if product.created %}{{ product.created|date('Y-m-d H:i:s') }}{% endif%}</td>
-            <td>{% if product.updated %}{{ product.updated|date('Y-m-d H:i:s') }}{% endif%}</td>
+            <td><img src="/uploads/products/{{ product.imageName }}" /></td>
+            <td>{% if product.created %}{{ product.created|date('m/d/Y H:i:s') }}{% endif%}</td>
+            <td>{% if product.updated %}{{ product.updated|date('m/d/Y H:i:s') }}{% endif%}</td>
             <td>
                 <ul>
                     <li>

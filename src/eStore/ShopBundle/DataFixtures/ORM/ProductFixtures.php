@@ -17,7 +17,7 @@ class ProductFixtures extends AbstractFixture implements OrderedFixtureInterface
         $product1->setName('Lime T-Shirt');
         $product1->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut velocity magna. Etiam vehicula nunc non leo hendrerit commodo. Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras el mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras elementum molestie vestibulum. Morbi id quam nisl. Praesent hendrerit, orci sed elementum lobortis, justo mauris lacinia libero, non facilisis purus ipsum non mi. Aliquam sollicitudin, augue id vestibulum iaculis, sem lectus convallis nunc, vel scelerisque lorem tortor ac nunc. Donec pharetra eleifend enim vel porta.');
         $product1->setPrice(100.22);
-        $product1->setImage('lime-t-shirt.png');
+        $product1->setImageName('lime-t-shirt.png');
         $product1->setCreated(new \DateTime());
         $product1->setUpdated($product1->getCreated());
         $product1->addCategory($manager->merge($this->getReference('tshirts')));
@@ -27,7 +27,7 @@ class ProductFixtures extends AbstractFixture implements OrderedFixtureInterface
         $product2->setName('Lionweight');
         $product2->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut velocity magna. Etiam vehicula nunc non leo hendrerit commodo. Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras el mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras elementum molestie vestibulum. Morbi id quam nisl. Praesent hendrerit, orci sed elementum lobortis, justo mauris lacinia libero, non facilisis purus ipsum non mi. Aliquam sollicitudin, augue id vestibulum iaculis, sem lectus convallis nunc, vel scelerisque lorem tortor ac nunc. Donec pharetra eleifend enim vel porta.');
         $product2->setPrice(100.22);
-        $product2->setImage('lime-t-shirt.png');
+        $product2->setImageName('lime-t-shirt.png');
         $product2->setCreated(new \DateTime());
         $product2->setUpdated($product2->getCreated());
         $product2->addCategory($manager->merge($this->getReference('tshirts')));
@@ -37,7 +37,7 @@ class ProductFixtures extends AbstractFixture implements OrderedFixtureInterface
         $product3->setName('King of the Night');
         $product3->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut velocity magna. Etiam vehicula nunc non leo hendrerit commodo. Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras el mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras elementum molestie vestibulum. Morbi id quam nisl. Praesent hendrerit, orci sed elementum lobortis, justo mauris lacinia libero, non facilisis purus ipsum non mi. Aliquam sollicitudin, augue id vestibulum iaculis, sem lectus convallis nunc, vel scelerisque lorem tortor ac nunc. Donec pharetra eleifend enim vel porta.');
         $product3->setPrice(100.22);
-        $product3->setImage('lime-t-shirt.png');
+        $product3->setImageName('lime-t-shirt.png');
         $product3->setCreated(new \DateTime());
         $product3->setUpdated($product3->getCreated());
         $product3->addCategory($manager->merge($this->getReference('vests')));
@@ -47,7 +47,7 @@ class ProductFixtures extends AbstractFixture implements OrderedFixtureInterface
         $product4->setName('Have The Abyss Stare');
         $product4->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut velocity magna. Etiam vehicula nunc non leo hendrerit commodo. Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras el mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras elementum molestie vestibulum. Morbi id quam nisl. Praesent hendrerit, orci sed elementum lobortis, justo mauris lacinia libero, non facilisis purus ipsum non mi. Aliquam sollicitudin, augue id vestibulum iaculis, sem lectus convallis nunc, vel scelerisque lorem tortor ac nunc. Donec pharetra eleifend enim vel porta.');
         $product4->setPrice(100.22);
-        $product4->setImage('lime-t-shirt.png');
+        $product4->setImageName('lime-t-shirt.png');
         $product4->setCreated(new \DateTime());
         $product4->setUpdated($product4->getCreated());
         $product4->addCategory($manager->merge($this->getReference('pants')));
@@ -57,7 +57,7 @@ class ProductFixtures extends AbstractFixture implements OrderedFixtureInterface
         $product5->setName('The Witching Hour');
         $product5->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing eletra electrify denim vel ports.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut velocity magna. Etiam vehicula nunc non leo hendrerit commodo. Vestibulum vulputate mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras el mauris eget erat congue dapibus imperdiet justo scelerisque. Nulla consectetur tempus nisl vitae viverra. Cras elementum molestie vestibulum. Morbi id quam nisl. Praesent hendrerit, orci sed elementum lobortis, justo mauris lacinia libero, non facilisis purus ipsum non mi. Aliquam sollicitudin, augue id vestibulum iaculis, sem lectus convallis nunc, vel scelerisque lorem tortor ac nunc. Donec pharetra eleifend enim vel porta.');
         $product5->setPrice(100.22);
-        $product5->setImage('lime-t-shirt.png');
+        $product5->setImageName('lime-t-shirt.png');
         $product5->setCreated(new \DateTime());
         $product5->setUpdated($product5->getCreated());
         $product5->addCategory($manager->merge($this->getReference('elasticBanded')));

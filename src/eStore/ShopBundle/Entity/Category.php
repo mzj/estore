@@ -16,6 +16,8 @@ use JMS\SerializerBundle\Annotation\Exclude;
  */
 class Category
 {
+    const ROOT = 1;
+    
     /**
      * @var integer $id
      *
@@ -38,8 +40,8 @@ class Category
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
-
-
+    
+    
     /**
      * @Gedmo\TreeLeft
      * @ORM\Column(name="lft", type="integer")
@@ -60,7 +62,7 @@ class Category
      
     /**
      * @Gedmo\TreeRoot
-     * @ORM\Column(name="root", type="integer")
+     * @ORM\Column(name="root", type="integer", nullable=true)
      */
     private $root;
      

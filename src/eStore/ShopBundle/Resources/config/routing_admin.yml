@@ -1,7 +1,18 @@
-eStoreShopBundleAdminIndex:
+eStoreShopBundleAdmin_index:
     pattern:  /
     defaults: { _controller: eStoreShopBundle:Admin:index }
     
 eStoreShopBundleAdmin_product_list:
     pattern:  /products/list
     defaults: { _controller: eStoreShopBundle:Product:list }
+    
+eStoreShopBundleAdmin_category_list:
+    pattern:  /categories/list
+    defaults: { _controller: eStoreShopBundle:Category:list }
+    
+eStoreShopBundleAdmin_category_movedown:
+    pattern:  /categories/move/down/{id}
+    defaults: { _controller: eStoreShopBundle:Category:moveDown }
+    requirements:
+        _method:  GET
+        id: \d+

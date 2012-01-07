@@ -20,6 +20,11 @@ body {
     margin-top: 7px;
 }
 
+#header h1 a {
+    color: #FFF;
+    text-decoration: none;
+}
+
 #container {
     margin: auto;
     margin-top: 50px;
@@ -104,4 +109,8 @@ body {
 .user-managment {
     margin-bottom: 50px;
     margin-top:30px;
+}
+
+#categories ul li ul {
+    margin-left: 50px;
 }

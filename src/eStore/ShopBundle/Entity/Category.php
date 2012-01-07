@@ -69,6 +69,7 @@ class Category
     /**
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="cascade")
      */
     private $parent;
      
@@ -90,8 +91,8 @@ class Category
      *
      * @ORM\ManyToMany(targetEntity="Product", inversedBy="categories")
      * @ORM\JoinTable(name="category_product",
-     *   joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")}
+     *   joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="cascade")},
+     *   inverseJoinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="cascade")}
      * )
      * @Exclude
      */    

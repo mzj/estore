@@ -23,3 +23,24 @@ eStoreShopBundleAdmin_category_moveup:
     requirements:
         _method:  GET
         id: \d+
+        
+eStoreShopBundleAdmin_category_delete:
+    pattern:  /categories/delete/{id}
+    defaults: { _controller: eStoreShopBundle:Category:delete }
+    requirements:
+        _method:  GET
+        id: \d+
+
+eStoreShopBundleAdmin_category_edit:
+    pattern:  /categories/edit/{id}
+    defaults: { _controller: eStoreShopBundle:Category:edit }
+    requirements:
+        _method:  GET
+        id: \d+
+        
+eStoreShopBundleAdmin_category_update:
+    pattern:  /categories/update/{id}
+    defaults: { _controller: eStoreShopBundle:Category:update }
+    requirements:
+        _method:  POST
+        id: \d+

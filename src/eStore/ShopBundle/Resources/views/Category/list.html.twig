@@ -2,6 +2,12 @@
 
 {% block container %}
 
+    {% if app.session.hasFlash('category-notice') %}
+        <div class="category-notice success">
+            {{ app.session.flash('category-notice') }}
+        </div>
+    {% endif %}
+
     <div id="categories">
         
         {% for category in categories %}

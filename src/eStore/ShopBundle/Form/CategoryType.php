@@ -17,7 +17,7 @@ class CategoryType extends AbstractType
                              'property'=>'indentName'
                             )
                       );
-                //->add('parent');
+        //->add('parent', 'categorymethod', array('multiple' => true))
     }
 
     public function getName()

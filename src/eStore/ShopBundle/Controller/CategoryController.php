@@ -25,16 +25,9 @@ class CategoryController extends Controller
     public function listAction()
     {       
         $em = $this->getDoctrine()->getEntityManager();
-        $repo = $em->getRepository('eStoreShopBundle:Category');
-        $helper = $this;
-        
-        $categories = $repo->childrenQuery()->getArrayResult();
-        
-        unset($categories[0]);
+        $categories = $em->getRepository('eStoreShopBundle:Category')->getArrWithoutRoot();
         
         $categories = $this->buildTable($categories);
-        
-        
         
         return $this->render('eStoreShopBundle:Category:list.html.twig', array( 'categories' => $categories ));
     }
@@ -187,7 +180,13 @@ class CategoryController extends Controller
     {
         $table = '<table id="category-list">';
         $table .= '<caption>Category list</caption>';
-        
+        $table .= '<thead>
+            <th>Name</th>
+            <th>Depth</th>
+            <th>Move</th>
+            <th>Edit</th>
+            <th>Remove</th>
+            </thead>';
         $i = 0;
         foreach($categories as $category) {
             if($i % 2 == 0) {
@@ -197,6 +196,7 @@ class CategoryController extends Controller
             }
             $indent = str_repeat(' |— ', $category['lvl'] - 1);
             $table .= '<td>' . $indent . $category['name'] . '</td>';
+            $table .= '<td>' . $category['lvl'] . '</td>';
             $table .= '<td>' . '<a href="' . $this->generateUrl('eStoreShopBundleAdmin_category_moveup',
                                     array('id' => $category['id'])) . '">' .
                     '<img src="/bundles/estoreshop/img/arrow-up.png" class="category-image"/> Up'

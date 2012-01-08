@@ -23,12 +23,22 @@ class CategoryRepository extends NestedTreeRepository
     {
         $left  = $category->getLft();
         $right = $category->getRgt();
-        $root  = $category->getRoot();
         
         $query = $this->_em->createQuery("SELECT p 
                                           FROM eStore\ShopBundle\Entity\Product p
                                           JOIN p.categories c
-                                          WHERE c.lft BETWEEN $left AND $right AND c.root = $root");
+                                          WHERE c.lft BETWEEN $left AND $right");
         return $query->getResult();
-    }    
+    }
+    
+    
+    public function getArrWithoutRoot() 
+    {
+        $categories = $this->childrenQuery()->getArrayResult();
+        
+        unset($categories[0]);
+        
+        return $categories;        
+    }
+    
 }

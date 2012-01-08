@@ -103,3 +103,10 @@ fos_rest:
         templating: templating
         serializer: serializer
         view_handler: fos_rest.view_handler.default
+
+services:
+    form.type.categorymethod:
+        class: eStore\ShopBundle\Form\Extension\Type\CategoryMethodType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            -  { name: form.type, alias: categorymethod }

@@ -87,13 +87,14 @@ class StoreController extends Controller
         $em = $this->getDoctrine()
                    ->getEntityManager();
         $repo = $em->getRepository('eStoreShopBundle:Category');
+        $categories = $repo->getArrWithoutRoot();
         $helper = $this;
         
         /**
          * Generate hierarchical categories menu
          * @todo refactor - it needs to be used in multiple places
          */
-        $categories = $repo->childrenHierarchy(null, false, array('decorate' => true, 
+        $categories = $repo->buildTree($categories, array('decorate' => true, 
                     'nodeDecorator' => function($node) use ($helper) {
                         return '<a href="' . $helper->generateUrl('eStoreShopBundle_category', 
                                 array('id' => $node['id'],'slug' => $node['slug'])) . '">' 

@@ -9,13 +9,49 @@
     {% endif %}
 
     <div id="categories">
+        <table id="category-list">
+            <caption>Category list</caption>
+            <thead>
+                <th>Name</th>
+                <th>Depth</th>
+                <th>Move</th>
+                <th>Edit</th>
+                <th>Remove</th>
+            </thead>
+            
+            
         
         {% for category in categories %}
-            {{ category.name }}
+            {% if loop.index is odd %}
+                <tr class="darker">
+            {% else %}
+                 <tr>
+            {% endif %}
+                <td>{{ ' |— '|repeat(category.lvl - 1) }}{{ category.name }}</td>
+                <td>{{ category.lvl - 1 }}</td>
+                <td>
+                    <a href="{{ path('eStoreShopBundleAdmin_category_moveup', {'id' : category.id} ) }}">
+                        <img src="/bundles/estoreshop/img/arrow-up.png" class="category-image"/> Up 
+                    </a>
+                    <a href="{{ path('eStoreShopBundleAdmin_category_movedown', {'id' : category.id} ) }}">
+                        <img src="/bundles/estoreshop/img/arrow-down.png" class="category-image"/> Down
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('eStoreShopBundleAdmin_category_edit', {'id' : category.id} ) }}">
+                        <img src="/bundles/estoreshop/img/edit-gray.png" class="category-image"/> Edit
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('eStoreShopBundleAdmin_category_delete', {'id' : category.id} ) }}">
+                        <img src="/bundles/estoreshop/img/delete-gray.png" class="category-image"/> Remove
+                    </a>
+                </td>
+            </tr>
         {% else %}
             {{ categories|raw }}
         {% endfor %}
-        
+        </table>
     </div>
 
 

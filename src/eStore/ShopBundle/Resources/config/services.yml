@@ -5,3 +5,10 @@ services:
 #    e_store_shop.example:
 #        class: %e_store_shop.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+
+services:
+    estore_shop.twig.extension:
+        class: eStore\ShopBundle\Twig\Extension\RepeatExtension
+        tags:
+            - { name: twig.extension }

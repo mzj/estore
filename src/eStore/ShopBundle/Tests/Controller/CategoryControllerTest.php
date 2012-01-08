@@ -12,9 +12,12 @@ class CategoryControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
+    /**
+     * @TODO Configure test enviroment to use sqlite3 for testing - with fixtures
+     */
     public function testIndex()
     {
-        $crawler = $this->client->request('GET', '/category/1/test-slug');
+        $crawler = $this->client->request('GET', '/category/17/test-slug');
         
         if ($profile = $this->client->getProfile()) {
             $queryNumber = $profile->getCollector('db')->getQueryCount();

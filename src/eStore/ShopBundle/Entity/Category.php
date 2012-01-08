@@ -114,7 +114,7 @@ class Category
 
     public function __toString()
     {
-        return $this->getNestedPrint();
+        return $this->name;
     }
     
     

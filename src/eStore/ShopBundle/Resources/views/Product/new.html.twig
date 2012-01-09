@@ -1,16 +1,22 @@
-<h1>Product creation</h1>
+{% extends 'eStoreShopBundle::adminLayout.html.twig' %}
 
-<form action="{{ path('admin_create') }}" method="post" {{ form_enctype(form) }}>
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Create</button>
-    </p>
-</form>
+{% block container %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+   <h2>Product creation</h2>
+
+    <form action="{{ path('eStoreShopBundleAdmin_product_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+
+    <ul class="record_actions">
+        <li>
+            <a href="">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+   
+{% endblock %}

@@ -5,7 +5,17 @@ eStoreShopBundleAdmin_index:
 eStoreShopBundleAdmin_product_list:
     pattern:  /products/list
     defaults: { _controller: eStoreShopBundle:Product:list }
-    
+
+eStoreShopBundleAdmin_product_new:
+    pattern:  /products/new
+    defaults: { _controller: eStoreShopBundle:Product:new }
+
+eStoreShopBundleAdmin_product_create:
+    pattern:  /products/create
+    defaults: { _controller: eStoreShopBundle:Product:create }
+    requirements:
+        _method:  POST
+
 eStoreShopBundleAdmin_category_list:
     pattern:  /categories/list
     defaults: { _controller: eStoreShopBundle:Category:list }

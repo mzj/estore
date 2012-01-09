@@ -69,9 +69,13 @@ class Product
     private $slug;
     
     /**
-     * Bidirectional - Many products are in many categories (INVERSE SIDE)
      *
-     * @ORM\ManyToMany(targetEntity="Category", mappedBy="products")
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="products")
+     * @ORM\JoinTable(name="category_product",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     *   }
+     * )
      */
     private $categories;
     
@@ -242,8 +246,8 @@ class Product
      */
     public function addCategory(\eStore\ShopBundle\Entity\Category $category)
     {
+        //$category->addProduct($this);
         $this->categories[] = $category;
-        $category->addProduct($this);
     }
 
     /**

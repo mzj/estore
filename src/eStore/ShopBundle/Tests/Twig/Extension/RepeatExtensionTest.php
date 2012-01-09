@@ -15,6 +15,5 @@ class RepeatExtensionTest extends \PHPUnit_Framework_TestCase
         
         $this->setExpectedException('\eStore\ShopBundle\Exception\LessThanZeroException');
         $this->assertEquals('', $ext->repeat('a', -1));
-        
     }
 }

@@ -22,6 +22,6 @@ class CategoryType extends AbstractType
 
     public function getName()
     {
-        return 'estore_shopbundle_filtertype';
+        return 'estore_shopbundle_categorytype';
     }
 }

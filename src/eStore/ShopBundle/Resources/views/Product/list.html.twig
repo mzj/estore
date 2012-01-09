@@ -1,51 +1,52 @@
 {% extends 'eStoreShopBundle::adminLayout.html.twig' %}
 
 {% block container %}
+    
+    {% if app.session.hasFlash('category-notice') %}
+        <div class="category-notice success">
+            {{ app.session.flash('category-notice') }}
+        </div>
+    {% endif %}
 
-
-
-<ul>
-    <li>
+    <p class="create create-product">
         <a href="">
+            <img src="/bundles/estoreshop/img/add-gray.png" />
             Create a new entry
         </a>
-    </li>
-</ul>
-
-<table id="entity-list" class="records_list">
-    <caption><h2>Product list</h2></caption>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Image</th>
-            <th>Created</th>
-            <th>Updated</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for product in products %}
-        <tr>
-            <td><a href="">{{ product.id }}</a></td>
-            <td>{{ product.name }}</td>
-            <td><img src="/uploads/products/{{ product.imageName }}" /></td>
-            <td>{% if product.created %}{{ product.created|date('m/d/Y H:i:s') }}{% endif%}</td>
-            <td>{% if product.updated %}{{ product.updated|date('m/d/Y H:i:s') }}{% endif%}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="">show</a>
-                    </li>
-                    <li>
-                        <a href="">edit</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    </p>
+    <table id="entity-list" class="records_list">
+        <caption><h2>Product list</h2></caption>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Created</th>
+                <th>Modified</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td><a href="">{{ product.id }}</a></td>
+                <td>{{ product.name }}</td>
+                <td><img src="/uploads/products/{{ product.imageName }}" /></td>
+                <td>{% if product.created %}{{ product.created|date('m/d/Y H:i:s') }}{% endif%}</td>
+                <td>{% if product.updated %}{{ product.updated|date('m/d/Y H:i:s') }}{% endif%}</td>
+                <td>
+                            <a href="">Edit</a>
+                </td>
+                <td>
+                            <a href="">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            There are no products to display
+        {% endfor %}
+        </tbody>
+    </table>
 
 
 {% endblock %}

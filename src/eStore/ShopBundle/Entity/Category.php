@@ -86,12 +86,12 @@ class Category
     private $slug;
     
     /**
-     * Bidirectional - Many categories can have many products (OWNING SIDE)
      *
-     * @ORM\ManyToMany(targetEntity="Product", inversedBy="categories")
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="categories")
      * @ORM\JoinTable(name="category_product",
-     *   joinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="cascade")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="cascade")}
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     *   }
      * )
      * @Exclude
      */    
@@ -325,6 +325,7 @@ class Category
      */
     public function addProduct(\eStore\ShopBundle\Entity\Product $product)
     {
+        $product->addCategory($this);
         $this->products[] = $product;
     }
 

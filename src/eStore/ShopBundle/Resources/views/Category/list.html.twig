@@ -9,6 +9,12 @@
     {% endif %}
 
     <div id="categories">
+        <p class="create">
+            <a href="{{ path('eStoreShopBundleAdmin_category_new') }}">
+                <img src="/bundles/estoreshop/img/add-gray.png" />
+                Create a new entry
+            </a>
+        </p>
         <table id="category-list">
             <caption>Category list</caption>
             <thead>
@@ -18,9 +24,6 @@
                 <th>Edit</th>
                 <th>Remove</th>
             </thead>
-            
-            
-        
         {% for category in categories %}
             {% if loop.index is odd %}
                 <tr class="darker">
@@ -48,8 +51,9 @@
                     </a>
                 </td>
             </tr>
+            
         {% else %}
-            {{ categories|raw }}
+             There are no categories to display 
         {% endfor %}
         </table>
     </div>

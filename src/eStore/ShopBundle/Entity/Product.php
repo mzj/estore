@@ -52,6 +52,7 @@ class Product
      */
     private $imageName;
 
+    public $file;
     /**
      * @ORM\Column(type="datetime")
      */
@@ -278,5 +279,68 @@ class Product
     public function getSlug()
     {
         return $this->slug;
+    }
+    
+    
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->file) {
+            $this->imageName = $this->file->getClientOriginalName();
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+
+        // you must throw an exception here if the file cannot be moved
+        // so that the entity is not persisted to the database
+        // which the UploadedFile move() method does
+        $this->file->move($this->getUploadRootDir(),  $this->id . '-' . $this->file->getClientOriginalName());
+
+        unset($this->file);
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if ($file = $this->getAbsolutePath()) {
+            unlink($file);
+        }
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->imageName ? null : $this->getUploadRootDir().'/'.$this->id.'.'.$this->imageName;
+    }
+    
+
+    public function getWebPath()
+    {
+        return null === $this->path ? null : $this->getUploadDir().'/'.$this->imageName;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'uploads/products';
     }
 }

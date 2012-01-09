@@ -32,7 +32,7 @@
             <tr>
                 <td><a href="">{{ product.id }}</a></td>
                 <td>{{ product.name }}</td>
-                <td><img src="/uploads/products/{{ product.imageName }}" /></td>
+                <td><img src="/uploads/products/{{ product.id ~ '-' ~ product.imageName }}" /></td>
                 <td>{% if product.created %}{{ product.created|date('m/d/Y H:i:s') }}{% endif%}</td>
                 <td>{% if product.updated %}{{ product.updated|date('m/d/Y H:i:s') }}{% endif%}</td>
                 <td>

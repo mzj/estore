@@ -312,6 +312,10 @@ class Product
     }
 
     /**
+     * PostRemove event can not be used here.  
+     * Id value is deleted before we could use 
+     * it to delete a coresponding file
+     * 
      * @ORM\PreRemove()
      */
     public function removeUpload()
@@ -323,14 +327,9 @@ class Product
 
     public function getAbsolutePath()
     {
-        return null === $this->imageName ? null : $this->getUploadRootDir() . '/'.$this->id . '-' . $this->imageName;
+        return null === $this->imageName ? null : $this->getUploadRootDir() . '/' . $this->id . '-' . $this->imageName;
     }
     
-
-    public function getWebPath()
-    {
-        return null === $this->path ? null : $this->getUploadDir().'/'.$this->imageName;
-    }
 
     protected function getUploadRootDir()
     {

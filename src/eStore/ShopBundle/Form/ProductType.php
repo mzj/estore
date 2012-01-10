@@ -22,7 +22,7 @@ class ProductType extends AbstractType
                              'multiple' => true
                         ))
                 ->add('price')
-                ->add('file', 'file');
+                ->add('file', 'file', array('required' => false));
     }
 
     public function getName()

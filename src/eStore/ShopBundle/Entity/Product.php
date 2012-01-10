@@ -289,6 +289,7 @@ class Product
     public function preUpload()
     {
         if (null !== $this->file) {
+            $this->removeUpload();
             $this->imageName = $this->file->getClientOriginalName();
         }
     }

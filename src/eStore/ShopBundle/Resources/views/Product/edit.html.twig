@@ -1,22 +1,25 @@
-<h1>Product edit</h1>
+{% extends 'eStoreShopBundle::adminLayout.html.twig' %}
 
-<form action="{{ path('admin_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button type="submit">Edit</button>
-    </p>
-</form>
+{% block container %}
+    <h2>Product edit</h2>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('admin') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('admin_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+    <form action="{{ path('eStoreShopBundleAdmin_product_update', { 'id': product.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+        {{ form_widget(edit_form) }}
+        <p>
+            <button type="submit">Edit</button>
+        </p>
+    </form>
+
+    <ul class="record_actions">
+        <li>
+            <a href="">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <form action="" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    </ul>
+{% endblock %}

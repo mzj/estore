@@ -15,6 +15,20 @@ eStoreShopBundleAdmin_product_create:
     defaults: { _controller: eStoreShopBundle:Product:create }
     requirements:
         _method:  POST
+        
+eStoreShopBundleAdmin_product_edit:
+    pattern:  /products/edit/{id}
+    defaults: { _controller: eStoreShopBundle:Product:edit }
+    requirements:
+        _method:  GET
+        id: \d+
+        
+eStoreShopBundleAdmin_product_update:
+    pattern:  /products/update/{id}
+    defaults: { _controller: eStoreShopBundle:Product:update }
+    requirements:
+        _method:  POST
+        id: \d+
 
 eStoreShopBundleAdmin_product_delete:
     pattern:  /products/delete/{id}

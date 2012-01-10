@@ -83,4 +83,58 @@ class ProductController extends Controller
         
         return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_product_list'));
     }
+    
+        /**
+     *
+     * @param type $id
+     * @return type 
+     */
+    public function editAction($id) 
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $product = $em->getRepository('eStoreShopBundle:Product')->find($id);
+        if (!$product) {
+            throw $this->createNotFoundException('Unable to find Product entity.');
+        }
+
+        $editForm = $this->createForm(new ProductType(), $product);
+        
+        return $this->render('eStoreShopBundle:Product:edit.html.twig', array(
+            'product'    => $product,
+            'edit_form'   => $editForm->createView()
+        ));        
+    }
+    
+    /**
+     *
+     * @param type $id
+     * @return type 
+     */
+    public function updateAction($id) 
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $product = $em->getRepository('eStoreShopBundle:Product')->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException('Unable to find Product entity.');
+        }
+
+        $editForm   = $this->createForm(new ProductType(), $product);
+        $request = $this->getRequest();
+        $editForm->bindRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->persist($product);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_product_edit', array('id' => $id)));
+        }
+
+        return $this->render('eStoreShopBundle:Product:edit.html.twig', array(
+            'product'    => $product,
+            'edit_form'   => $editForm->createView()
+        ));        
+    }
 }

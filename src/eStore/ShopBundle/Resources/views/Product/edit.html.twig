@@ -10,8 +10,11 @@
         </p>
     </form>
     
-    <img src="/uploads/products/{{ product.id ~ '-' ~ product.imageName }}" style="float:right; height: 167px;" />
-
+     {% set imageFullName = product.id ~ '-' ~ product.imageName %}
+     {% set imageFullPath  = '/uploads/products/' ~ imageFullName %}
+    
+    <img src="{{ imageFullPath | apply_filter('my_thumb') }}" />
+    
     <ul class="record_actions">
         <li>
             <a href="">

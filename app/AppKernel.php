@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new FOS\RestBundle\FOSRestBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
             new eStore\ShopBundle\eStoreShopBundle(),
         );
 

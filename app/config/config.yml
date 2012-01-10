@@ -110,3 +110,11 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             -  { name: form.type, alias: categorymethod }
+            
+    
+avalanche_imagine:
+    cache_prefix: uploads/products/thumbs
+    filters:
+        my_thumb:
+            type:    thumbnail
+            options: { size: [125, 167], mode: outbound }

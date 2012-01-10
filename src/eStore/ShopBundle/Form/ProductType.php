@@ -14,6 +14,7 @@ class ProductType extends AbstractType
                 ->add('description')
                 ->add('categories', 'entity',  
                         array(
+                            'property' => 'indentName',
                             'class' => 'eStoreShopBundle:Category',
                             'query_builder' => function($er)
                                 {

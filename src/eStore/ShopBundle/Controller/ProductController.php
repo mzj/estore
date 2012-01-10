@@ -70,4 +70,17 @@ class ProductController extends Controller
             'form'     => $form->createView()
         ));  
     }
+    
+    public function deleteAction($id) 
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $product = $em->getRepository('eStoreShopBundle:Product')->find($id);
+        
+        $em->remove($product);
+        $em->flush();
+        
+        $this->get('session')->setFlash('category-notice', 'Product was removed successfully!');
+        
+        return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_product_list'));
+    }
 }

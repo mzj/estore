@@ -312,7 +312,7 @@ class Product
     }
 
     /**
-     * @ORM\PostRemove()
+     * @ORM\PreRemove()
      */
     public function removeUpload()
     {
@@ -323,7 +323,7 @@ class Product
 
     public function getAbsolutePath()
     {
-        return null === $this->imageName ? null : $this->getUploadRootDir().'/'.$this->id.'.'.$this->imageName;
+        return null === $this->imageName ? null : $this->getUploadRootDir() . '/'.$this->id . '-' . $this->imageName;
     }
     
 

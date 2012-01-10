@@ -16,6 +16,13 @@ eStoreShopBundleAdmin_product_create:
     requirements:
         _method:  POST
 
+eStoreShopBundleAdmin_product_delete:
+    pattern:  /products/delete/{id}
+    defaults: { _controller: eStoreShopBundle:Product:delete }
+    requirements:
+        _method:  GET
+        id: \d+
+
 eStoreShopBundleAdmin_category_list:
     pattern:  /categories/list
     defaults: { _controller: eStoreShopBundle:Category:list }

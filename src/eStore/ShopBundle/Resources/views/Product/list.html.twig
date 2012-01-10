@@ -32,14 +32,14 @@
             <tr>
                 <td><a href="">{{ product.id }}</a></td>
                 <td>{{ product.name }}</td>
-                <td><img src="/uploads/products/{{ product.id ~ '-' ~ product.imageName }}" /></td>
+                <td><img src="/uploads/products/{{ product.id ~ '-' ~ product.imageName }}" height="167" /></td>
                 <td>{% if product.created %}{{ product.created|date('m/d/Y H:i:s') }}{% endif%}</td>
                 <td>{% if product.updated %}{{ product.updated|date('m/d/Y H:i:s') }}{% endif%}</td>
                 <td>
                             <a href="">Edit</a>
                 </td>
                 <td>
-                            <a href="">Delete</a>
+                            <a href="{{ path('eStoreShopBundleAdmin_product_delete', {'id' : product.id}) }}">Delete</a>
                 </td>
             </tr>
             {% else %}

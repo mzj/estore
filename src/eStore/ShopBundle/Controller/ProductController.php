@@ -2,6 +2,10 @@
 namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Exception\NotValidCurrentPageException;
+use Pagerfanta\View\DefaultView;
 use eStore\ShopBundle\Entity\Category;
 use eStore\ShopBundle\Entity\Product;
 use eStore\ShopBundle\Form\ProductType;
@@ -20,13 +24,38 @@ class ProductController extends Controller
         return $this->render('eStoreShopBundle:Product:view.html.twig', array( 'product'=> $product ));
     }
     
-    public function listAction()
+    
+    public function listAction($page)
     {       
         $em = $this->getDoctrine()->getEntityManager();
+        $queryP = $em->getRepository('eStoreShopBundle:Product')->getProducts();
+        
+        $pagedProducts = new Pagerfanta(new DoctrineORMAdapter($queryP));
+        $pagedProducts->setMaxPerPage($this->container
+                            ->getParameter('estore_shop.admin.products.max_per_page'));
 
-        $products = $em->getRepository('eStoreShopBundle:Product')->findAll();
-
-        return $this->render('eStoreShopBundle:Product:list.html.twig', array( 'products' => $products ));
+        try {
+            $pagedProducts->setCurrentPage($page);
+        } catch(NotValidCurrentPageException $e) {
+            throw $this->createNotFoundException('Page not found.');
+        }
+          
+        // gets products collection for currnet page
+        $products = $pagedProducts->getCurrentPageResults();
+        
+        $helper = $this;
+        $routeGenerator = function($page) use ($helper) {
+            $route = $helper->generateUrl('eStoreShopBundleAdmin_product_list', 
+                    array('page' => $page));
+            return $route;
+        };
+        
+        $view = new DefaultView();
+        $html = $view->render($pagedProducts, $routeGenerator, array(
+            'proximity' => 3,
+        ));
+        
+        return $this->render('eStoreShopBundle:Product:list.html.twig', array( 'products' => $products, 'pagerfanta' => $html ));
     }
     
     /**

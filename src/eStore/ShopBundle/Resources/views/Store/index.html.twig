@@ -30,8 +30,17 @@
 	<!-- Normal loop that iterates over products -->
         <% _.each(products, function(p) { %>
             <li>
-                <div><a href="#product/<%= p.id %>/<%= p.slug %>"><%= p.name %></a></div>
-                <div> 
+                <a href="/uploads/products/<%= p.id + '-' + p.image_name %>">
+                    <img src="/uploads/products/thumbs/my_thumb/uploads/products/<%= p.id + '-' + p.image_name %>"/>
+                </a>
+                <div style="text-align: center;"><a href="#product/<%= p.id %>/<%= p.slug %>"><%= p.name %></a></div>
+                <div>
+                    <p style="margin-bottom:10px;">
+                        <span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                    </p>
+                    <p>
+                        <span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                    </p>
                     In:
                     <% _.each(p.categories, function(c) { %>
                         <% if (c.parent != null) { %>

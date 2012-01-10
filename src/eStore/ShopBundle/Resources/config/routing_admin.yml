@@ -3,9 +3,12 @@ eStoreShopBundleAdmin_index:
     defaults: { _controller: eStoreShopBundle:Admin:index }
     
 eStoreShopBundleAdmin_product_list:
-    pattern:  /products/list
-    defaults: { _controller: eStoreShopBundle:Product:list }
-
+    pattern:  /products/list/{page}
+    defaults: { _controller: eStoreShopBundle:Product:list, page: 1 }
+    requirements:
+        _method:  GET
+        page: \d+
+        
 eStoreShopBundleAdmin_product_new:
     pattern:  /products/new
     defaults: { _controller: eStoreShopBundle:Product:new }

@@ -14,7 +14,6 @@ class ProductRepository extends EntityRepository
     /**
      *
      * @todo You could use DISTINCT clause
-     * or simulate with GROUP BY
      */
     public function getPopularProducts()
     {
@@ -23,6 +22,20 @@ class ProductRepository extends EntityRepository
                                      FROM eStore\ShopBundle\Entity\Product p
                                      JOIN p.categories c
                                      LEFT JOIN c.parent cp
+                                     ORDER BY p.id DESC
+                                   ");
+        return $query;
+    }
+    
+    /**
+     *
+     * @return type 
+     */
+    public function getProducts()
+    {
+        $query = $this->_em
+                      ->createQuery("SELECT p
+                                     FROM eStore\ShopBundle\Entity\Product p
                                      ORDER BY p.id DESC
                                    ");
         return $query;

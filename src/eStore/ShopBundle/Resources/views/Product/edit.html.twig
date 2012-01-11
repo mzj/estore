@@ -3,28 +3,42 @@
 {% block container %}
     <h2>Product edit</h2>
 
-    <form action="{{ path('eStoreShopBundleAdmin_product_update', { 'id': product.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-        {{ form_widget(edit_form) }}
+    <form action="{{ path('eStoreShopBundleAdmin_product_update', { 'id': product.id }) }}" method="post" {{ form_enctype(form) }}>
+        
+        {{ form_errors(form) }}
+
+        <fieldset style="border: 1px solid #ccc;"> <legend>Basic data</legend>
+            {{ form_label(form.name) }}
+            {{ form_errors(form.name) }}
+            {{ form_widget(form.name) }}
+            <br />
+            {{ form_label(form.description) }}
+            {{ form_errors(form.description) }}
+            {{ form_widget(form.description) }}
+            <br />  
+            {{ form_label(form.price) }}
+            {{ form_errors(form.price) }}
+            {{ form_widget(form.price) }}
+        </fieldset>
+        
+        <fieldset style="border: 1px solid #ccc;"> <legend>Additional data</legend>
+            {{ form_row(form.categories) }}
+        </fieldset>
+        
+        <fieldset style="border: 1px solid #ccc;"> <legend>Image</legend>
+            {% set imageFullName = product.id ~ '-' ~ product.imageName %}
+            {% set imageFullPath  = '/uploads/products/' ~ imageFullName %}
+
+            <img src="{{ imageFullPath | apply_filter('my_thumb') }}" />
+            {{ form_label(form.file) }}
+            {{ form_errors(form.file) }}
+            {{ form_widget(form.file) }}
+        </fieldset>
+        
+        {{ form_rest(form) }}
+        
         <p>
-            <button type="submit">Edit</button>
+            <input type="submit" value="Edit"/>
         </p>
     </form>
-    
-     {% set imageFullName = product.id ~ '-' ~ product.imageName %}
-     {% set imageFullPath  = '/uploads/products/' ~ imageFullName %}
-    
-    <img src="{{ imageFullPath | apply_filter('my_thumb') }}" />
-    
-    <ul class="record_actions">
-        <li>
-            <a href="">
-                Back to the list
-            </a>
-        </li>
-        <li>
-            <form action="" method="post">
-                <button type="submit">Delete</button>
-            </form>
-        </li>
-    </ul>
 {% endblock %}

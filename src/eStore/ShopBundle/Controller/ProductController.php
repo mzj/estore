@@ -53,6 +53,11 @@ class ProductController extends Controller
         $view = new DefaultView();
         $html = $view->render($pagedProducts, $routeGenerator, array(
             'proximity' => 3,
+            'previous_message' => "<img src='/bundles/estoreshop/img/arrow-left.png' />",
+            'next_message' => "<img src='/bundles/estoreshop/img/arrow-right.png' />",
+            'css_disabled_class' => 'pagerfanta-disabled',
+            'css_dots_class' => 'pagerfanta-dots',
+            'css_current_class' => 'pagerfanta-current'
         ));
         
         return $this->render('eStoreShopBundle:Product:list.html.twig', array( 'products' => $products, 'pagerfanta' => $html ));
@@ -130,8 +135,8 @@ class ProductController extends Controller
         $editForm = $this->createForm(new ProductType(), $product);
         
         return $this->render('eStoreShopBundle:Product:edit.html.twig', array(
-            'product'    => $product,
-            'edit_form'   => $editForm->createView()
+            'product'  => $product,
+            'form'     => $editForm->createView()
         ));        
     }
     
@@ -162,8 +167,8 @@ class ProductController extends Controller
         }
 
         return $this->render('eStoreShopBundle:Product:edit.html.twig', array(
-            'product'    => $product,
-            'edit_form'   => $editForm->createView()
+            'product' => $product,
+            'form'    => $editForm->createView()
         ));        
     }
 }

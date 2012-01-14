@@ -11,12 +11,16 @@ class CategoryType extends AbstractType
     {
         $builder->add('name')
                 ->add('description')
-                ->add('parent', 'entity',
-                       array(
-                             'class'=>'eStore\ShopBundle\Entity\Category',
-                             'property'=>'indentName'
-                            )
-                      );
+                ->add('parent', 'entity',  
+                        array(
+                            'property' => 'indentName',
+                            'class' => 'eStoreShopBundle:Category',
+                            'query_builder' => function($er)
+                                {
+                                    return $er->createQueryBuilder('c')->orderBy('c.lft', 'ASC');
+                                },
+                             'multiple' => false
+                        ));
         //->add('parent', 'categorymethod', array('multiple' => true))
     }
 

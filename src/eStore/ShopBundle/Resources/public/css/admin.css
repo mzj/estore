@@ -364,3 +364,10 @@ div.buttonsContainer
     float: right;
     margin: 1em 1em 1em 0;
 }
+
+
+fieldset.nested select {
+    width: 400px;
+    height: 200px;
+    margin-left: -35px;
+}

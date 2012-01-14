@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * 
+ */
 namespace eStore\ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -15,6 +17,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Product
 {
+    const PRODUCT_QUANTITIY = 1;
+    const STATUS_ENABLED    = true;
+    const STATUS_DISABLED   = false;
+    
     /**
      * @var integer $id
      *
@@ -32,6 +38,11 @@ class Product
     private $name;
 
     /**
+     * @ORM\Column(name="code", type="string", length=255, nullable=true)
+     */
+    private $code;
+    
+    /**
      * @var text $description
      *
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -46,13 +57,28 @@ class Product
     private $price;
 
     /**
+     * @ORM\Column(name="quantity", type="integer")
+     */
+    private $quantity = self::PRODUCT_QUANTITIY;
+    
+    /**
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active = self::STATUS_DISABLED;
+    
+    /**
      * @var string $imageName
      *
-     * @ORM\Column(name="image_name", type="string", length=255)
+     * @ORM\Column(name="image_name", type="string", length=255, nullable=true)
      */
     private $imageName;
 
+    /**
+     *
+     * @var type 
+     */
     public $file;
+    
     /**
      * @ORM\Column(type="datetime")
      */
@@ -80,6 +106,10 @@ class Product
      */
     private $categories;
     
+
+    /**
+     * 
+     */
     public function __construct()
     {
         // When creating entity as POPO
@@ -281,6 +311,65 @@ class Product
         return $this->slug;
     }
     
+        /**
+     * Set code
+     *
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string 
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set quantity
+     *
+     * @param integer $quantity
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+    }
+
+    /**
+     * Get quantity
+     *
+     * @return integer 
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
     
     /**
      * @ORM\PrePersist()

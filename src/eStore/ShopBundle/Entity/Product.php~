@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * 
+ */
 namespace eStore\ShopBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -15,6 +17,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Product
 {
+    const PRODUCT_QUANTITIY = 1;
+    const STATUS_ENABLED    = true;
+    const STATUS_DISABLED   = false;
+    
     /**
      * @var integer $id
      *
@@ -32,6 +38,11 @@ class Product
     private $name;
 
     /**
+     * @ORM\Column(name="code", type="string", length=255, nullable=true)
+     */
+    private $code;
+    
+    /**
      * @var text $description
      *
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -41,17 +52,33 @@ class Product
     /**
      * @var decimal $price
      *
-     * @ORM\Column(name="price", type="decimal")
+     * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
      */
     private $price;
 
     /**
-     * @var string $image
-     *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="quantity", type="integer")
      */
-    private $image;
+    private $quantity = self::PRODUCT_QUANTITIY;
+    
+    /**
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active = self::STATUS_DISABLED;
+    
+    /**
+     * @var string $imageName
+     *
+     * @ORM\Column(name="image_name", type="string", length=255)
+     */
+    private $imageName;
 
+    /**
+     *
+     * @var type 
+     */
+    public $file;
+    
     /**
      * @ORM\Column(type="datetime")
      */
@@ -69,14 +96,22 @@ class Product
     private $slug;
     
     /**
-     * Bidirectional - Many products are in many categories (INVERSE SIDE)
      *
-     * @ORM\ManyToMany(targetEntity="Category", mappedBy="products")
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="products")
+     * @ORM\JoinTable(name="category_product",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     *   }
+     * )
      */
     private $categories;
     
+    /**
+     * 
+     */
     public function __construct()
     {
+        // When creating entity as POPO
         $this->setCreated(new \DateTime());
         $this->setUpdated(new \DateTime());
         $this->categories = new ArrayCollection();
@@ -179,9 +214,9 @@ class Product
      *
      * @param string $image
      */
-    public function setImage($image)
+    public function setImageName($image)
     {
-        $this->image = $image;
+        $this->imageName = $image;
     }
 
     /**
@@ -189,9 +224,9 @@ class Product
      *
      * @return string 
      */
-    public function getImage()
+    public function getImageName()
     {
-        return $this->image;
+        return $this->imageName;
     }
 
     /**
@@ -241,8 +276,8 @@ class Product
      */
     public function addCategory(\eStore\ShopBundle\Entity\Category $category)
     {
+        //$category->addProduct($this);
         $this->categories[] = $category;
-        $category->addProduct($this);
     }
 
     /**
@@ -253,5 +288,147 @@ class Product
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+    
+        /**
+     * Set code
+     *
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string 
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set quantity
+     *
+     * @param integer $quantity
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+    }
+
+    /**
+     * Get quantity
+     *
+     * @return integer 
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+    
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->file) {
+            $this->removeUpload();
+            $this->imageName = $this->file->getClientOriginalName();
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+
+        // you must throw an exception here if the file cannot be moved
+        // so that the entity is not persisted to the database
+        // which the UploadedFile move() method does
+        $this->file->move($this->getUploadRootDir(),  $this->id . '-' . $this->file->getClientOriginalName());
+
+        unset($this->file);
+    }
+
+    /**
+     * PostRemove event can not be used here.  
+     * Id value is deleted before we could use 
+     * it to delete a coresponding file
+     * 
+     * @ORM\PreRemove()
+     */
+    public function removeUpload()
+    {
+        if ($file = $this->getAbsolutePath()) {
+            unlink($file);
+        }
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->imageName ? null : $this->getUploadRootDir() . '/' . $this->id . '-' . $this->imageName;
+    }
+    
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'uploads/products';
     }
 }

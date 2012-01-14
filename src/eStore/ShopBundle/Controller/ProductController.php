@@ -60,7 +60,10 @@ class ProductController extends Controller
             'css_current_class' => 'pagerfanta-current'
         ));
         
-        return $this->render('eStoreShopBundle:Product:list.html.twig', array( 'products' => $products, 'pagerfanta' => $html ));
+        $response = $this->render('eStoreShopBundle:Product:list.html.twig', array( 'products' => $products, 'pagerfanta' => $html ));
+        $response->setSharedMaxAge(30);
+        
+        return $response;
     }
     
     /**

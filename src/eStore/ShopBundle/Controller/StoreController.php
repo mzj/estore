@@ -29,10 +29,13 @@ class StoreController extends Controller
     public function indexAction(Request $request)
     {
         $form = $this->createForm(new FilterType());
-
-        return $this->render('eStoreShopBundle:Store:index.html.twig', array(
+        
+        $response = $this->render('eStoreShopBundle:Store:index.html.twig', array(
             'form' => $form->createView()
         ));
+        
+         $response->setSharedMaxAge(60);
+         return $response;
     }
     
     /**
@@ -41,7 +44,10 @@ class StoreController extends Controller
      */
     public function aboutAction()
     {
-        return $this->render('eStoreShopBundle:Store:about.html.twig');
+        $response = $this->render('eStoreShopBundle:Store:about.html.twig');
+        $response->setSharedMaxAge(60);
+        
+        return $response;
     }
     
     /**
@@ -82,8 +88,9 @@ class StoreController extends Controller
      *
      * @return Response 
      */
-    public function headerNavigationAction()
+    public function headerNavigationAction(Request $request)
     {
+        
         $em = $this->getDoctrine()
                    ->getEntityManager();
         $repo = $em->getRepository('eStoreShopBundle:Category');
@@ -101,7 +108,7 @@ class StoreController extends Controller
                     })
                 );
         
-        return $this->render('eStoreShopBundle:Store:headerNavigation.html.twig', array(
+        return  $this->render('eStoreShopBundle:Store:headerNavigation.html.twig', array(
             'categories' => $categories
         ));
     }

@@ -37,7 +37,14 @@ class FilterType extends AbstractType
         $builder->add('subject');
         $builder->add('body', 'textarea');
     }
-
+    
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+           'csrf_protection' => false
+        );
+    }
+    
     public function getName()
     {
         return 'estore_shopbundle_filtertype';

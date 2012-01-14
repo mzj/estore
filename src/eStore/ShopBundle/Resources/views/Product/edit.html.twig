@@ -1,44 +1,65 @@
 {% extends 'eStoreShopBundle::adminLayout.html.twig' %}
 
 {% block container %}
-    <h2>Product edit</h2>
+    
 
-    <form action="{{ path('eStoreShopBundleAdmin_product_update', { 'id': product.id }) }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('eStoreShopBundleAdmin_product_update', { 'id': product.id }) }}" method="post" {{ form_enctype(form) }} id="product-edit">
         
         {{ form_errors(form) }}
+        <fieldset class="main">
+            <legend>Product edit</legend>
+            
+            <fieldset class="nested"> 
+                <legend>Basic data</legend>
+                <ol>
+                    <li>
+                        {{ form_label(form.name) }}
+                        {{ form_errors(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </li>                    
+                    <li>
+                        {{ form_label(form.description) }}
+                        {{ form_errors(form.description) }}
+                        {{ form_widget(form.description) }}
+                    </li>                    
+                    <li>
+                        {{ form_label(form.price) }}
+                        {{ form_errors(form.price) }}
+                        {{ form_widget(form.price) }}
+                    </li>
+                </ol>
+            </fieldset>
 
-        <fieldset style="border: 1px solid #ccc;"> <legend>Basic data</legend>
-            {{ form_label(form.name) }}
-            {{ form_errors(form.name) }}
-            {{ form_widget(form.name) }}
-            <br />
-            {{ form_label(form.description) }}
-            {{ form_errors(form.description) }}
-            {{ form_widget(form.description) }}
-            <br />  
-            {{ form_label(form.price) }}
-            {{ form_errors(form.price) }}
-            {{ form_widget(form.price) }}
-        </fieldset>
-        
-        <fieldset style="border: 1px solid #ccc;"> <legend>Additional data</legend>
-            {{ form_row(form.categories) }}
-        </fieldset>
-        
-        <fieldset style="border: 1px solid #ccc;"> <legend>Image</legend>
-            {% set imageFullName = product.id ~ '-' ~ product.imageName %}
-            {% set imageFullPath  = '/uploads/products/' ~ imageFullName %}
+            <fieldset class="nested"> 
+                <legend>Additional data</legend>
+                <ol>
+                    <li>
+                        {{ form_label(form.categories) }}
+                        {{ form_errors(form.categories) }}
+                        {{ form_widget(form.categories) }}
+                    </li>
+                </ol>
+            </fieldset>
 
-            <img src="{{ imageFullPath | apply_filter('my_thumb') }}" />
-            {{ form_label(form.file) }}
-            {{ form_errors(form.file) }}
-            {{ form_widget(form.file) }}
-        </fieldset>
+            <fieldset class="nested"> 
+                <legend>Image</legend>
+                {% set imageFullName = product.id ~ '-' ~ product.imageName %}
+                {% set imageFullPath  = '/uploads/products/' ~ imageFullName %}
+
+                <ol>
+                    <li>
+                        <img src="{{ imageFullPath | apply_filter('my_thumb') }}" />
+                        {{ form_label(form.file) }}
+                        {{ form_errors(form.file) }}
+                        {{ form_widget(form.file) }}
+                    </li>
+                </ol>
+            </fieldset>
         
         {{ form_rest(form) }}
         
         <p>
             <input type="submit" value="Edit"/>
-        </p>
+        </p> 
     </form>
 {% endblock %}

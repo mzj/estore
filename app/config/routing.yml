@@ -3,9 +3,9 @@ eStoreShopBundle:
     prefix:   /
     
 # Internal routing configuration to handle ESI
-#_internal:
-#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-#   prefix:   /_internal
+_internal:
+   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+   prefix:   /_internal
 
 _imagine:
     resource: .

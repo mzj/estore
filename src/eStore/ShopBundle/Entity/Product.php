@@ -17,7 +17,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Product
 {
-    const PRODUCT_QUANTITIY = 1;
     
     const STATUS_ENABLED    = true;
     const STATUS_DISABLED   = false;
@@ -62,10 +61,6 @@ class Product
      */
     private $price;
 
-    /**
-     * @ORM\Column(name="quantity", type="integer")
-     */
-    private $quantity = self::PRODUCT_QUANTITIY;
     
     /**
      * @ORM\Column(name="active", type="boolean")
@@ -119,7 +114,7 @@ class Product
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Garment", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="Garment", mappedBy="product", cascade={"persist"})
      */
     private $garments;
     
@@ -194,7 +189,7 @@ class Product
     public function setGender($gender)
     {
         if (!in_array($gender, array(self::GENDER_M, self::GENDER_W, self::GENDER_K, self::GENDER_U))) {
-            throw new \InvalidArgumentException("Invalid gender type");
+            throw new \InvalidArgumentException("Invalid gender value");
         }
         $this->gender = $gender;
     }
@@ -389,7 +384,27 @@ class Product
     {
         return $this->quantity;
     }
-
+    
+    /**
+     * Get quantity
+     *
+     * @return integer 
+     */
+    public function getGarments()
+    {
+        return $this->garments;
+    }
+    
+    /**
+     */
+    public function setGarments($garments)
+    {
+        $this->garments = $garments;
+        foreach ($garments as $garment){
+            $garment->setProduct($this);
+        }
+    }
+    
     /**
      * Set active
      *
@@ -409,6 +424,8 @@ class Product
     {
         return $this->active;
     }
+    
+
     
     /**
      * @ORM\PrePersist()

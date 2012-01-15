@@ -1,0 +1,44 @@
+<?php
+/**
+ * 
+ */
+namespace eStore\ShopBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * eStore\ShopBundle\Entity\Garment
+ *
+ * @ORM\Table(name="garment")
+ * @ORM\Entity(repositoryClass="eStore\ShopBundle\Repository\GarmentRepository")
+ */
+class Garment
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Style", inversedBy="garments")
+     */
+    private $style;
+    
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="garments")
+     */
+    private $product;
+    
+    /**
+     * @ORM\Column(name="quantity", type="integer")
+     */
+    private $quantity;
+    
+}

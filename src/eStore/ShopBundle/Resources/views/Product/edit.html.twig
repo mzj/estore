@@ -1,6 +1,20 @@
 {% extends 'eStoreShopBundle::adminLayout.html.twig' %}
 
 {% block container %}
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+    function add() {
+        var collectionHolder = $('#estore_shopbundle_producttype_garments');
+        var prototype = collectionHolder.attr('data-prototype');
+        form = prototype.replace(/\$\$name\$\$/g, collectionHolder.children().length);
+        collectionHolder.append(form);
+    }
+
+    $('a.jslink').live('click', function(event){
+        event.preventDefault();
+        add();
+    });
+    </script>
     
 
     <form action="{{ path('eStoreShopBundleAdmin_product_update', { 'id': product.id }) }}" method="post" {{ form_enctype(form) }} id="product-edit">
@@ -23,11 +37,6 @@
                         {{ form_widget(form.code) }}
                     </li>
                     <li>
-                        {{ form_label(form.quantity) }}
-                        {{ form_errors(form.quantity) }}
-                        {{ form_widget(form.quantity) }}
-                    </li>
-                    <li>
                         {{ form_label(form.active) }}
                         {{ form_errors(form.active) }}
                         {{ form_widget(form.active) }}
@@ -46,8 +55,41 @@
             </fieldset>
 
             <fieldset class="nested"> 
+                <legend>Garments</legend>
+                <ol>
+                    <li class="garments">
+                       <div id="estore_shopbundle_producttype_garments" data-prototype="{{ form_widget(form.garments.get('prototype')) | e }}">
+                           {% for index, garment in form.garments %}
+
+                                <span class="title">{{ index }}</span>
+                                {{ form_row(garment.colours) }}
+                                <br />
+                                {{ form_row(garment.size) }}
+                                <br />
+                                {{ form_row(garment.quantity) }}
+                                <br />
+                                <br />
+                            {% endfor %}
+                        </div>
+                    </li>
+                    
+                    <ul class="record_actions">
+                        <li>
+                            <a href="#" class="jslink">
+                                Add a garment
+                            </a>
+                        </li>
+                    </ul>
+                </ol>
+            </fieldset>
+                               
+            
+            <fieldset class="nested"> 
                 <legend>Additional data</legend>
                 <ol>
+                    <li>
+                        {{ form_widget(form.gender) }}
+                    </li>
                     <li>
                         {{ form_label(form.categories) }}
                         {{ form_errors(form.categories) }}

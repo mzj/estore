@@ -1,0 +1,16 @@
+{% extends 'eStoreShopBundle::adminLayout.html.twig' %}
+
+{% block container %}
+
+   <h2>Style creation</h2>
+
+    <form action="{{ path('eStoreShopBundleAdmin_style_create') }}" method="post" {{ form_enctype(form) }}>
+       
+            
+        {{ form_rest(form) }}
+        <p>
+            <input type="submit" value="Create"/>
+        </p>
+    </form>
+   
+{% endblock %}

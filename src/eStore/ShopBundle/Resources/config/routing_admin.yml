@@ -1,7 +1,11 @@
 eStoreShopBundleAdmin_index:
     pattern:  /
     defaults: { _controller: eStoreShopBundle:Admin:index }
-    
+
+
+##################################
+# Product
+##################################
 eStoreShopBundleAdmin_product_list:
     pattern:  /products/list/{page}
     defaults: { _controller: eStoreShopBundle:Product:list, page: 1 }
@@ -40,6 +44,10 @@ eStoreShopBundleAdmin_product_delete:
         _method:  GET
         id: \d+
 
+
+##################################
+# Category
+##################################
 eStoreShopBundleAdmin_category_list:
     pattern:  /categories/list
     defaults: { _controller: eStoreShopBundle:Category:list }
@@ -90,3 +98,33 @@ eStoreShopBundleAdmin_category_update:
     requirements:
         _method:  POST
         id: \d+
+        
+        
+
+##################################
+# Style
+##################################
+eStoreShopBundleAdmin_style_new:
+    pattern:  /styles/new
+    defaults: { _controller: eStoreShopBundle:Style:new }
+
+eStoreShopBundleAdmin_style_create:
+    pattern:  /styles/create
+    defaults: { _controller: eStoreShopBundle:Style:create }
+    requirements:
+        _method:  POST
+        
+        
+
+##################################
+# Garment
+##################################
+eStoreShopBundleAdmin_garment_new:
+    pattern:  /garments/new
+    defaults: { _controller: eStoreShopBundle:Garment:new }
+
+eStoreShopBundleAdmin_garment_create:
+    pattern:  /garments/create
+    defaults: { _controller: eStoreShopBundle:Garment:create }
+    requirements:
+        _method:  POST

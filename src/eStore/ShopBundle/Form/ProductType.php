@@ -5,15 +5,16 @@ namespace eStore\ShopBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use eStore\ShopBundle\Form\CategoryType;
+use eStore\ShopBundle\Form\GarmentType;
 use eStore\ShopBundle\Entity\Product;
 
 class ProductType extends AbstractType
 {
+    
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('name')
                 ->add('code')
-                ->add('quantity')
                 ->add('active')
                 ->add('description')
                 ->add('categories', 'entity',  
@@ -35,7 +36,13 @@ class ProductType extends AbstractType
                         Product::GENDER_U => "Uni's"),
                     'expanded' => true)
                    )
-                ->add('file', 'file', array('required' => false));
+                ->add('file', 'file', array('required' => false))                           
+            ->add('garments', 'collection', array(
+             'type' => new GarmentType($this->pid),
+                'by_reference' => false,
+                 'allow_add' => true,
+                    'prototype' => true
+             ));
     }
 
     public function getName()

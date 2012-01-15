@@ -98,7 +98,7 @@ class ProductController extends Controller
             $em->persist($product);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_product_list', 
+            return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_product_edit', 
                     array('id' => $product->getId())));
         }
 

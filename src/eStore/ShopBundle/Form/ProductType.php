@@ -5,6 +5,7 @@ namespace eStore\ShopBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 use eStore\ShopBundle\Form\CategoryType;
+use eStore\ShopBundle\Entity\Product;
 
 class ProductType extends AbstractType
 {
@@ -26,6 +27,14 @@ class ProductType extends AbstractType
                              'multiple' => true
                         ))
                 ->add('price')
+                ->add('gender', 'choice', array(
+                    'choices' => array(
+                        Product::GENDER_M => "Men's",
+                        Product::GENDER_W => "Women's",
+                        Product::GENDER_K => "Kid's",
+                        Product::GENDER_U => "Uni's"),
+                    'expanded' => true)
+                   )
                 ->add('file', 'file', array('required' => false));
     }
 

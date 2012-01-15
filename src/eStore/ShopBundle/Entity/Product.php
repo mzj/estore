@@ -18,8 +18,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
 class Product
 {
     const PRODUCT_QUANTITIY = 1;
+    
     const STATUS_ENABLED    = true;
     const STATUS_DISABLED   = false;
+    
+    const GENDER_M = 1;
+    const GENDER_W = 2;
+    const GENDER_K = 3;
+    const GENDER_U = 4;
     
     /**
      * @var integer $id
@@ -106,7 +112,17 @@ class Product
      */
     private $categories;
     
+    /**
+     * @ORM\Column(name="gender", type="integer")
+     */
+    private $gender;
 
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Garment", mappedBy="product")
+     */
+    private $garments;
+    
     /**
      * 
      */
@@ -170,6 +186,29 @@ class Product
         return $this->name;
     }
 
+        /**
+     * Set name
+     *
+     * @param string $name
+     */
+    public function setGender($gender)
+    {
+        if (!in_array($gender, array(self::GENDER_M, self::GENDER_W, self::GENDER_K, self::GENDER_U))) {
+            throw new \InvalidArgumentException("Invalid gender type");
+        }
+        $this->gender = $gender;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+    
     /**
      * Set description
      *

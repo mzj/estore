@@ -367,7 +367,6 @@ div.buttonsContainer
 
 
 fieldset.nested select {
-    width: 400px;
+    width: 300px;
     height: 200px;
-    margin-left: -35px;
 }

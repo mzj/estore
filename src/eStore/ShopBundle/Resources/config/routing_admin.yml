@@ -102,29 +102,42 @@ eStoreShopBundleAdmin_category_update:
         
 
 ##################################
-# Style
+# Brand
 ##################################
-eStoreShopBundleAdmin_style_new:
-    pattern:  /styles/new
-    defaults: { _controller: eStoreShopBundle:Style:new }
+eStoreShopBundleAdmin_brand_list:
+    pattern:  /brands/list
+    defaults: { _controller: eStoreShopBundle:Brand:list }
+    requirements:
+        _method:  GET
+        page: \d+
+        
+eStoreShopBundleAdmin_brand_new:
+    pattern:  /brands/new
+    defaults: { _controller: eStoreShopBundle:Brand:new }
 
-eStoreShopBundleAdmin_style_create:
-    pattern:  /styles/create
-    defaults: { _controller: eStoreShopBundle:Style:create }
+eStoreShopBundleAdmin_brand_create:
+    pattern:  /brands/create
+    defaults: { _controller: eStoreShopBundle:Brand:create }
     requirements:
         _method:  POST
         
+eStoreShopBundleAdmin_brand_edit:
+    pattern:  /brands/edit/{id}
+    defaults: { _controller: eStoreShopBundle:Brand:edit }
+    requirements:
+        _method:  GET
+        id: \d+
         
-
-##################################
-# Garment
-##################################
-eStoreShopBundleAdmin_garment_new:
-    pattern:  /garments/new
-    defaults: { _controller: eStoreShopBundle:Garment:new }
-
-eStoreShopBundleAdmin_garment_create:
-    pattern:  /garments/create
-    defaults: { _controller: eStoreShopBundle:Garment:create }
+eStoreShopBundleAdmin_brand_update:
+    pattern:  /brands/update/{id}
+    defaults: { _controller: eStoreShopBundle:Brand:update }
     requirements:
         _method:  POST
+        id: \d+
+
+eStoreShopBundleAdmin_brand_delete:
+    pattern:  /brands/delete/{id}
+    defaults: { _controller: eStoreShopBundle:Brand:delete }
+    requirements:
+        _method:  GET
+        id: \d+

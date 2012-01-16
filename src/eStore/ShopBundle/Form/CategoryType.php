@@ -21,7 +21,6 @@ class CategoryType extends AbstractType
                                 },
                              'multiple' => false
                         ));
-        //->add('parent', 'categorymethod', array('multiple' => true))
     }
 
     public function getName()

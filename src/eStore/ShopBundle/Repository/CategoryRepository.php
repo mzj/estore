@@ -28,6 +28,7 @@ class CategoryRepository extends NestedTreeRepository
                                           FROM eStore\ShopBundle\Entity\Product p
                                           JOIN p.categories c
                                           WHERE c.lft BETWEEN $left AND $right");
+        
         return $query->getResult();
     }
     

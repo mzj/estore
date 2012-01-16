@@ -119,6 +119,12 @@ class Product
     private $garments;
     
     /**
+     *
+     * @ORM\ManyToOne(targetEntity="Brand", inversedBy="products")
+     */
+    private $brand;
+    
+    /**
      * 
      */
     public function __construct()
@@ -487,5 +493,35 @@ class Product
     {
         // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
         return 'uploads/products';
+    }
+
+    /**
+     * Add garments
+     *
+     * @param eStore\ShopBundle\Entity\Garment $garments
+     */
+    public function addGarment(\eStore\ShopBundle\Entity\Garment $garments)
+    {
+        $this->garments[] = $garments;
+    }
+
+    /**
+     * Set brand
+     *
+     * @param eStore\ShopBundle\Entity\Brand $brand
+     */
+    public function setBrand(\eStore\ShopBundle\Entity\Brand $brand)
+    {
+        $this->brand = $brand;
+    }
+
+    /**
+     * Get brand
+     *
+     * @return eStore\ShopBundle\Entity\Brand 
+     */
+    public function getBrand()
+    {
+        return $this->brand;
     }
 }

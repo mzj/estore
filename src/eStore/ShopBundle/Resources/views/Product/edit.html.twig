@@ -60,15 +60,18 @@
                     <li class="garments">
                        <div id="estore_shopbundle_producttype_garments" data-prototype="{{ form_widget(form.garments.get('prototype')) | e }}">
                            {% for index, garment in form.garments %}
-
-                                <span class="title">{{ index }}</span>
-                                {{ form_row(garment.colours) }}
-                                <br />
-                                {{ form_row(garment.size) }}
-                                <br />
-                                {{ form_row(garment.quantity) }}
-                                <br />
-                                <br />
+                               <fieldset style="border:1px solid #CCC; border-radius: 5px; padding: 10px; margin: 10px; margin-left: -140px;">
+                                   
+                                   <legend class="title">Garment No. #{{ index + 1 }}</legend>
+                                    {{ form_row(garment.colours) }}
+                                    <br />
+                                    {{ form_row(garment.size) }}
+                                    <br />
+                                    {{ form_row(garment.quantity) }}
+                                    <br />
+                                    <br />
+                                
+                               </fieldset>
                             {% endfor %}
                         </div>
                     </li>
@@ -89,6 +92,11 @@
                 <ol>
                     <li>
                         {{ form_widget(form.gender) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.brand) }}
+                        {{ form_errors(form.brand) }}
+                        {{ form_widget(form.brand) }}
                     </li>
                     <li>
                         {{ form_label(form.categories) }}

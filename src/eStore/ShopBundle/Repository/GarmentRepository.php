@@ -13,4 +13,20 @@ use Doctrine\ORM\EntityRepository;
         
 class GarmentRepository extends EntityRepository
 {    
+    /**
+     *
+     * @todo You could use DISTINCT clause
+     */
+    public function getGarments()
+    {
+        $query = $this->_em
+                      ->createQuery("SELECT p, g, c
+                                     FROM eStore\ShopBundle\Entity\Product p
+                                     LEFT JOIN p.garments g
+                                     LEFT JOIN g.colours c
+                                     WHERE p.id = 22 
+                                     ORDER BY p.id DESC
+                                   ");
+        return $query->getResult();
+    }
 }

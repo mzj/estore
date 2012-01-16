@@ -15,7 +15,7 @@ class ProductType extends AbstractType
     {
         $builder->add('name')
                 ->add('code')
-                ->add('active')
+                ->add('active', 'checkbox', array('required' => false))
                 ->add('description')
                 ->add('categories', 'entity',  
                         array(
@@ -27,6 +27,12 @@ class ProductType extends AbstractType
                                 },
                              'multiple' => true
                         ))
+                ->add('brand', 'entity',  
+                        array(
+                            'property' => 'name',
+                            'class' => 'eStoreShopBundle:Brand'
+                            )
+                        )                        
                 ->add('price')
                 ->add('gender', 'choice', array(
                     'choices' => array(

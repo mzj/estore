@@ -1,0 +1,41 @@
+<?php
+/**
+ * 
+ */
+namespace eStore\ShopBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+/**
+ * eStore\ShopBundle\Entity\Product
+ *
+ * @ORM\Table(name="brand")
+ * @ORM\Entity(repositoryClass="eStore\ShopBundle\Repository\BrandRepository")
+ * @ORM\HasLifecycleCallbacks()
+ */
+class Brand
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string $name
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+    
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="brand")
+     */
+    private $products;
+}

@@ -1,0 +1,29 @@
+{% extends 'eStoreShopBundle::adminLayout.html.twig' %}
+
+{% block container %}
+    
+
+    <form action="{{ path('eStoreShopBundleAdmin_colour_update', { 'id': colour.id }) }}" method="post" {{ form_enctype(form) }} id="product-edit">
+        
+        {{ form_errors(form) }}
+        <fieldset class="main">
+            <legend>Colour edit</legend>
+            
+            <fieldset class="nested"> 
+                <legend>Basic data</legend>
+                <ol>
+                    <li>
+                        {{ form_label(form.name) }}
+                        {{ form_errors(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </li>
+                </ol>
+            </fieldset>
+        {{ form_rest(form) }}
+        
+        <p>
+            <input type="submit" value="Edit"/>
+        </p> 
+    </form>
+
+{% endblock %}

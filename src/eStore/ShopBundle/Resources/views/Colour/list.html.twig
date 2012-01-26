@@ -1,0 +1,45 @@
+{% extends 'eStoreShopBundle::adminLayout.html.twig' %}
+
+{% block container %}
+    
+    {% if app.session.hasFlash('category-notice') %}
+        <div class="category-notice success">
+            {{ app.session.flash('category-notice') }}
+        </div>
+    {% endif %}
+
+    <p class="create create-product">
+        <a href="">
+            <img src="/bundles/estoreshop/img/add-gray.png" />
+            Create a new entry
+        </a>
+    </p>
+    <table id="entity-list" class="records_list">
+        <caption><h2>Colour list</h2></caption>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for colour in colours %}
+                
+            <tr>
+                <td><a href="">{{ colour.id }}</a></td>
+                <td>{{ colour.name }}</td>
+                <td>
+                    <a href="{{ path('eStoreShopBundleAdmin_colour_edit', {'id' : colour.id}) }}">Edit</a>
+                </td>
+                <td>
+                    <a href="{{ path('eStoreShopBundleAdmin_colour_delete', {'id' : colour.id}) }}">Delete</a>
+                </td>
+            </tr>
+            {% else %}
+            There are no colours to display
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

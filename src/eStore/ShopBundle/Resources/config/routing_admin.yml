@@ -141,3 +141,46 @@ eStoreShopBundleAdmin_brand_delete:
     requirements:
         _method:  GET
         id: \d+
+        
+        
+
+##################################
+# Colour
+##################################
+eStoreShopBundleAdmin_colour_list:
+    pattern:  /colours/list
+    defaults: { _controller: eStoreShopBundle:Colour:list }
+    requirements:
+        _method:  GET
+        page: \d+
+        
+eStoreShopBundleAdmin_colour_new:
+    pattern:  /colours/new
+    defaults: { _controller: eStoreShopBundle:Colour:new }
+
+eStoreShopBundleAdmin_colour_create:
+    pattern:  /colours/create
+    defaults: { _controller: eStoreShopBundle:Colour:create }
+    requirements:
+        _method:  POST
+        
+eStoreShopBundleAdmin_colour_edit:
+    pattern:  /colours/edit/{id}
+    defaults: { _controller: eStoreShopBundle:Colour:edit }
+    requirements:
+        _method:  GET
+        id: \d+
+        
+eStoreShopBundleAdmin_colour_update:
+    pattern:  /colours/update/{id}
+    defaults: { _controller: eStoreShopBundle:Colour:update }
+    requirements:
+        _method:  POST
+        id: \d+
+
+eStoreShopBundleAdmin_colour_delete:
+    pattern:  /colours/delete/{id}
+    defaults: { _controller: eStoreShopBundle:Colour:delete }
+    requirements:
+        _method:  GET
+        id: \d+

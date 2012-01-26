@@ -1,4 +1,7 @@
 <?php
+/**
+ * 
+ */
 namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -6,9 +9,17 @@ use eStore\ShopBundle\Entity\Category;
 use eStore\ShopBundle\Entity\Product;
 use eStore\ShopBundle\Form\CategoryType;
 
+/**
+ * 
+ */
 class CategoryController extends Controller
 {
-    
+    /**
+     *
+     * @param type $id
+     * @param type $slug
+     * @return type 
+     */
     public function indexAction($id, $slug)
     {       
         $em = $this->getDoctrine()
@@ -21,7 +32,10 @@ class CategoryController extends Controller
         return $this->render('eStoreShopBundle:Category:listProducts.html.twig', array( 'category'=> $category, 'products' => $products));
     }
     
-    
+    /**
+     *
+     * @return type 
+     */
     public function listAction()
     {       
         $em = $this->getDoctrine()->getEntityManager();
@@ -31,7 +45,9 @@ class CategoryController extends Controller
         return $this->render('eStoreShopBundle:Category:list.html.twig', array( 'categories' => $categories ));
     }
     
-    
+    /**
+     * 
+     */
     public function moveDownAction($id)
     {       
         $em = $this->getDoctrine()->getEntityManager();
@@ -47,7 +63,9 @@ class CategoryController extends Controller
         return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_category_list'));
     }
     
-    
+    /**
+     * 
+     */
     public function moveUpAction($id)
     {       
         $em = $this->getDoctrine()->getEntityManager();
@@ -63,7 +81,11 @@ class CategoryController extends Controller
         return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_category_list'));
     }
     
-    
+    /**
+     *
+     * @param type $id
+     * @return type 
+     */
     public function deleteAction($id) 
     {
         $em = $this->getDoctrine()->getEntityManager();

@@ -17,7 +17,7 @@ class CategoryControllerTest extends WebTestCase
      */
     public function testIndex()
     {
-        $crawler = $this->client->request('GET', '/category/17/test-slug');
+        $crawler = $this->client->request('GET', '/category/59/test-slug');
         
         if ($profile = $this->client->getProfile()) {
             $queryNumber = $profile->getCollector('db')->getQueryCount();

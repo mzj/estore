@@ -9,11 +9,19 @@
     {% endif %}
 
     <p class="create create-product">
+        <form action="{{ path('eStoreShopBundleAdmin_product_list', { 'page': 1 }) }}" method="get" >
+            <input type="text" name="term" />
+            <input type="submit" />
+        </form>
+    </p>
+    
+    <p class="create create-product">
         <a href="">
             <img src="/bundles/estoreshop/img/add-gray.png" />
             Create a new entry
         </a>
     </p>
+    
     <table id="entity-list" class="records_list">
         <caption><h2>Product list</h2></caption>
         <thead>

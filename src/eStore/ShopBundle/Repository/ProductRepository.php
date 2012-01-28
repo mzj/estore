@@ -13,7 +13,7 @@ class ProductRepository extends EntityRepository
 {
     /**
      *
-     * @todo You could use DISTINCT clause
+     * @todo You could use DISTINCT (Group by) clause
      */
     public function getPopularProducts()
     {
@@ -36,6 +36,21 @@ class ProductRepository extends EntityRepository
         $query = $this->_em
                       ->createQuery("SELECT p
                                      FROM eStore\ShopBundle\Entity\Product p
+                                     ORDER BY p.id DESC
+                                   ");
+        return $query;
+    }
+    
+    /**
+     *
+     * @return type 
+     */
+    public function getProductsWithTerm($term)
+    {
+        $query = $this->_em
+                      ->createQuery("SELECT p
+                                     FROM eStore\ShopBundle\Entity\Product p
+                                     WHERE p.name LIKE '%$term%'
                                      ORDER BY p.id DESC
                                    ");
         return $query;

@@ -2,6 +2,7 @@
 namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Exception\NotValidCurrentPageException;
@@ -25,10 +26,18 @@ class ProductController extends Controller
     }
     
     
-    public function listAction($page)
+    public function listAction(Request $request, $page)
     {       
         $em = $this->getDoctrine()->getEntityManager();
-        $queryP = $em->getRepository('eStoreShopBundle:Product')->getProducts();
+        
+        
+        $term = $request->query->get('term');
+        
+        if($term !== null) {
+            $queryP = $em->getRepository('eStoreShopBundle:Product')->getProductsWithTerm($term);
+        } else {
+            $queryP = $em->getRepository('eStoreShopBundle:Product')->getProducts();
+        }
         
         $pagedProducts = new Pagerfanta(new DoctrineORMAdapter($queryP));
         $pagedProducts->setMaxPerPage($this->container
@@ -44,9 +53,9 @@ class ProductController extends Controller
         $products = $pagedProducts->getCurrentPageResults();
         
         $helper = $this;
-        $routeGenerator = function($page) use ($helper) {
-            $route = $helper->generateUrl('eStoreShopBundleAdmin_product_list', 
-                    array('page' => $page));
+        $routeGenerator = function($page) use ($helper, $term) {
+            $params = $term ? array('page' => $page, 'term' => $term) : array('page' => $page);
+            $route  = $helper->generateUrl('eStoreShopBundleAdmin_product_list', $params);
             return $route;
         };
         

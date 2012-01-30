@@ -1,19 +1,25 @@
 <?php
+/**
+ * 
+ */
 namespace eStore\ShopBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use eStore\ShopBundle\Entity\Brand;
-use eStore\ShopBundle\Form\BrandType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller,
+    eStore\ShopBundle\Entity\Brand,
+    eStore\ShopBundle\Form\BrandType;
 
 class BrandController extends Controller
 {
+    /**
+     *
+     * @return type 
+     */
     public function listAction()
     {       
         $em = $this->getDoctrine()->getEntityManager();
         $brands = $em->getRepository('eStoreShopBundle:Brand')->findAll();
         
         return $this->render('eStoreShopBundle:Brand:list.html.twig', array( 'brands' => $brands ));
-
     }
     
     /**
@@ -58,6 +64,11 @@ class BrandController extends Controller
         ));  
     }
     
+    /**
+     *
+     * @param type $id
+     * @return type 
+     */
     public function deleteAction($id) 
     {
         $em = $this->getDoctrine()->getEntityManager();

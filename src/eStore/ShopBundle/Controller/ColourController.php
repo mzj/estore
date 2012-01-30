@@ -1,12 +1,19 @@
 <?php
+/**
+ * 
+ */
 namespace eStore\ShopBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use eStore\ShopBundle\Entity\Colour;
-use eStore\ShopBundle\Form\ColourType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller,
+    eStore\ShopBundle\Entity\Colour,
+    eStore\ShopBundle\Form\ColourType;
 
 class ColourController extends Controller
 {
+    /**
+     *
+     * @return type 
+     */
     public function listAction()
     {       
         $em = $this->getDoctrine()->getEntityManager();
@@ -58,6 +65,11 @@ class ColourController extends Controller
         ));  
     }
     
+    /**
+     *
+     * @param type $id
+     * @return type 
+     */
     public function deleteAction($id) 
     {
         $em = $this->getDoctrine()->getEntityManager();

@@ -4,10 +4,9 @@
  */
 namespace eStore\ShopBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use eStore\ShopBundle\Entity\Category;
-use eStore\ShopBundle\Entity\Product;
-use eStore\ShopBundle\Form\CategoryType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller,
+    eStore\ShopBundle\Entity\Category,
+    eStore\ShopBundle\Form\CategoryType;
 
 /**
  * 

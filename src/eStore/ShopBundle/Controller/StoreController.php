@@ -5,18 +5,17 @@
  * Author: markozjovanovic@gmail.com 
  * Date: Dec. 2011
  */
-
 namespace eStore\ShopBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use eStore\ShopBundle\Entity\Category;
-use eStore\ShopBundle\Entity\Contact;
-use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Exception\NotValidCurrentPageException;
-use eStore\ShopBundle\Form\FilterType;
-use eStore\ShopBundle\Form\ContactType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller,
+    Symfony\Component\HttpFoundation\Request,
+    eStore\ShopBundle\Entity\Category,
+    eStore\ShopBundle\Entity\Contact,
+    Pagerfanta\Pagerfanta,
+    Pagerfanta\Adapter\DoctrineORMAdapter,
+    Pagerfanta\Exception\NotValidCurrentPageException,
+    eStore\ShopBundle\Form\FilterType,
+    eStore\ShopBundle\Form\ContactType;
 
 
 class StoreController extends Controller

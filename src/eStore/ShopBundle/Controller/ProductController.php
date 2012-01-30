@@ -1,15 +1,18 @@
 <?php
+/**
+ * 
+ */
 namespace eStore\ShopBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Exception\NotValidCurrentPageException;
-use Pagerfanta\View\DefaultView;
-use eStore\ShopBundle\Entity\Category;
-use eStore\ShopBundle\Entity\Product;
-use eStore\ShopBundle\Form\ProductType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller,
+    Symfony\Component\HttpFoundation\Request,
+    Pagerfanta\Pagerfanta,
+    Pagerfanta\Adapter\DoctrineORMAdapter,
+    Pagerfanta\Exception\NotValidCurrentPageException,
+    Pagerfanta\View\DefaultView,
+    eStore\ShopBundle\Entity\Category,
+    eStore\ShopBundle\Entity\Product,
+    eStore\ShopBundle\Form\ProductType;
 
 class ProductController extends Controller
 {

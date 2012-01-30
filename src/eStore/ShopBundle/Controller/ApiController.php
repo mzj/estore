@@ -9,28 +9,26 @@
 
 namespace eStore\ShopBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use eStore\ShopBundle\Entity\Category;
-use Pagerfanta\Pagerfanta;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Exception\NotValidCurrentPageException;
-use eStore\ShopBundle\Form\FilterType;
-use FOS\RestBundle\View\View;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller,
+    Pagerfanta\Pagerfanta,
+    Pagerfanta\Adapter\DoctrineORMAdapter,
+    Pagerfanta\Exception\NotValidCurrentPageException,
+    eStore\ShopBundle\Form\FilterType,
+    FOS\RestBundle\View\View;
 
 
 class ApiController extends Controller
 {
     /**
      * Returns paged collection of product entity, 
-     * in one of the tree types - JSON, XML, HMTL. 
+     * in one of the tree formats - JSON, XML, HMTL. 
      * Depending on the requested format (by extension (or lack of one) in the url)
      * 
      * @param Request $request
      * @param int $page
      * @return Response 
      */
-    public function getProductsAction(Request $request, $page)
+    public function getProductsAction($page)
     {
         $em = $this->getDoctrine()
                    ->getEntityManager();       

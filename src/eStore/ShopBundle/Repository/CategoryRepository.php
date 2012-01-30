@@ -27,7 +27,11 @@ class CategoryRepository extends NestedTreeRepository
         $query = $this->_em->createQuery("SELECT p 
                                           FROM eStore\ShopBundle\Entity\Product p
                                           JOIN p.categories c
-                                          WHERE c.lft BETWEEN $left AND $right");
+                                          WHERE c.lft BETWEEN ?1 AND ?2");
+        $query->setParameters(array(
+                1 => $left,
+                2 => $right
+            ));
         
         return $query->getResult();
     }

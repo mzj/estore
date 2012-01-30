@@ -13,7 +13,12 @@ use eStore\ShopBundle\Form\ProductType;
 
 class ProductController extends Controller
 {
-    
+    /**
+     *
+     * @param type $id
+     * @param type $slug
+     * @return type 
+     */
     public function indexAction($id, $slug)
     {       
         $em = $this->getDoctrine()
@@ -25,7 +30,13 @@ class ProductController extends Controller
         return $this->render('eStoreShopBundle:Product:view.html.twig', array( 'product'=> $product ));
     }
     
-    
+    /**
+     *
+     * @param Request $request
+     * @param type $page
+     * @param type $page
+     * @return type 
+     */
     public function listAction(Request $request, $page)
     {       
         $em = $this->getDoctrine()->getEntityManager();
@@ -49,7 +60,7 @@ class ProductController extends Controller
             throw $this->createNotFoundException('Page not found.');
         }
           
-        // gets products collection for currnet page
+        // get products collection for current page
         $products = $pagedProducts->getCurrentPageResults();
         
         $helper = $this;
@@ -117,6 +128,11 @@ class ProductController extends Controller
         ));  
     }
     
+    /**
+     *
+     * @param type $id
+     * @return type 
+     */
     public function deleteAction($id) 
     {
         $em = $this->getDoctrine()->getEntityManager();
@@ -130,7 +146,7 @@ class ProductController extends Controller
         return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_product_list'));
     }
     
-        /**
+    /**
      *
      * @param type $id
      * @return type 

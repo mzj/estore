@@ -1,8 +1,9 @@
 <?php
 namespace eStore\ShopBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-use eStore\ShopBundle\Entity\Product;
+use Doctrine\ORM\EntityRepository,
+    eStore\ShopBundle\Entity\Product;
+
 /**
  * ProductRepository
  *
@@ -50,9 +51,11 @@ class ProductRepository extends EntityRepository
         $query = $this->_em
                       ->createQuery("SELECT p
                                      FROM eStore\ShopBundle\Entity\Product p
-                                     WHERE p.name LIKE '%$term%'
+                                     WHERE p.name LIKE :term
                                      ORDER BY p.id DESC
                                    ");
+        $query->setParameter('term', '%' . $term . '%');
+        
         return $query;
     }
 }

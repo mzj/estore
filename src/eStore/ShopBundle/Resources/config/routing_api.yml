@@ -4,7 +4,7 @@
 #    name_prefix:  api_
     
 products:
-    pattern:  /products/{page}.{_format}
-    defaults: { _controller: eStoreShopBundle:Api:getProducts, _format: json, page: 1 }
+    pattern:  /products.{_format}
+    defaults: { _controller: eStoreShopBundle:Api:getProducts, _format: json }
     
     

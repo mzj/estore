@@ -10,6 +10,7 @@
 namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
+    Symfony\Component\HttpFoundation\Request,
     Pagerfanta\Pagerfanta,
     Pagerfanta\Adapter\DoctrineORMAdapter,
     Pagerfanta\Exception\NotValidCurrentPageException,
@@ -28,8 +29,19 @@ class ApiController extends Controller
      * @param int $page
      * @return Response 
      */
-    public function getProductsAction($page)
+    public function getProductsAction(Request $request)
     {
+        $search = $request->query->get('search');
+        $colours = $request->query->get('colours');
+        $gender = $request->query->get('gender');
+        $size = $request->query->get('size');
+        $productsPerPage = $request->query->get('ppp');
+        $orderByPrice = $request->query->get('obp');
+        $priceLowest = $request->query->get('priceL');
+        $priceHighest = $request->query->get('priceH');
+        $page = $request->query->get('page');
+        $page = $page ? $page : 1;
+        
         $em = $this->getDoctrine()
                    ->getEntityManager();       
 
@@ -37,8 +49,7 @@ class ApiController extends Controller
                      ->getPopularProducts();
         
         $pagedProducts = new Pagerfanta(new DoctrineORMAdapter($query));
-        $pagedProducts->setMaxPerPage($this->container
-                            ->getParameter('estore_shop.products.max_per_page'));
+        $pagedProducts->setMaxPerPage($productsPerPage);
 
         try {
             $pagedProducts->setCurrentPage($page);

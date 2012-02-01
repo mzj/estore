@@ -1,4 +1,5 @@
 function productsApp() {
+
     //
     var Product = Backbone.Model.extend({
         // url: 'api/products'
@@ -58,7 +59,11 @@ function productsApp() {
         el: '#formFilter',
 
         events : {
-            "click #btnFilter" : "changed"
+            "click #btnFilter" : "changed",
+            "change input" : "changed",
+            //"change price-filter" : "changed", 
+            "change input[type=text]": "changed",
+            "change select" : "changed"
         },
 
         initialize: function () {
@@ -75,12 +80,35 @@ function productsApp() {
            alert('kljik');
         }
     });
+    
+    
+    var SliderView = Backbone.View.extend({
+        el: '#slider-filter',
+
+        events : {
+            "change #slider-filter" : "changed"
+        },
+
+        initialize: function () {
+            _.bindAll(this, "changed");
+            alert('fdf');
+        },
+        changed:function(e) {
+          /* var changed = evt.currentTarget;
+           var value = $("#"+changed.id).val();
+           var obj = "{\""+changed.id +"\":\""+value+"\"}";
+           var objInst = JSON.parse(obj);
+           this.model.set(objInst);*/
+           alert('jeeej');
+        }
+    });
 
     //
     var App = Backbone.Router.extend({
         views: {},
         productsView: null,
         filterView: null,
+        sliderView: null,
         routes: {
             ":page/:ppp" : "index"
         },
@@ -88,6 +116,7 @@ function productsApp() {
         initialize: function(data) {
             //this.route(":number", "page", function(number){ alert(number) });
             this.filterView = new FilterView();
+            this.sliderView = new SliderView();
         },
 
         // Index route

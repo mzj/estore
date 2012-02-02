@@ -1,11 +1,14 @@
 function productsApp() {
 
-    //
+    /**
+     *
+     */
     var Product = Backbone.Model.extend({
-        // url: 'api/products'
     });
 
-    //
+    /**
+     *
+     */
     var Products = Backbone.Collection.extend({
         model: Product,
 
@@ -34,12 +37,13 @@ function productsApp() {
           *  return response.products
           */
         parse: function(response) {
-           //console.log(response.pagerfanta);
            return response.products;
         }
     });
 
-    //	
+    /**
+     *
+     */	
     var ProductsView = Backbone.View.extend({
         template: $("#products-template").html(),
         el: $('#products'),
@@ -51,59 +55,39 @@ function productsApp() {
 
         render: function() {
                 this.el.html(_.template(this.template, {'products': this.collection.toJSON()}));
+                alert("HAHAHA triger")
                 return this;
         }
     });
     
+    /**
+     *
+     */
     var FilterView = Backbone.View.extend({
         el: '#formFilter',
 
         events : {
             "click #btnFilter" : "changed",
             "change input" : "changed",
-            //"change price-filter" : "changed", 
+            "slidechange #slider-range" : "changed", 
             "change input[type=text]": "changed",
             "change select" : "changed"
         },
 
         initialize: function () {
             _.bindAll(this, "changed");
-            alert('fdf');
         },
+        
         changed:function(e) {
-          /* var changed = evt.currentTarget;
-           var value = $("#"+changed.id).val();
-           var obj = "{\""+changed.id +"\":\""+value+"\"}";
-           var objInst = JSON.parse(obj);
-           this.model.set(objInst);*/ 
            e.preventDefault();
-           alert('kljik');
+           products.trigger("reset");
         }
     });
     
-    
-    var SliderView = Backbone.View.extend({
-        el: '#slider-filter',
 
-        events : {
-            "change #slider-filter" : "changed"
-        },
-
-        initialize: function () {
-            _.bindAll(this, "changed");
-            alert('fdf');
-        },
-        changed:function(e) {
-          /* var changed = evt.currentTarget;
-           var value = $("#"+changed.id).val();
-           var obj = "{\""+changed.id +"\":\""+value+"\"}";
-           var objInst = JSON.parse(obj);
-           this.model.set(objInst);*/
-           alert('jeeej');
-        }
-    });
-
-    //
+    /**
+     *
+     */
     var App = Backbone.Router.extend({
         views: {},
         productsView: null,
@@ -116,13 +100,14 @@ function productsApp() {
         initialize: function(data) {
             //this.route(":number", "page", function(number){ alert(number) });
             this.filterView = new FilterView();
-            this.sliderView = new SliderView();
+            this.index(1, 2);
         },
 
         // Index route
         index: function(page, ppp) {
             this.productsView = null;
             products = null;
+            console.log("Page: " + page + " PPP: " + ppp);
             page = page > 0 ? page : 1;
             ppp  = ppp > 0 ? ppp : 1;
             products = new Products([], {url: 'api/products.json?page=' + page + '&ppp=' + ppp});

@@ -264,15 +264,6 @@ h3 {
 	width:97%;
 	background-color:#F7F7F7;
 	border:1px solid #ECECEC;
-	position:relative;
-}
-
-#filter-close {
-	position:absolute;
-	width: 20px;
-	right: 0px;	
-	top: 0px;
-	cursor:pointer;
 }
 
 #filter-container form {

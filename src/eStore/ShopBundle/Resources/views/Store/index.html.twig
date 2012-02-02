@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/uniform/css/uniform.eStore.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/jSlider/stylesheets/jslider.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/jSlider/stylesheets/jslider.eStore.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/jquery-ui/css/cupertino/jquery-ui-1.8.17.custom.css') }}" type="text/css" />
 {% endblock%}
 {% block javascripts %}
     {{ parent() }}
@@ -17,9 +18,9 @@
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/backbone/backbone-min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/jquery.nivo.slider.pack.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jSlider/javascripts/jquery.slider-min.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jquery-ui/js/jquery-ui-1.8.17.custom.min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jSlider/javascripts/jquery.dependClass.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/uniform/jquery.uniform.min.js') }}" ></script>
-    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/filterSlide.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/productsApp.js?version=4') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/bootstrap.js') }}" ></script>
 {% endblock %}
@@ -61,7 +62,9 @@
 {% endblock %}    
     
 {% block main %}
+                                
 
+                                
     <div class="slider-wrapper theme-default">
                 	<div class="ribbon"></div>
                 	<div id="slider" class="nivoSlider">
@@ -79,11 +82,9 @@
                 	<h2>Popular products</h2>
                     <div class="line line-products"></div>
                     
+
+                    
                     <div id="filter-container">
-                    	<div id="filter-close">
-                        	<img id="filter-collapse-btn" src="{{ asset('bundles/estoreshop/img/arrow-up.png') }}" title="Collapse/Expand filter" alt="Collapse/Expand filter"/>
-                        </div>
-                        
                         <h3>Filter</h3>
                         <form id="formFilter" target="">
                         	<div style="margin-left:50px;">
@@ -97,14 +98,14 @@
                                 <input id="kids" type="checkbox">
                                  
                                 <select id="categories">
-                               		<option>All categories</option>
+                                    <option>All categories</option>
                                     <option>Shirts</option>
                                     <option>Pants</option>
                                     <option>Shoes</option>
                                 </select>
                                 
                                 <select id="per-page">
-                                	<option>Products per page</option>
+                                    <option>Products per page</option>
                                     <option>10</option>
                                     <option>20</option>
                                     <option>50</option>
@@ -112,28 +113,31 @@
                                 </select>
                             </div>
                             
-                            <div style="margin-left:114px;">
+                            <div style="margin-left:50px;">
+
                                 <div class="layout-slider" style="width:170px; float:left; margin-top:20px;">
-                                    <span style=" width:170px;">
-                                        <input id="slider-filter" type="text" name="price-filter" value="1;5000"/>
-                                    </span>
+                                    <div class="tooltip tooltip1"></div>
+                                    <div class="tooltip tooltip2"></div>
+                                    <div id="slider-range" style="width: 160px;"></div>
                                 </div>
+
                             <br />
+                            
                                 <label for="price-order" style="margin-left:20px; margin-top:20px;"></label> 
                                 <select id="price-order" style="">
-                               		<option>Order by price</option>
+                                    <option>Order by price</option>
                                     <option>Lower to higher</option>
                                     <option>Higher to lower</option>
                                 </select>
                                 
                                 <input type="submit" value="Filter" class="btn-submit" name="btnFilter" id="btnFilter"/>
-                    		</div>
+                            </div>
                             
                             
                         </form>
                     <!-- filter-container end -->
                     </div>
-                    
+
                     <ul id="products">
                     <!-- products end -->
                     </ul>

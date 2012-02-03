@@ -30,7 +30,7 @@ class ApiControllerTest extends WebTestCase
      */
     public function testGetProductsJsonAction()
     {
-        $crawler = $this->client->request('GET', '/api/products/1.json');
+        $crawler = $this->client->request('GET', '/api/products.json');
         $json = $this->client->getResponse()->getContent();
         $this->assertTrue($this->isJson($json), 
                 "Requested json response, got something else");
@@ -55,7 +55,7 @@ class ApiControllerTest extends WebTestCase
      */
     public function testGetProductsXmlAction()
     {
-        $crawler = $this->client->request('GET', '/api/products/1.xml');
+        $crawler = $this->client->request('GET', '/api/products.xml');
         $xml = $this->client->getResponse()->getContent();
         $this->assertTrue($this->isXml($xml), 
                 "Requested xml response, got something else");

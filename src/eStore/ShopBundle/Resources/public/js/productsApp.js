@@ -15,21 +15,7 @@ function productsApp() {
         initialize: function(models, options) {
             this.url = options.url;
         },
-
-        create : function(model, options) {
-            var coll = this;
-            options || (options = {});
-            if (!(model instanceof Backbone.Model)) {
-                    model = new this.model(model, {collection: coll});
-            } else {
-                    model.collection = coll;
-            }
-            var success = function(nextModel, resp) {
-                    coll.add(nextModel);
-                    if (options.success) options.success(nextModel, resp);
-            };
-            return model.save(null, {success : success, error : options.error});
-        },
+        
          /**
           *  This is the place where you can play with returned JSON
           *  Example: 
@@ -47,6 +33,7 @@ function productsApp() {
     var ProductsView = Backbone.View.extend({
         template: $("#products-template").html(),
         el: $('#products'),
+        fadeState: false,
         
         initialize: function() {
                 this.collection.bind('reset', this.render, this);
@@ -54,8 +41,12 @@ function productsApp() {
         },
 
         render: function() {
-                this.el.html(_.template(this.template, {'products': this.collection.toJSON()}));
-                alert("HAHAHA triger")
+                var sg = this;
+                this.el.fadeOut('fast', function(){
+                   sg.el.empty(); 
+                   sg.el.html(_.template(sg.template, {'products': sg.collection.toJSON()}));
+                   sg.el.fadeIn('fast');
+                });
                 return this;
         }
     });
@@ -79,10 +70,20 @@ function productsApp() {
         },
         
         changed:function(e) {
-           e.preventDefault();
-           products.trigger("reset");
-        }
-    });
+            e.preventDefault();
+            console.log("Changed event");
+            products.fetch({
+                data: { 
+                    page: 1, 
+                    ppp: $("#per-page").val() 
+                },
+                processData: true,
+                success: function() {
+                    console.log("Data fetched");
+                }
+            });
+            }
+        });
     
 
     /**
@@ -94,29 +95,24 @@ function productsApp() {
         filterView: null,
         sliderView: null,
         routes: {
-            ":page/:ppp" : "index"
+            "" : "index"
         },
 
         initialize: function(data) {
-            //this.route(":number", "page", function(number){ alert(number) });
             this.filterView = new FilterView();
-            this.index(1, 2);
         },
 
-        // Index route
-        index: function(page, ppp) {
+        index: function() {
             this.productsView = null;
             products = null;
-            console.log("Page: " + page + " PPP: " + ppp);
-            page = page > 0 ? page : 1;
-            ppp  = ppp > 0 ? ppp : 1;
-            products = new Products([], {url: 'api/products.json?page=' + page + '&ppp=' + ppp});
+            products = new Products([], {url: 'api/products.json?page=1&ppp=2' });
             products.fetch({
                 success: function() {
                     this.productsView = new ProductsView({ 
                         collection: products
                     });
-                }});
+               }
+           });
         }
      });
 

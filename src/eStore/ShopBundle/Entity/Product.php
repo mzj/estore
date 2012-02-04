@@ -114,7 +114,7 @@ class Product
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="Garment", mappedBy="product", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Garment", mappedBy="product", cascade={"all"},orphanRemoval=true)
      */
     private $garments;
     

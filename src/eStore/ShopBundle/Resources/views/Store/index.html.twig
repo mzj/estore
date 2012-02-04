@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/themes/eStore/eStore.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/nivo-slider.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/uniform/css/uniform.eStore.css') }}" type="text/css" media="screen" />
-    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/jSlider/stylesheets/jslider.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/jSlider/stylesheets/jslider.eStore.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/jquery-ui/css/cupertino/jquery-ui-1.8.17.custom.css') }}" type="text/css" />
 {% endblock%}
 {% block javascripts %}
@@ -17,9 +15,8 @@
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/underscore/underscore-min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/backbone/backbone-min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/nivo-slider/jquery.nivo.slider.pack.js') }}" ></script>
-    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jSlider/javascripts/jquery.slider-min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jquery-ui/js/jquery-ui-1.8.17.custom.min.js') }}" ></script>
-    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jSlider/javascripts/jquery.dependClass.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/priceRangeSlider.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/uniform/jquery.uniform.min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/productsApp.js?version=4') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/bootstrap.js') }}" ></script>
@@ -40,7 +37,7 @@
                         <span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
                     </p>
                     <p>
-                        <span>23.00$</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                        <span><%= p.price %>&euro;</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
                     </p>
                     In:
                     <% _.each(p.categories, function(c) { %>
@@ -87,17 +84,17 @@
                     <div id="filter-container">
                         <h3>Filter</h3>
                         <form id="formFilter" target="">
-                        	<div style="margin-left:50px;">
+                            <div style="margin-left:50px;">
                                 <label for="mens">Men's</label>  
-                                <input id="mens" type="checkbox">
+                                <input id="mens" type="radio" value="1" name="gender">
                                 <label for="womens">Women's</label>
-                                <input id="womens" type="checkbox">
+                                <input id="womens" type="radio" value="2" name="gender">
                                 <label for="unis">Uni's</label>  
-                                <input id="unis" type="checkbox"> 
+                                <input id="unis" type="radio" value="4" name="gender" checked="checked"> 
                                 <label for="kids">Kid's</label>  
-                                <input id="kids" type="checkbox">
+                                <input id="kids" type="radio" value="3" name="gender">
                                  
-                                <select id="categories">
+                                <select id="filter-categories">
                                     <option>All categories</option>
                                     <option>Shirts</option>
                                     <option>Pants</option>
@@ -105,9 +102,7 @@
                                 </select>
                                 
                                 <select id="per-page">
-                                    <option value="1">Products per page</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
+                                    <option value="5">5 products per page</option>
                                     <option value="10">10</option>
                                     <option value="20">20</option>
                                     <option value="30">50</option>
@@ -115,24 +110,40 @@
                                 </select>
                             </div>
                             
-                            <div style="margin-left:50px;">
+                            <div style="margin-left:60px;">
 
-                                <div class="layout-slider" style="width:170px; float:left; margin-top:20px;">
+                                <div class="layout-slider" style="width:232px; float:left; margin-top:24px;">
                                     <div class="tooltip tooltip1"></div>
                                     <div class="tooltip tooltip2"></div>
-                                    <div id="slider-range" style="width: 160px;"></div>
+                                    <div id="slider-range" style="width: 200px;"></div>
                                 </div>
 
                             <br />
                             
-                                <label for="price-order" style="margin-left:20px; margin-top:20px;"></label> 
-                                <select id="price-order" style="">
-                                    <option>Order by price</option>
-                                    <option>Lower to higher</option>
-                                    <option>Higher to lower</option>
+                                <select id="filter-price-order">
+                                    <option value="">Order by price</option>
+                                    <option value="asc">Lower to higher</option>
+                                    <option value="desc">Higher to lower</option>
                                 </select>
                                 
-                                <input type="submit" value="Filter" class="btn-submit" name="btnFilter" id="btnFilter"/>
+                                <select id="filter-size">
+                                    <option value="">All sizes</option>
+                                    <option value="1">Small</option>
+                                    <option value="2">Medium</option>
+                                    <option value="3">Big</option>
+                                </select>
+                            
+                            <br /><br />
+                                <label for="green" style="margin-left: 120px;">Green</label>  
+                                <input id="green" type="checkbox" value="16" name="colour" checked="checked">
+                                <label for="red">Red</label>
+                                <input id="red" type="checkbox" value="15" name="colour" checked="checked">
+                                <label for="blue">Blue</label>  
+                                <input id="blue" type="checkbox" value="22" name="colour" checked="checked"> 
+                                <label for="white">White</label>  
+                                <input id="white" type="checkbox" value="23" name="colour" checked="checked">
+                                <label for="black">Black</label>  
+                                <input id="black" type="checkbox" value="24" name="colour" checked="checked">
                             </div>
                             
                             

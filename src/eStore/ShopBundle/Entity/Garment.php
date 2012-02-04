@@ -39,7 +39,7 @@ class Garment
      * @ORM\ManyToMany(targetEntity="Colour")
      * @ORM\JoinTable(
      *   joinColumns={
-     *     @ORM\JoinColumn(name="garment_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="garment_id", referencedColumnName="id", onDelete="cascade")
      *   }
      * )
      */

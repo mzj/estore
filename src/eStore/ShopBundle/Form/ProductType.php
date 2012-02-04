@@ -43,11 +43,12 @@ class ProductType extends AbstractType
                     'expanded' => true)
                    )
                 ->add('file', 'file', array('required' => false))                           
-            ->add('garments', 'collection', array(
-             'type' => new GarmentType($this->pid),
-                'by_reference' => false,
-                 'allow_add' => true,
-                    'prototype' => true
+                ->add('garments', 'collection', array(
+                        'type' => new GarmentType($this->pid),
+                        'by_reference' => false,
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                        'prototype' => true
              ));
     }
 

@@ -10,9 +10,21 @@
         collectionHolder.append(form);
     }
 
+    function deleteGarment(event) {
+        var collectionHolder = $('#estore_shopbundle_producttype_garments');
+        $(event).parent().remove();
+        console.log(event);
+    }
+    
     $('a.jslink').live('click', function(event){
         event.preventDefault();
         add();
+    });
+    
+   $('a.delete-garment').live('click', function(event){
+        event.preventDefault();
+        
+        deleteGarment(this);
     });
     </script>
     
@@ -70,7 +82,7 @@
                                     {{ form_row(garment.quantity) }}
                                     <br />
                                     <br />
-                                
+                                    <a href="#" class="delete-garment">Delete garment</a>
                                </fieldset>
                             {% endfor %}
                         </div>

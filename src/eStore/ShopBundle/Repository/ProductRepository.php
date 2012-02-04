@@ -58,4 +58,72 @@ class ProductRepository extends EntityRepository
         
         return $query;
     }
+    
+    
+        /**
+     *
+     * @return type 
+     */
+    public function getProductsForApi($params)
+    {
+        $priceMin = $params['priceMin'];
+        $priceMax = $params['priceMax'];
+        $gender = $params['gender'];
+        $size = $params['size'];
+        $colours = $params['colours'];
+        
+        $orderByPrice = $params['orderByPrice'] == 'asc' ? 'ASC' : 'DESC';
+        
+        $query = $this->_em
+                      ->createQuery("SELECT p
+                                     FROM eStore\ShopBundle\Entity\Product p
+                                     INNER JOIN p.garments g
+                                     LEFT JOIN g.colours c
+                                     WHERE p.price BETWEEN :priceMin AND :priceMax
+                                     AND p.gender = :gender
+                                     AND g.size = :size              
+                                     AND c.id IN (:colours)
+                                     ORDER BY p.price " . $orderByPrice);
+        $query->setParameters(array('priceMin' => $priceMin, 
+                'priceMax' => $priceMax,
+                'gender' => $gender,
+                'size' => $size,
+                'colours' => explode('-', $colours)
+            ));
+        return $query;
+        
+        //return $this->tmpQbDql($params);
+    }
+    
+    private function tmpQbDql($params) 
+    {
+        $priceMin = $params['priceMin'];
+        $priceMax = $params['priceMax'];
+        $gender = $params['gender'];
+        $size = $params['size'];
+        $orderByPrice = $params['orderByPrice'];
+        
+        $qb = $this->createQueryBuilder('v');        
+        $qb->select('p', 'g', 'c')
+           ->from('eStore\ShopBundle\Entity\Product', 'p')
+           ->innerJoin('p.garments', 'g')
+           ->leftJoin('g.colours', 'c')
+                
+           //->where('p.price between ?1 and ?2')
+           //->andWhere('p.gender = ?3')
+           //->andWhere('g.size = ?4');
+        
+        //if($orderByPrice == 'asc' || $orderByPrice == 'desc') {
+       //     $qb->orderBy('p.price', $orderByPrice);
+        //} else {
+           ->orderBy('p.id', 'desc');
+        //}
+        
+        /*$qb->setParameter(1, $priceMin) 
+           ->setParameter(2, $priceMax)
+           ->setParameter(3, $gender)
+           ->setParameter(4, $size);*/
+        
+        return $qb->getQuery();
+    }
 }

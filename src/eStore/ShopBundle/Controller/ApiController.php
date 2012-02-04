@@ -37,16 +37,30 @@ class ApiController extends Controller
         $size = $request->query->get('size');
         $productsPerPage = $request->query->get('ppp');
         $orderByPrice = $request->query->get('obp');
-        $priceLowest = $request->query->get('priceL');
-        $priceHighest = $request->query->get('priceH');
+        $priceMin = $request->query->get('minprice');
+        $priceMax = $request->query->get('maxprice');
+        $colours = $request->query->get('colours');
         $page = $request->query->get('page');
         $page = $page ? $page : 1;
+        
+        $params = array(
+                'search' => $search, 
+                'colours' => $colours, 
+                'gender' => $gender, 
+                'size' =>  $size, 
+                'productsPerPage' => $productsPerPage, 
+                'orderByPrice' => $orderByPrice, 
+                'priceMin' => $priceMin, 
+                'priceMax' => $priceMax, 
+                'page' => $page,
+                'colours' => $colours
+            );
         
         $em = $this->getDoctrine()
                    ->getEntityManager();       
 
         $query =  $em->getRepository('eStoreShopBundle:Product')
-                     ->getPopularProducts();
+                     ->getProductsForApi($params);
         
         $pagedProducts = new Pagerfanta(new DoctrineORMAdapter($query));
         $pagedProducts->setMaxPerPage($productsPerPage);

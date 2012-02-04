@@ -11,9 +11,9 @@ function productsApp() {
      */
     var Products = Backbone.Collection.extend({
         model: Product,
-
+        url: 'api/products.json',
+        
         initialize: function(models, options) {
-            this.url = options.url;
         },
         
          /**
@@ -75,7 +75,13 @@ function productsApp() {
             products.fetch({
                 data: { 
                     page: 1, 
-                    ppp: $("#per-page").val() 
+                    ppp: $("#per-page").val(),
+                    minprice: $("#slider-range").slider("values", 0), 
+                    maxprice: $("#slider-range").slider("values", 1),
+                    gender: $('input:radio[name=gender]:checked').val(),
+                    size: $('#filter-size').val(),
+                    obp: $('#filter-price-order').val(),
+                    colours: getColoursStr()
                 },
                 processData: true,
                 success: function() {
@@ -105,8 +111,22 @@ function productsApp() {
         index: function() {
             this.productsView = null;
             products = null;
-            products = new Products([], {url: 'api/products.json?page=1&ppp=2' });
+            products = new Products;
+            
+            
+            
             products.fetch({
+                data: { 
+                    page: 1,
+                    ppp: $("#per-page").val(),
+                    minprice: $("#slider-range").slider("values", 0),
+                    maxprice: $("#slider-range").slider("values", 1),
+                    gender: $('input:radio[name=gender]:checked').val(),
+                    size: $('#filter-size').val(),
+                    obp: $('#filter-price-order').val(),
+                    colours: getColoursStr()
+                },
+                processData: true,
                 success: function() {
                     this.productsView = new ProductsView({ 
                         collection: products
@@ -116,6 +136,16 @@ function productsApp() {
         }
      });
 
+    function getColoursStr() {
+        var coloursVals = '';
+         $('input:checkbox[name=colour]:checked').each(function() {
+           coloursVals += '-' + $(this).val();
+         });
+        coloursVals = coloursVals.substring(1);
+        
+        return coloursVals;
+    }
+    
     new App;
     Backbone.history.start();
 };

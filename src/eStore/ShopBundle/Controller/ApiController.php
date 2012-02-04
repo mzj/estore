@@ -40,6 +40,7 @@ class ApiController extends Controller
         $priceMin = $request->query->get('minprice');
         $priceMax = $request->query->get('maxprice');
         $colours = $request->query->get('colours');
+        $category = $request->query->get('category');
         $page = $request->query->get('page');
         $page = $page ? $page : 1;
         
@@ -53,7 +54,8 @@ class ApiController extends Controller
                 'priceMin' => $priceMin, 
                 'priceMax' => $priceMax, 
                 'page' => $page,
-                'colours' => $colours
+                'colours' => $colours,
+                'category' => $category
             );
         
         $em = $this->getDoctrine()

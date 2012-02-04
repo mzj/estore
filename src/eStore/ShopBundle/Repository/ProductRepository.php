@@ -60,39 +60,41 @@ class ProductRepository extends EntityRepository
     }
     
     
-        /**
+    /**
      *
      * @return type 
      */
     public function getProductsForApi($params)
-    {
-        $priceMin = $params['priceMin'];
-        $priceMax = $params['priceMax'];
-        $gender = $params['gender'];
-        $size = $params['size'];
-        $colours = $params['colours'];
-        
+    {       
         $orderByPrice = $params['orderByPrice'] == 'asc' ? 'ASC' : 'DESC';
+        $parameters = array(
+                'priceMin' => $params['priceMin'], 
+                'priceMax' => $params['priceMax'],
+                'gender' => $params['gender'],
+                'size' => $params['size'],
+                'colours' => explode('-', $params['colours']));
         
-        $query = $this->_em
-                      ->createQuery("SELECT p
-                                     FROM eStore\ShopBundle\Entity\Product p
-                                     INNER JOIN p.garments g
-                                     LEFT JOIN g.colours c
-                                     WHERE p.price BETWEEN :priceMin AND :priceMax
-                                     AND p.gender = :gender
-                                     AND g.size = :size              
-                                     AND c.id IN (:colours)
-                                     ORDER BY p.price " . $orderByPrice);
-        $query->setParameters(array('priceMin' => $priceMin, 
-                'priceMax' => $priceMax,
-                'gender' => $gender,
-                'size' => $size,
-                'colours' => explode('-', $colours)
-            ));
+        $dql = "SELECT p
+                 FROM eStore\ShopBundle\Entity\Product p
+                 JOIN p.garments g
+                 JOIN g.colours c
+                 JOIN p.categories cat
+                 WHERE p.price BETWEEN :priceMin AND :priceMax";
+        if(!empty($params['category'])) {
+            $dql .= " AND cat.id = :category ";
+            $parameters['category'] = $params['category'];
+        }
+        $dql .= " AND p.gender = :gender
+                  AND g.size = :size              
+                  AND c.id IN (:colours)
+                  ORDER BY p.price " . $orderByPrice;
+        
+        $query = $this->_em->createQuery($dql);
+        
+        
+        $query->setParameters($parameters);
+        
         return $query;
-        
-        //return $this->tmpQbDql($params);
     }
     
     private function tmpQbDql($params) 

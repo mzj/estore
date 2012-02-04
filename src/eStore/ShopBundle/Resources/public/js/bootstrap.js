@@ -13,6 +13,11 @@ $(window).load(function() {
         // NivoSlider needs to be initialized before Slider Range 
         // Absolute positioning conflict 
 	$('#slider').nivoSlider();
+        // LightBox
+        $(".lightbox").lightbox({
+            fitToScreen: true,
+            imageClickClose: false
+        });
         // Slider - Price Range
         priceRangeSlider();
         // Main app

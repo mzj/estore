@@ -74,7 +74,8 @@ function productsApp() {
             console.log("Changed event");
             products.fetch({
                 data: { 
-                    page: 1, 
+                    page: 1,
+                    category: $('#filter-categories').val(),
                     ppp: $("#per-page").val(),
                     minprice: $("#slider-range").slider("values", 0), 
                     maxprice: $("#slider-range").slider("values", 1),
@@ -113,11 +114,10 @@ function productsApp() {
             products = null;
             products = new Products;
             
-            
-            
             products.fetch({
                 data: { 
                     page: 1,
+                    category: $('#filter-categories').val(),
                     ppp: $("#per-page").val(),
                     minprice: $("#slider-range").slider("values", 0),
                     maxprice: $("#slider-range").slider("values", 1),

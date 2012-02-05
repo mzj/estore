@@ -2,40 +2,40 @@
 
 namespace eStore\ShopBundle\Form;
 
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\AbstractType,
+    Symfony\Component\Form\FormBuilder,
+    eStore\ShopBundle\Entity\Product;
 
 class FilterType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder->add('gender', 'choice', array(
-                'choices' => array(
-                    'm' => "Men's",
-                    'w' => "Women's",
-                    'k' => "Kid's"
-                ),
-                'required'    => true,
-                'empty_value' => 'Choose gender type...',
-                'empty_data'  => null
-            ));
-        
-        $builder->add('sizes', 'choice', array(
-                'choices' => array(
-                     's' => "S",
-                     'm' => "M",
-                     'l' => "L",
-                     'x' => "X",
-                     'xl' => "XL",
-                     'xxl' => "XXL"
-                ),
-                'required'    => true,
-                'empty_value' => 'Choose size...',
-                'empty_data'  => null
-            ));
-        
-        $builder->add('subject');
-        $builder->add('body', 'textarea');
+                    'choices' => array(
+                        Product::GENDER_M => "Men's",
+                        Product::GENDER_W => "Women's",
+                        Product::GENDER_K => "Kid's",
+                        Product::GENDER_U => "Uni's"),
+                    'expanded' => true, 
+                    'property_path' => false)
+                   )
+                ->add('categories', 'entity',  
+                        array(
+                            'property' => 'indentNameFilter',
+                            'class' => 'eStoreShopBundle:Category',
+                            'query_builder' => function($er)
+                                {
+                                    return $er->createQueryBuilder('c')->orderBy('c.lft', 'ASC');
+                                },
+                             'multiple' => false
+                        ))
+                 ->add('colours', 'entity',  
+                        array(
+                            'property' => 'name',
+                            'class' => 'eStoreShopBundle:Colour',
+                            'multiple' => true,
+                            'expanded' => true
+                        ));
     }
     
     public function getDefaultOptions(array $options)

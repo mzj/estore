@@ -87,21 +87,10 @@
                         <h3>Filter</h3>
                         <form id="formFilter" target="">
                             <div style="margin-left:50px;">
-                                <label for="mens">Men's</label>  
-                                <input id="mens" type="radio" value="1" name="gender">
-                                <label for="womens">Women's</label>
-                                <input id="womens" type="radio" value="2" name="gender">
-                                <label for="unis">Uni's</label>  
-                                <input id="unis" type="radio" value="4" name="gender" checked="checked"> 
-                                <label for="kids">Kid's</label>  
-                                <input id="kids" type="radio" value="3" name="gender">
-                                 
-                                <select id="filter-categories">
-                                    <option value="">All categories</option>
-                                    <option value="59">Shirts</option>
-                                    <option>Pants</option>
-                                    <option>Shoes</option>
-                                </select>
+                                
+                                {{ form_widget(form.gender) }}
+                                {{ form_widget(form.categories) }}
+                                
                                 
                                 <select id="per-page">
                                     <option value="5">5 products per page</option>
@@ -136,18 +125,8 @@
                                 </select>
                             
                             <br /><br />
-                                <label for="green" style="margin-left: 120px;">Green</label>  
-                                <input id="green" type="checkbox" value="16" name="colour" checked="checked">
-                                <label for="red">Red</label>
-                                <input id="red" type="checkbox" value="15" name="colour" checked="checked">
-                                <label for="blue">Blue</label>  
-                                <input id="blue" type="checkbox" value="22" name="colour" checked="checked"> 
-                                <label for="white">White</label>  
-                                <input id="white" type="checkbox" value="23" name="colour" checked="checked">
-                                <label for="black">Black</label>  
-                                <input id="black" type="checkbox" value="24" name="colour" checked="checked">
+                                {{ form_widget(form.colours) }}
                             </div>
-                            
                             
                         </form>
                     <!-- filter-container end -->

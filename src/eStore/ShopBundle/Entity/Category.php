@@ -99,7 +99,8 @@ class Category
     
     
     private $indentName;
-
+    private $indentNameFilter;
+    
 
     public function __construct() 
     {
@@ -123,6 +124,15 @@ class Category
         $lvl = $this->getLvl();
         $indent = ($lvl >= 1) ? $lvl - 1 : $lvl;
         $name = $this->parent ? $this->getName() : '-- Without parent --';       
+        
+        return str_repeat(' |— ', $indent) . ' ' . $name;
+    }
+    
+    public function getIndentNameFilter()
+    {
+        $lvl = $this->getLvl();
+        $indent = ($lvl >= 1) ? $lvl - 1 : $lvl;
+        $name = $this->parent ? $this->getName() : '-- All Categories --';       
         
         return str_repeat(' |— ', $indent) . ' ' . $name;
     }

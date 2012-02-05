@@ -75,11 +75,11 @@ function productsApp() {
             products.fetch({
                 data: { 
                     page: 1,
-                    category: $('#filter-categories').val(),
+                    category: $('#estore_shopbundle_filtertype_categories').val(),
                     ppp: $("#per-page").val(),
                     minprice: $("#slider-range").slider("values", 0), 
                     maxprice: $("#slider-range").slider("values", 1),
-                    gender: $('input:radio[name=gender]:checked').val(),
+                    gender: $('input:radio[name=estore_shopbundle_filtertype[gender]]:checked').val(),
                     size: $('#filter-size').val(),
                     obp: $('#filter-price-order').val(),
                     colours: getColoursStr()
@@ -117,11 +117,11 @@ function productsApp() {
             products.fetch({
                 data: { 
                     page: 1,
-                    category: $('#filter-categories').val(),
+                    category: $('#estore_shopbundle_filtertype_categories').val(),
                     ppp: $("#per-page").val(),
                     minprice: $("#slider-range").slider("values", 0),
                     maxprice: $("#slider-range").slider("values", 1),
-                    gender: $('input:radio[name=gender]:checked').val(),
+                    gender: $('input:radio[name=estore_shopbundle_filtertype[gender]]:checked').val(),
                     size: $('#filter-size').val(),
                     obp: $('#filter-price-order').val(),
                     colours: getColoursStr()
@@ -138,13 +138,21 @@ function productsApp() {
 
     function getColoursStr() {
         var coloursVals = '';
-         $('input:checkbox[name=colour]:checked').each(function() {
+         $('input:checkbox[name=estore_shopbundle_filtertype[colours]]:checked').each(function() {
            coloursVals += '-' + $(this).val();
          });
         coloursVals = coloursVals.substring(1);
         
         return coloursVals;
     }
+    
+    $('input:checkbox[name=estore_shopbundle_filtertype[colours]]').each(function() {
+           $(this).attr('checked', true);
+           $(this).parent().addClass('checked');
+    });
+    
+     $('#estore_shopbundle_filtertype_gender_4').attr('checked', true);
+     $('#estore_shopbundle_filtertype_gender_4').parent().addClass('checked');
     
     new App;
     Backbone.history.start();

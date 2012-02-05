@@ -61,8 +61,7 @@ class ProductRepository extends EntityRepository
     
     
     /**
-     *
-     * @return type 
+     * @todo Query Builder bug with joins - solution searching in progress
      */
     public function getProductsForApi($params)
     {       
@@ -71,7 +70,6 @@ class ProductRepository extends EntityRepository
                 'priceMin' => $params['priceMin'], 
                 'priceMax' => $params['priceMax'],
                 'gender' => $params['gender'],
-                'size' => $params['size'],
                 'colours' => explode('-', $params['colours']));
         
         $dql = "SELECT p
@@ -80,12 +78,22 @@ class ProductRepository extends EntityRepository
                  JOIN g.colours c
                  JOIN p.categories cat
                  WHERE p.price BETWEEN :priceMin AND :priceMax";
+        
         if(!empty($params['category'])) {
-            $dql .= " AND cat.id = :category ";
-            $parameters['category'] = $params['category'];
+            $cat = $this->getCategory($params['category']);
+            $left  = $cat->getLft();
+            $right = $cat->getRgt();
+            
+            $dql .= " AND cat.lft BETWEEN :left AND :right ";
+            $parameters['left'] = $left;
+            $parameters['right'] = $right;
+        }
+        if(!empty($params['size'])) {
+            $dql .= " AND g.size = :size ";
+            
+            $parameters['size'] = $params['size'];
         }
         $dql .= " AND p.gender = :gender
-                  AND g.size = :size              
                   AND c.id IN (:colours)
                   ORDER BY p.price " . $orderByPrice;
         
@@ -97,35 +105,16 @@ class ProductRepository extends EntityRepository
         return $query;
     }
     
-    private function tmpQbDql($params) 
+    private function getCategory($id)
     {
-        $priceMin = $params['priceMin'];
-        $priceMax = $params['priceMax'];
-        $gender = $params['gender'];
-        $size = $params['size'];
-        $orderByPrice = $params['orderByPrice'];
-        
-        $qb = $this->createQueryBuilder('v');        
-        $qb->select('p', 'g', 'c')
-           ->from('eStore\ShopBundle\Entity\Product', 'p')
-           ->innerJoin('p.garments', 'g')
-           ->leftJoin('g.colours', 'c')
-                
-           //->where('p.price between ?1 and ?2')
-           //->andWhere('p.gender = ?3')
-           //->andWhere('g.size = ?4');
-        
-        //if($orderByPrice == 'asc' || $orderByPrice == 'desc') {
-       //     $qb->orderBy('p.price', $orderByPrice);
-        //} else {
-           ->orderBy('p.id', 'desc');
-        //}
-        
-        /*$qb->setParameter(1, $priceMin) 
-           ->setParameter(2, $priceMax)
-           ->setParameter(3, $gender)
-           ->setParameter(4, $size);*/
-        
-        return $qb->getQuery();
+         $query = $this->_em
+                      ->createQuery("SELECT c
+                                     FROM eStore\ShopBundle\Entity\Category c
+                                     WHERE c.id = ?1
+                                   ");
+         $query->setParameter(1, $id);
+         $cat = $query->getSingleResult();
+         //exit(print_r($cat));
+         return $cat;
     }
 }

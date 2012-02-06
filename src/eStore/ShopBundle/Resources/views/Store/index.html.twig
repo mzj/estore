@@ -33,22 +33,26 @@
                 <a href="/uploads/products/<%= p.id + '-' + p.image_name %>" class="lightbox">
                     <img src="/uploads/products/thumbs/my_thumb/uploads/products/<%= p.id + '-' + p.image_name %>"/>
                 </a>
-                <div style="text-align: center;"><a href="#product/<%= p.id %>/<%= p.slug %>"><%= p.name %></a></div>
+                <div style="text-align: center;"><%= p.name %></div>
                 <div>
                     <p style="margin-bottom:10px;">
-                        <span>T-shirt</span> <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
+                        
+                        <span>
+                            <% _.each(p.categories, function(c) { %>
+                                <% if (c.parent != null) { %>
+                                    <a title="<%= 'Subcategory of ' + c.parent.name %>"><%= c.name %></a>
+                                <% } else { %>
+                                    <a ><%= c.name %></a>
+                                <% } %>
+                            <% }); %>
+                        </span> 
+                        
+                        <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
                     </p>
                     <p>
                         <span><%= p.price %>&euro;</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
                     </p>
-                    In:
-                    <% _.each(p.categories, function(c) { %>
-                        <% if (c.parent != null) { %>
-                            <a href="#category/<%= c.id %>/<%= c.slug %>" title="<%= 'Subcategory of ' + c.parent.name %>"><%= c.name %></a>
-                        <% } else { %>
-                            <a href="#category/<%= c.id %>/<%= c.slug %>"><%= c.name %></a>
-                        <% } %>
-                    <% }); %>
+                    
                 </div>
            </li>
         <% }); %>

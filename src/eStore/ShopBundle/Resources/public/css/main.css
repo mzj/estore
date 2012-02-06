@@ -310,6 +310,15 @@ h3 {
 	margin-left:50px;
 }
 
+#estore_shopbundle_filtertype_gender {
+    display: inline;
+    margin-right: 21px;
+}
+
+#estore_shopbundle_filtertype_colours {
+    margin-left: 25px;
+}
+
 .estore-notice { text-align: center; padding: 10px; background: #DFF2BF; border: 1px solid; color: #4F8A10; margin-bottom: 10px; }
 form.estore { font-size: 16px; }
 form.estore div { clear: left; margin-bottom: 10px; }

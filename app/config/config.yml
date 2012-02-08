@@ -123,3 +123,8 @@ avalanche_imagine:
         my_thumb:
             type:    thumbnail
             options: { size: [125, 167], mode: outbound }
+            
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: eStore\ShopBundle\Entity\User

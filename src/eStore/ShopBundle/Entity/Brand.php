@@ -4,9 +4,11 @@
  */
 namespace eStore\ShopBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\ORM\Mapping as ORM,
+    Doctrine\Common\Collections\ArrayCollection,
+    Gedmo\Mapping\Annotation as Gedmo,
+    JMS\SerializerBundle\Annotation\ExclusionPolicy,
+    JMS\SerializerBundle\Annotation\Exclude;
 
 /**
  * eStore\ShopBundle\Entity\Product
@@ -14,6 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="brand")
  * @ORM\Entity(repositoryClass="eStore\ShopBundle\Repository\BrandRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @ExclusionPolicy("none")
  */
 class Brand
 {
@@ -34,8 +37,8 @@ class Brand
     private $name;
     
     /**
-     *
      * @ORM\OneToMany(targetEntity="Product", mappedBy="brand")
+     * @Exclude
      */
     private $products;
     

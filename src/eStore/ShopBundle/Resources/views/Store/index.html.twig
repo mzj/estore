@@ -20,7 +20,7 @@
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/priceRangeSlider.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/uniform/jquery.uniform.min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/lightbox/jquery.lightbox.js') }}" ></script>
-    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/productsApp.js?version=4') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/productsApp.js?version=3') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/bootstrap.js') }}" ></script>
 {% endblock %}
  
@@ -97,7 +97,8 @@
                                 
                                 
                                 <select id="per-page">
-                                    <option value="5">5 products per page</option>
+                                    <option value="2">2 products per page</option>
+                                    <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="20">20</option>
                                     <option value="30">50</option>
@@ -141,14 +142,6 @@
                     </ul>
                     
                     <ul id="pagination">
-                        <li><img src="/bundles/estoreshop/img/arrow-left.png" /></li>
-                        <li><a href="/bundles/estoreshop/img/arrow-left.png" class="lightbox">1</a></li>
-                        <li><a href="#2">2</a></li>
-                        <li><a href="#3">3</a></li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>6</li>
-                        <li><img src="/bundles/estoreshop/img/arrow-right.png" /></li>
                     <!-- pagination end -->
                     </ul>
                     

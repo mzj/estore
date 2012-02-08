@@ -2,11 +2,11 @@
 
 namespace eStore\ShopBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Mapping\Annotation as Gedmo;
-use JMS\SerializerBundle\Annotation\ExclusionPolicy;
-use JMS\SerializerBundle\Annotation\Exclude;
+use Doctrine\ORM\Mapping as ORM,
+    Doctrine\Common\Collections\ArrayCollection,
+    Gedmo\Mapping\Annotation as Gedmo,
+    JMS\SerializerBundle\Annotation\ExclusionPolicy,
+    JMS\SerializerBundle\Annotation\Exclude;
 
 /**
  * @ORM\Table(name="category")
@@ -132,7 +132,7 @@ class Category
     {
         $lvl = $this->getLvl();
         $indent = ($lvl >= 1) ? $lvl - 1 : $lvl;
-        $name = $this->parent ? $this->getName() : '-- All Categories --';       
+        $name = $this->parent ? $this->getName() : 'All Categories';       
         
         return str_repeat(' |— ', $indent) . ' ' . $name;
     }

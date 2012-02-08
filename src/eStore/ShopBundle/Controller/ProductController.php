@@ -75,7 +75,7 @@ class ProductController extends Controller
         
         $view = new DefaultView();
         $html = $view->render($pagedProducts, $routeGenerator, array(
-            'proximity' => 3,
+            'proximity' => 1,
             'previous_message' => "<img src='/bundles/estoreshop/img/arrow-left.png' />",
             'next_message' => "<img src='/bundles/estoreshop/img/arrow-right.png' />",
             'css_disabled_class' => 'pagerfanta-disabled',

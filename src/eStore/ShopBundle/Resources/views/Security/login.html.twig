@@ -1,0 +1,26 @@
+{% extends "eStoreShopBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+{% if error %}
+    <div>{{ error }}</div>
+{% endif %}
+    
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    <fieldset style="border: 1px solid #CCC; border-radius:5px; width: 300px; padding: 20px; margin-left: 100px; margin-top: 30px;">
+        <legend>Login Form</legend>
+        
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+        <br /><br />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="_password" />
+        <br /><br />
+        <label for="remember_me">Remember me:</label>
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+        <br /><br />
+        <input type="submit" id="_submit" name="_submit" value="Login" />
+    </fieldset>
+</form>
+{% endblock fos_user_content %}

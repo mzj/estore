@@ -44,28 +44,31 @@
         </tr>
     </table>
 
-    <table id="entity-list" class="user-managment">
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <table id="entity-list" class="user-managment">
 
-        <caption class="darker"><h2>User managment</h2></caption>
+            <caption class="darker"><h2>User managment</h2></caption>
 
-        <tr>
-            <td>Users</td>
-            <td> 
-                <a href="#"> <img src="/bundles/estoreshop/img/list-gray.png" /> List</a>
-            </td>
-            <td>
-                <a href="#"> <img src="/bundles/estoreshop/img/add-gray.png" /> Add</a>
-            </td>
-        </tr>
-        
-        <tr>
-            <td>Groups</td>
-            <td> 
-                <a href="#"> <img src="/bundles/estoreshop/img/list-gray.png" /> List</a>
-            </td>
-            <td>
-                <a href="#"> <img src="/bundles/estoreshop/img/add-gray.png" /> Add</a>
-            </td>
-        </tr>
-    </table>
+            <tr>
+                <td>Users</td>
+                <td> 
+                    <a href="#"> <img src="/bundles/estoreshop/img/list-gray.png" /> List</a>
+                </td>
+                <td>
+                    <a href="#"> <img src="/bundles/estoreshop/img/add-gray.png" /> Add</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Groups</td>
+                <td> 
+                    <a href="#"> <img src="/bundles/estoreshop/img/list-gray.png" /> List</a>
+                </td>
+                <td>
+                    <a href="#"> <img src="/bundles/estoreshop/img/add-gray.png" /> Add</a>
+                </td>
+            </tr>
+        </table>
+    {% endif %}
+
 {% endblock %}

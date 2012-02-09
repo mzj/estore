@@ -184,3 +184,12 @@ eStoreShopBundleAdmin_colour_delete:
     requirements:
         _method:  GET
         id: \d+
+ 
+        
+        
+##################################
+# User
+##################################        
+eStoreShopBundleAdmin_user_list:
+    pattern:  /users/
+    defaults: { _controller: eStoreShopBundle:Admin:index }

@@ -84,8 +84,14 @@
             <div id="main">
             	{% block main %}
                 
-            <!-- products-container end -->
-            {% endblock %}
+                <!-- products-container end -->
+                {% endblock %}
+                
+                {# FOSUser #}
+                {% block content %}
+                    {% block fos_user_content %}{% endblock %}
+                {% endblock %}
+                
             </div>
         <!-- page end -->
         </div>

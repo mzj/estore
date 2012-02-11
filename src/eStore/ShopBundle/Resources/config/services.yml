@@ -13,6 +13,12 @@ services:
         tags:
             - { name: twig.extension }
             
+    estore_shop.cart.controller:
+        class:  "eStore\ShopBundle\Controller\CartController"
+        shared: true
+        calls:
+            - [ setContainer, ["@service_container"] ]
+            
     user.registration.form.type:
         class: eStore\ShopBundle\Form\UserRegistrationType
         arguments: [%fos_user.model.user.class%]

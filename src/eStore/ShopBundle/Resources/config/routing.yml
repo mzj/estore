@@ -26,6 +26,26 @@ eStoreShopBundle_category:
         _method:  GET
         id: \d+
         
+eStoreShopBundle_addToCart:
+    pattern:  /cart/add/{id}
+    defaults: { _controller: eStoreShopBundle:Cart:addToCart }
+    requirements:
+        _method:  GET
+        id: \d+
+        
+eStoreShopBundle_removeFromCart:
+    pattern:  /cart/remove/{id}
+    defaults: { _controller: eStoreShopBundle:Cart:removeFromCart }
+    requirements:
+        _method:  GET
+        id: \d+  
+        
+eStoreShopBundle_emptyCart:
+    pattern:  /cart/empty
+    defaults: { _controller: eStoreShopBundle:Cart:emptyCart }
+    requirements:
+        _method:  GET
+        
 eStoreShopBundleApi:
     resource: "@eStoreShopBundle/Resources/config/routing_api.yml"
     prefix:   /api

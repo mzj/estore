@@ -40,3 +40,8 @@
 #products li div span {
 	font-weight:bold;
 }
+
+.add2Cart {
+    float:right;
+    cursor: pointer;
+}

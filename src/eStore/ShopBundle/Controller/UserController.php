@@ -17,9 +17,9 @@ class UserController extends Controller
     public function listAction()
     {       
         $em = $this->getDoctrine()->getEntityManager();
-        $colours = $em->getRepository('eStoreShopBundle:Colour')->findAll();
+        $users = $em->getRepository('eStoreShopBundle:User')->getUsersByRoles('ADMIN');
         
-        return $this->render('eStoreShopBundle:Colour:list.html.twig', array( 'colours' => $colours ));
+        return $this->render('eStoreShopBundle:User:list.html.twig', array( 'users' => $users ));
 
     }
     

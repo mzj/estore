@@ -50,7 +50,8 @@
                         <img src="{{ asset('bundles/estoreshop/img/magnifying-glass.png') }}" style="float:right; margin-top:4px;"/>
                     </p>
                     <p>
-                        <span><%= p.price %>&euro;</span> <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" style="float:right;"/>
+                        <span><%= p.price %>&euro;</span> 
+                        <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" class="add2Cart" id="<%= p.id %>" />
                     </p>
                     
                 </div>

@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     Symfony\Component\HttpFoundation\Request,
     eStore\ShopBundle\Entity\Category,
     eStore\ShopBundle\Entity\Contact,
+    eStore\ShopBundle\Entity\Cart,
     Pagerfanta\Pagerfanta,
     Pagerfanta\Adapter\DoctrineORMAdapter,
     Pagerfanta\Exception\NotValidCurrentPageException,
@@ -118,6 +119,19 @@ class StoreController extends Controller
      */
     public function cartWidgetAction()
     {
-        return $this->render('eStoreShopBundle:Store:cartWidget.html.twig');
+        $cartCont = $this->container->get('estore_shop.cart.controller');
+        $cart = $cartCont->getCart();
+        //exit(var_dump($cartCont));
+        //$cart = new Cart();
+       // $cart->setProduct(1);
+       // $cart->setProduct(16);
+       // $cart->setProduct(7);
+       // $cart->setProduct(9);
+        
+       // $cartCont->saveCart($cart);
+        
+        $nbOfProducts = $cart->getNbOfProducts();
+        
+        return $this->render('eStoreShopBundle:Store:cartWidget.html.twig', array('nbOfProducts' => $nbOfProducts));
     }
 }

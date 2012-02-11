@@ -169,6 +169,23 @@ function productsApp() {
             el.html(html);
         };
     }
+    
+    function add2Cart(id) 
+    {
+        var baseUrl = location.href;
+        baseUrl = baseUrl.replace(/\/$/g, '');
+            
+        $.ajax({
+            url: baseUrl + '/cart/add/' + id,
+            
+            success: function( data ) {
+                $('.cart-items-number').text(data);
+            }
+            
+        });
+    }
+    
+    
     //
     $('input:checkbox[name=estore_shopbundle_filtertype[colours]]').each(function() {
            $(this).attr('checked', true);
@@ -178,6 +195,11 @@ function productsApp() {
     //
     $('#estore_shopbundle_filtertype_gender_4').attr('checked', true);
     $('#estore_shopbundle_filtertype_gender_4').parent().addClass('checked');
+    
+    
+    $(document).on("click", '.add2Cart', function(event){
+        add2Cart($(this).attr('id'));
+    });
     
     //
     new App;

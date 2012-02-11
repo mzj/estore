@@ -121,15 +121,6 @@ class StoreController extends Controller
     {
         $cartCont = $this->container->get('estore_shop.cart.controller');
         $cart = $cartCont->getCart();
-        //exit(var_dump($cartCont));
-        //$cart = new Cart();
-       // $cart->setProduct(1);
-       // $cart->setProduct(16);
-       // $cart->setProduct(7);
-       // $cart->setProduct(9);
-        
-       // $cartCont->saveCart($cart);
-        
         $nbOfProducts = $cart->getNbOfProducts();
         
         return $this->render('eStoreShopBundle:Store:cartWidget.html.twig', array('nbOfProducts' => $nbOfProducts));

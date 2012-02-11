@@ -1,5 +1,6 @@
 function productsApp() {
-    
+    var baseUrl = location.href;
+        baseUrl = baseUrl.replace(/\/$/g, '');
     var pagerfanta;
     
     /**
@@ -12,8 +13,10 @@ function productsApp() {
      *
      */
     var Products = Backbone.Collection.extend({
+        
+        
         model: Product,
-        url: 'api/products.json',
+        url: baseUrl + '/api/products.json',
         
          /**
           *  This is the place where you can play with returned JSON
@@ -24,6 +27,7 @@ function productsApp() {
         parse: function(response) {
            var pagination = new Pagination(response.pagerfanta);
            pagination.render();
+           console.log(response.cart);
            return response.products;
         }
     });
@@ -172,9 +176,6 @@ function productsApp() {
     
     function add2Cart(id) 
     {
-        var baseUrl = location.href;
-        baseUrl = baseUrl.replace(/\/$/g, '');
-            
         $.ajax({
             url: baseUrl + '/cart/add/' + id,
             

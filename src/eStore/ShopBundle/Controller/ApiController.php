@@ -43,6 +43,9 @@ class ApiController extends Controller
         $category = $request->query->get('category');
         $page = $request->query->get('page');
         $page = $page ? $page : 1;
+        $cartCont = $this->container->get('estore_shop.cart.controller');
+        $cart = $cartCont->getCart();
+        $cartProducts = $cart->getProducts();
         
         $params = array(
                 'search' => $search, 
@@ -77,11 +80,14 @@ class ApiController extends Controller
         $products = $pagedProducts->getCurrentPageResults();
         
         $view = View::create();
-        $view->setData(array('products' => $products, 'pagerfanta' => array(
-            'currentPage'  => $pagedProducts->getCurrentPage(),
-            'nbPages'      => $pagedProducts->getNbPages(), 
-            'nbResults'    => $pagedProducts->getNbResults(),
-            )
+        $view->setData(array(
+            'products' => $products,
+            'cart' => $cartProducts,
+            'pagerfanta' => array(
+                'currentPage'  => $pagedProducts->getCurrentPage(),
+                'nbPages'      => $pagedProducts->getNbPages(), 
+                'nbResults'    => $pagedProducts->getNbResults(),
+                )
           ));
         
         $view->setTemplate('eStoreShopBundle:Api:getProducts.html.twig');

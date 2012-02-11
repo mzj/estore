@@ -20,7 +20,11 @@ class CartController extends Controller
     public function addToCartAction($id)
     {     
         $cart = $this->getCart();
-        $cart->setProduct($id);
+        
+        try {
+            $cart->setProduct($id);
+        } catch(\Exception $e) {}
+        
         $this->saveCart($cart);
         
         return new Response($cart->getNbOfProducts(), 200, array('Content-Type' => 'text/plain'));

@@ -193,3 +193,13 @@ eStoreShopBundleAdmin_colour_delete:
 eStoreShopBundleAdmin_user_list:
     pattern:  /users/
     defaults: { _controller: eStoreShopBundle:Admin:index }
+    
+eStoreShopBundleAdmin_user_new:
+    pattern:  /users/new
+    defaults: { _controller: eStoreShopBundle:User:new }
+    
+eStoreShopBundleAdmin_user_create:
+    pattern:  /users/create
+    defaults: { _controller: eStoreShopBundle:User:create }
+    requirements:
+        _method:  POST

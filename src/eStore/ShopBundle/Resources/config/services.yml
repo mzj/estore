@@ -12,3 +12,22 @@ services:
         class: eStore\ShopBundle\Twig\Extension\RepeatExtension
         tags:
             - { name: twig.extension }
+            
+    user.registration.form.type:
+        class: eStore\ShopBundle\Form\UserRegistrationType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: user_registration }
+            
+    user.form.handler.registration:
+        class: eStore\ShopBundle\Form\Handler\UserRegistrationHandler
+        arguments: ["@fos_user.registration.form", "@request", "@fos_user.user_manager", "@fos_user.mailer"]
+        scope: request
+        public: false
+        
+        
+    admin.registration.form.type:
+        class: eStore\ShopBundle\Form\Admin\AdminRegistrationType
+        arguments: [%fos_user.model.user.class%, %security.role_hierarchy.roles%]
+        tags:
+            - { name: form.type, alias: admin_registration }

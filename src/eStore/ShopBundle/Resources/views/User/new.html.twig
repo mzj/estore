@@ -1,0 +1,14 @@
+{% extends 'eStoreShopBundle::adminLayout.html.twig' %}
+
+{% block container %}
+
+   <h2>Register Admin</h2>
+
+    <form action="{{ path('eStoreShopBundleAdmin_user_create') }}" {{ form_enctype(form) }} method="POST">
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="Create User" />
+        </div>
+    </form>
+   
+{% endblock %}

@@ -1,6 +1,14 @@
 <p>
-    <span class="signup">SIGN UP</span> | 
-    <span class="login">LOGIN</span>
+    {% if app.user %}
+        Hi <a href="{{ path('fos_user_profile_show') }}" style="color:#3F70B0;">{{ app.user.username }}</a> - 
+        <a href="{{ path('fos_user_security_logout') }}">logout!</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            Admin
+        {% endif %}
+    {% else %}
+        <a href="{{ path('fos_user_registration_register') }}" class="signup">SIGN UP</a> | 
+        <a href="{{ path('fos_user_security_login') }}" class="login">LOGIN</a>
+    {% endif %}
 </p>
 <img src="{{ asset('bundles/estoreshop/img/icon-cart.png') }}" /> <span class="cart-items-number">2</span> items in cart <br /><br />
 <a href="#">Check out!</a>

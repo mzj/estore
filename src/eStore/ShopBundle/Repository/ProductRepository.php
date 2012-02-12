@@ -14,6 +14,26 @@ class ProductRepository extends EntityRepository
 {
     /**
      *
+     * @param type $id
+     * @return type 
+     */
+    public function getProductById($id) 
+    {
+        
+        $query = $this->_em->createQuery("SELECT p, g, c, b, col
+                                          FROM eStore\ShopBundle\Entity\Product p
+                                          JOIN p.garments g
+                                          JOIN p.categories c
+                                          JOIN p.brand b
+                                          JOIN g.colours col
+                                          WHERE p.id = ?1");
+        $query->setParameter(1, $id); 
+        
+        return $query->getSingleResult();
+    }
+    
+    /**
+     *
      * @todo You could use DISTINCT (Group by) clause
      */
     public function getPopularProducts()
@@ -105,6 +125,11 @@ class ProductRepository extends EntityRepository
         return $query;
     }
     
+    /**
+     *
+     * @param type $id
+     * @return type 
+     */
     private function getCategory($id)
     {
          $query = $this->_em

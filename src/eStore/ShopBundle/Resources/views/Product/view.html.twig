@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/uniform/css/uniform.eStore.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/jSlider/stylesheets/jslider.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/jSlider/stylesheets/jslider.eStore.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/estoreshop/js/vendor/cloud-zoom/cloud-zoom.css') }}" type="text/css" />
 {% endblock%}
 {% block javascripts %}
     {{ parent() }}
@@ -16,10 +17,41 @@
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jSlider/javascripts/jquery.slider-min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/jSlider/javascripts/jquery.dependClass.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/uniform/jquery.uniform.min.js') }}" ></script>
+    <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/vendor/cloud-zoom/cloud-zoom.1.0.2.min.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/filterSlide.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('bundles/estoreshop/js/bootstrap.js') }}" ></script>
 {% endblock %}
 
 {% block main %}
+   <br /><br />
    {{ product.name }}
+   <br /><br />
+   
+   <p>
+       {% set imageFullName = product.id ~ '-' ~ product.imageName %}
+       {% set imageFullPath  = '/uploads/products/' ~ imageFullName %}
+       <a href='{{ asset('/uploads/products/' ~ product.id ~ '-' ~ product.imageName) }}' class = 'cloud-zoom' id='zoom1' rel="adjustX: 10, adjustY:-4">
+            <img src="{{ imageFullPath | apply_filter('my_thumb_view') }}" />
+       </a>
+
+       {{ product.description }}
+   </p>
+   
+   
+   <br /><br />
+   {{ product.price }}€
+   <br /><br />
+   {{ product.brand.name }}
+   <br /><br />
+   
+   {% for garment in product.garments %}
+   
+       {% for colour in garment.colours %}
+   
+            {{ colour }}
+   
+        {% endfor %}
+   
+   {% endfor %}
+   
 {% endblock %}

@@ -28,9 +28,9 @@ class ProductController extends Controller
                    ->getEntityManager();
          
         $repo = $em->getRepository('eStoreShopBundle:Product');
-        $product = $repo->find($id);
+        $product = $repo->getProductById($id);
       
-        return $this->render('eStoreShopBundle:Product:view.html.twig', array( 'product'=> $product ));
+        return $this->render('eStoreShopBundle:Product:view.html.twig', array( 'product' => $product ));
     }
     
     /**

@@ -123,6 +123,9 @@ avalanche_imagine:
         my_thumb:
             type:    thumbnail
             options: { size: [125, 167], mode: outbound }
+        my_thumb_view:
+            type:    thumbnail
+            options: { size: [200, 300], mode: outbound }
             
 fos_user:
     db_driver: orm

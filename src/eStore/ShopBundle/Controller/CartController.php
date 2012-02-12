@@ -30,6 +30,10 @@ class CartController extends Controller
         return new Response($cart->getNbOfProducts(), 200, array('Content-Type' => 'text/plain'));
     }
     
+    /**
+     *
+     * @return Response 
+     */
     public function emptyCartAction() 
     {
         $session = $this->get( 'session' );
@@ -38,16 +42,24 @@ class CartController extends Controller
         return new Response('ok', 200, array('Content-Type' => 'text/plain'));
     }
     
+    /**
+     *
+     * @param type $id
+     * @return Response 
+     */
     public function removeFromCartAction($id)
     {
         $cart = $this->getCart();
         $cart->remove($id);
         $this->saveCart($cart);
         
-        return new Response('ok', 200, array('Content-Type' => 'text/plain'));
+        return new Response($cart->getNbOfProducts(), 200, array('Content-Type' => 'text/plain'));
     }
 
-
+    /**
+     *
+     * @return Cart 
+     */
     public function getCart() 
     {
         $session = $this->container->get( 'session' );
@@ -61,6 +73,10 @@ class CartController extends Controller
         return $cart;
     }
     
+    /**
+     *
+     * @param type $cart 
+     */
     public function saveCart($cart) 
     {
         $session = $this->get( 'session' );

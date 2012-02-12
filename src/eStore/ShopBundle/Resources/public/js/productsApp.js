@@ -1,6 +1,15 @@
 function productsApp() {
     var baseUrl = location.href;
-        baseUrl = baseUrl.replace(/\/$/g, '');
+    var hash = window.location.hash;
+    var index_of_hash = baseUrl.indexOf(hash) || baseUrl.length;
+    var hashless_url = baseUrl.substr(0, index_of_hash);
+    
+    baseUrl = hashless_url.replace(/\/$/g, '');
+    baseUrlWithoutApp = hashless_url.replace(/app_dev.php/g, '');
+    baseUrlWithoutApp = baseUrlWithoutApp.replace(/\/$/g, '');
+    baseUrlWithoutApp = baseUrlWithoutApp.replace(/\/$/g, '');
+    
+    var cartProducts;
     var pagerfanta;
     
     /**
@@ -27,7 +36,7 @@ function productsApp() {
         parse: function(response) {
            var pagination = new Pagination(response.pagerfanta);
            pagination.render();
-           console.log(response.cart);
+           cartProducts = response.cart;
            return response.products;
         }
     });
@@ -55,6 +64,7 @@ function productsApp() {
                    if(sg.collection.length == 0) {
                        sg.el.html("No products found.");
                    }
+                   addCartIcon();
                    sg.el.fadeIn('fast');
                 });
                 return this;
@@ -174,18 +184,72 @@ function productsApp() {
         };
     }
     
-    function add2Cart(id) 
+    function cartAction(el)
+    {
+        var id  = $(el).attr('id');
+        var img = $(el).attr('src');
+        
+        if(img == 'http://estore.com/bundles/estoreshop/img/icon-cart-add.png' || 
+           img == '/bundles/estoreshop/img/icon-cart-add.png') {
+           addToCart(id);
+        } else {
+           removeFromCart(id);
+        }
+    }
+    
+    /**
+     * 
+     */
+    function addToCart(id) 
     {
         $.ajax({
             url: baseUrl + '/cart/add/' + id,
             
+            beforeSend: function() { 
+                $('#'+id).attr('src', baseUrlWithoutApp + '/bundles/estoreshop/img/loading.gif');
+            },
             success: function( data ) {
                 $('.cart-items-number').text(data);
+                $('#'+id).attr('src', baseUrlWithoutApp + '/bundles/estoreshop/img/icon-cart-remove.png');
             }
             
         });
     }
     
+    
+    /**
+     * 
+     */
+    function removeFromCart(id) 
+    {
+        $.ajax({
+            url: baseUrl + '/cart/remove/' + id,
+            beforeSend: function() { 
+                $('#'+id).attr('src', baseUrlWithoutApp + '/bundles/estoreshop/img/loading.gif');
+            },
+            success: function( data ) {
+                $('.cart-items-number').text(data);
+                $('#'+id).attr('src', baseUrlWithoutApp + '/bundles/estoreshop/img/icon-cart-add.png');
+            }
+            
+        });
+    }
+    
+    /**
+     * 
+     */
+    function addCartIcon() 
+    {
+        $('.add-to-cart').each(function() {
+            var id = $(this).attr('id');
+            
+            $.each(cartProducts, function(index, value, sg) {
+                if(id == value) {
+                    $('#' + id).attr('src', baseUrlWithoutApp + '/bundles/estoreshop/img/icon-cart-remove.png');
+                }
+            });
+        });
+    }
     
     //
     $('input:checkbox[name=estore_shopbundle_filtertype[colours]]').each(function() {
@@ -197,9 +261,9 @@ function productsApp() {
     $('#estore_shopbundle_filtertype_gender_4').attr('checked', true);
     $('#estore_shopbundle_filtertype_gender_4').parent().addClass('checked');
     
-    
-    $(document).on("click", '.add2Cart', function(event){
-        add2Cart($(this).attr('id'));
+    //
+    $(document).on("click", '.add-to-cart', function(event){
+        cartAction(this);
     });
     
     //

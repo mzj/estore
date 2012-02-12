@@ -33,7 +33,11 @@
                 <a href="/uploads/products/<%= p.id + '-' + p.image_name %>" class="lightbox">
                     <img src="/uploads/products/thumbs/my_thumb/uploads/products/<%= p.id + '-' + p.image_name %>"/>
                 </a>
-                <div style="text-align: center;"><%= p.name %></div>
+                <div style="text-align: center;">
+                    <a href="<%= p.id + '/' + p.slug %>" class="product-name">
+                        <%= p.name %>
+                    </a>
+                </div>
                 <div>
                     <p style="margin-bottom:10px;">
                         
@@ -51,7 +55,7 @@
                     </p>
                     <p>
                         <span><%= p.price %>&euro;</span> 
-                        <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" class="add2Cart" id="<%= p.id %>" />
+                        <img src="{{ asset('bundles/estoreshop/img/icon-cart-add.png') }}" class="add-to-cart" id="<%= p.id %>" />
                     </p>
                     
                 </div>

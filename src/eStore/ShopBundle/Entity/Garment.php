@@ -61,6 +61,17 @@ class Garment
      */
     private $quantity;
     
+    /**
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="garment")
+     */
+    private $orders;
+    
+    
+    public function __construct()
+    {
+        $this->colours = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -165,6 +176,27 @@ class Garment
     public function addColour(\eStore\ShopBundle\Entity\Colour $colour)
     {
         $this->colours[] = $colour;
+    }
+    
+    /**
+     * Add categories
+     *
+     * @param eStore\ShopBundle\Entity\Category $categories
+     */
+    public function addOrder(\eStore\ShopBundle\Entity\Order $order)
+    {
+        //$category->addProduct($this);
+        $this->orders[] = $order;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getOrders()
+    {
+        return $this->orders;
     }
     
     /**

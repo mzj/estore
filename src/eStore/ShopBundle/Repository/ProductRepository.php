@@ -19,6 +19,9 @@ class ProductRepository extends EntityRepository
      */
     public function getProductById($id) 
     {
+        if(empty($id)) {
+            return;
+        }
         
         $query = $this->_em->createQuery("SELECT p, g, c, b, col
                                           FROM eStore\ShopBundle\Entity\Product p
@@ -26,10 +29,12 @@ class ProductRepository extends EntityRepository
                                           JOIN p.categories c
                                           JOIN p.brand b
                                           JOIN g.colours col
-                                          WHERE p.id = ?1");
+                                          WHERE p.id IN (?1)");
         $query->setParameter(1, $id); 
-        
-        return $query->getSingleResult();
+
+        $result = !is_array($id) ?  $query->getSingleResult() : $query->getResult();
+
+        return $result; 
     }
     
     /**

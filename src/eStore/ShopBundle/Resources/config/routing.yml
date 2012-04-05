@@ -25,7 +25,11 @@ eStoreShopBundle_category:
     requirements:
         _method:  GET
         id: \d+
-        
+
+eStoreShopBundle_cart:
+    pattern:  /cart
+    defaults: { _controller: eStoreShopBundle:Cart:viewCart }
+    
 eStoreShopBundle_addToCart:
     pattern:  /cart/add/{id}
     defaults: { _controller: eStoreShopBundle:Cart:addToCart }

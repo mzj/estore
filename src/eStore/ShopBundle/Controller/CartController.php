@@ -12,6 +12,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller,
 
 class CartController extends Controller
 {
+    /**
+     *
+     * @return type 
+     */
+    public function viewCartAction()
+    {     
+        $cart = $this->getCart();
+        $productsIds = $cart->getProducts();
+        
+        $em = $this->getDoctrine()
+                   ->getEntityManager();
+         
+        $repo = $em->getRepository('eStoreShopBundle:Product');
+        $products = $repo->getProductById($productsIds);
+        
+        return $this->render('eStoreShopBundle:Cart:view.html.twig', array('products' => $products));
+    }
+    
     
     /**
      *

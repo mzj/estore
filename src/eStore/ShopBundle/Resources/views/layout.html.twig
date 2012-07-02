@@ -3,12 +3,22 @@
 {% block title %}Awesome clothing - eStore{% endblock %}
 {% block keywords %}clothing, store, estore, eStore, fashion, mens, womens, kids, tshirts, t-shirts, shirts, clothes, style{% endblock %}
 {% block description %}Online clothing shop. Most awesome products on the web{% endblock %}
+
+
+
+    
+    
 {% block stylesheets %}
-    {{ parent() }}
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|PT+Sans+Caption' rel='stylesheet' type='text/css' />
-    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/estoreshop/css/main.css') }}" />
-    <link type="text/css" rel="stylesheet" href="{{ asset('bundles/estoreshop/css/dropDownMenu.css') }}" />
-{% endblock %}
+    {{ parent () }}
+    {% stylesheets  filter='cssrewrite' debug=false
+            'bundles/estoreshop/css/main.css'
+            'bundles/estoreshop/css/dropDownMenu.css'
+            
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+    {% endstylesheets %}  
+{% endblock stylesheets %}    
+    
 
 {% block javascripts %}
     {{ parent() }}

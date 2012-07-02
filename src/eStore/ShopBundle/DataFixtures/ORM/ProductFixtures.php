@@ -5,12 +5,13 @@ namespace eStore\ShopBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use eStore\ShopBundle\Entity\Product;
 use eStore\ShopBundle\Entity\Category;
 
 class ProductFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         
         $product1 = new Product();

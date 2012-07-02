@@ -4,13 +4,14 @@
 namespace eStore\ShopBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\Persistence\ObjectManager;
 use eStore\ShopBundle\Entity\Product;
 use eStore\ShopBundle\Entity\Category;
 use eStore\ShopBundle\Entity\Colour;
 
 class ColourFixtures extends AbstractFixture
 {
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         
         $red = new Colour();

@@ -78,6 +78,7 @@ jms_security_extra:
     secure_controllers:  true
     secure_all_services: false
 
+# FOSRestBundle 
 fos_rest:
     routing_loader:
         default_format: json
@@ -135,3 +136,7 @@ fos_user:
         form:
             type: user_registration
             handler: user.form.handler.registration
+            
+sensio_framework_extra:
+    view:
+        annotations: false

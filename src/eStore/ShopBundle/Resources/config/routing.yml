@@ -58,4 +58,4 @@ eStoreShopBundleApi:
 eStoreShopBundleAdmin:
     resource: "@eStoreShopBundle/Resources/config/routing_admin.yml"
     prefix:   /admin
-    type: rest
+    

@@ -8,8 +8,8 @@ $loader->registerNamespaces(array(
     'Symfony'          => array(__DIR__.'/../vendor/symfony/src', __DIR__.'/../vendor/bundles'),
     'Sensio'           => __DIR__.'/../vendor/bundles',
     'JMS'              => __DIR__.'/../vendor/bundles',
-    'Stof' => __DIR__ . '/../vendor/bundles',
-    'Gedmo' => __DIR__ . '/../vendor/gedmo-doctrine-extensions/lib',    
+    'Stof'             => __DIR__ . '/../vendor/bundles',
+    'Gedmo'            => __DIR__ . '/../vendor/gedmo-doctrine-extensions/lib',    
     'Doctrine\\Common\\DataFixtures'    => __DIR__.'/../vendor/doctrine-fixtures/lib',
     'Doctrine\\Common' => __DIR__.'/../vendor/doctrine-common/lib',
     'Doctrine\\DBAL\\Migrations' => __DIR__.'/../vendor/doctrine-migrations/lib',
@@ -21,7 +21,8 @@ $loader->registerNamespaces(array(
     'WhiteOctober'     => __DIR__.'/../vendor/bundles',
     'Pagerfanta'       => __DIR__.'/../vendor/pagerfanta/src',
     'JMS'              => __DIR__.'/../vendor/bundles',
-    'FOS' => __DIR__.'/../vendor/bundles',
+    'FOS\\Rest' => __DIR__.'/../vendor/fos',
+    'FOS'       => __DIR__.'/../vendor/bundles',
     'Imagine'          => __DIR__.'/../vendor/imagine/lib',
     'Avalanche'        => __DIR__.'/../vendor/bundles'
 ));

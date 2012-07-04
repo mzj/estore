@@ -5,8 +5,7 @@
 namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
-    eStore\ShopBundle\Entity\User,
-    eStore\ShopBundle\Form\Admin\RegisterAdminType;
+    eStore\ShopBundle\Entity\User;
 
 class UserController extends Controller
 {

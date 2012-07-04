@@ -1,12 +1,12 @@
 <?php
-// src/Blogger/BlogBundle/DataFixtures/ORM/BlogFixtures.php
+// src/eStore/ShopBundle/DataFixtures/ORM/CategoryFixtures.php
 
 namespace eStore\ShopBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
-use eStore\ShopBundle\Entity\Category;
+use Doctrine\Common\DataFixtures\AbstractFixture,
+    Doctrine\Common\DataFixtures\OrderedFixtureInterface,
+    Doctrine\Common\Persistence\ObjectManager,
+    eStore\ShopBundle\Entity\Category;
 
 class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -86,6 +86,7 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
         $manager->persist($pants);
         $manager->persist($sweatshirts);
         $manager->persist($hoodies);
+        
         $manager->flush();
         
         $this->addReference('tshirts',   $tshirts);
@@ -100,8 +101,14 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
         $this->addReference('hoodies', $hoodies);
     }
     
+    /**
+     * OrderedFixtureInterface method
+     * Specifies in what order fixtures should be loaded
+     * 
+     * @return int 
+     */
     public function getOrder()
     {
-        return 1;
+        return 2;
     }
 }

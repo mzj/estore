@@ -8,21 +8,22 @@ namespace eStore\ShopBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture,
     Doctrine\Common\DataFixtures\OrderedFixtureInterface,
-    Doctrine\Common\DataFixtures\FixtureInterface,
+    Doctrine\Common\Persistence\ObjectManager,
     Symfony\Component\DependencyInjection\ContainerAwareInterface,
     Symfony\Component\DependencyInjection\ContainerInterface,
-    Doctrine\Common\Persistence\ObjectManager,
     eStore\ShopBundle\Entity\User;
 
 class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     /**
-     * Dependency injection container - DIC 
+     * Dependency injection container - DIC
+     *  
      * @var ContainerInterface 
      */
     private $container;
 
     /**
+     * 
      * @param ContainerInterface $container 
      */
     public function setContainer(ContainerInterface $container = null)
@@ -32,6 +33,7 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
     
     /**
      * Main method for loading fixtures
+     * 
      * @param ObjectManager $manager 
      */
     public function load(ObjectManager $manager)
@@ -42,8 +44,6 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setUsername('okram666');
         $user->setEmail('markozjovanovic@gmail.com');
         $user->setPlainPassword('password');
-        //$user->setFirstname('Marko');
-        //$user->setLastname('Jovanovic');
         $user->setEnabled(true);
         $user->addRole(User::ROLE_SUPER_ADMIN);
         
@@ -54,6 +54,7 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
     /**
      * OrderedFixtureInterface method
      * Specifies in what order fixtures should be loaded
+     * 
      * @return int 
      */
     public function getOrder()

@@ -1,39 +1,55 @@
 <?php
-// src/Blogger/BlogBundle/DataFixtures/ORM/BlogFixtures.php
+// src/eStore/ShopBundle/DataFixtures/ORM/ColorFixtures.php
 
 namespace eStore\ShopBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\Persistence\ObjectManager;
-use eStore\ShopBundle\Entity\Product;
-use eStore\ShopBundle\Entity\Category;
-use eStore\ShopBundle\Entity\Colour;
+use Doctrine\Common\DataFixtures\AbstractFixture,
+    Doctrine\Common\Persistence\ObjectManager,
+    Doctrine\Common\DataFixtures\OrderedFixtureInterface,
+    eStore\ShopBundle\Entity\Colour;
 
-class ColourFixtures extends AbstractFixture
+class ColourFixtures extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
+        $colour1 = new Colour();
+        $colour1->setName('Red');
+        $manager->persist($colour1);
         
-        $red = new Colour();
-        $red->setName('Red');
-        $manager->persist($red);
+        $colour2 = new Colour();
+        $colour2->setName('Green');
+        $manager->persist($colour2);
         
-        $green = new Colour();
-        $green->setName('Green');
-        $manager->persist($green);
+        $colour3 = new Colour();
+        $colour3->setName('Blue');
+        $manager->persist($colour3);
         
-        $blue = new Colour();
-        $blue->setName('Blue');
-        $manager->persist($blue);
+        $colour4 = new Colour();
+        $colour4->setName('White');
+        $manager->persist($colour4);
         
-        $white = new Colour();
-        $white->setName('White');
-        $manager->persist($white);
-        
-        $black = new Colour();
-        $black->setName('Black');
-        $manager->persist($black);   
+        $colour5 = new Colour();
+        $colour5->setName('Black');
+        $manager->persist($colour5);   
         
         $manager->flush();
+        
+        $this->addReference('colour1', $colour1);
+        $this->addReference('colour2', $colour2);
+        $this->addReference('colour3', $colour3);
+        $this->addReference('colour4', $colour4);
+        $this->addReference('colour5', $colour5);
     }
+        
+    /**
+     * OrderedFixtureInterface method
+     * Specifies in what order fixtures should be loaded
+     * 
+     * @return int 
+     */
+    public function getOrder()
+    {
+        return 3;
+    }
+
 }

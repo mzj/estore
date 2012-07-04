@@ -20,7 +20,6 @@ class GarmentFixtures extends AbstractFixture implements OrderedFixtureInterface
         $garment1->addColour($manager->merge($this->getReference('colour4')));
         $manager->persist($garment1);
 
-
         $manager->flush();
     }
     

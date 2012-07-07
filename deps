@@ -77,7 +77,8 @@
     target=/bundles/Symfony/Bundle/DoctrineMigrationsBundle
 
 [gedmo-doctrine-extensions]
-   git=http://github.com/l3pp4rd/DoctrineExtensions.git
+    git=http://github.com/l3pp4rd/DoctrineExtensions.git
+    version=v2.3.0
 
 [Stof-DoctrineExtensionsBundle]
    git=https://github.com/stof/StofDoctrineExtensionsBundle.git
@@ -115,3 +116,7 @@
     git=http://github.com/whiteoctober/WhiteOctoberPagerfantaBundle.git
     target=/bundles/WhiteOctober/PagerfantaBundle
     version=origin/symfony2.0
+
+[LiipFunctionalTestBundle]
+    git=git://github.com/liip/LiipFunctionalTestBundle.git
+    target=bundles/Liip/FunctionalTestBundle

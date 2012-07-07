@@ -1,7 +1,15 @@
 <?php
+
+/*
+ * This file is part of the eStore/ShopBundle
+ *
+ * Author: Marko Z. Jovanovic <markozjovanovic@gmail.com>
+ *
+ */
+
 namespace eStore\ShopBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 class CategoryControllerTest extends WebTestCase
 {
@@ -11,13 +19,23 @@ class CategoryControllerTest extends WebTestCase
     {
         $this->client = static::createClient();
     }
-
-    /**
-     * @TODO Configure test enviroment to use sqlite3 for testing - with fixtures
-     */
+    
     public function testIndex()
     {
-        $crawler = $this->client->request('GET', '/category/59/test-slug');
+        // add all your doctrine fixtures classes
+        $classes = array(
+            // classes implementing Doctrine\Common\DataFixtures\FixtureInterface
+            'eStore\ShopBundle\DataFixtures\ORM\UserFixtures',
+            'eStore\ShopBundle\DataFixtures\ORM\CategoryFixtures',
+            'eStore\ShopBundle\DataFixtures\ORM\ColourFixtures',
+            'eStore\ShopBundle\DataFixtures\ORM\BrandFixtures',
+            'eStore\ShopBundle\DataFixtures\ORM\ProductFixtures',
+            'eStore\ShopBundle\DataFixtures\ORM\GarmentFixtures'
+        );
+        
+        $this->loadFixtures($classes);
+        
+        $crawler = $this->client->request('GET', '/category/2/test-slug');
         
         if ($profile = $this->client->getProfile()) {
             $queryNumber = $profile->getCollector('db')->getQueryCount();
@@ -28,5 +46,6 @@ class CategoryControllerTest extends WebTestCase
             // check the time spent in the framework
             $this->assertTrue( $exTime < 5, 'Execution time is ' . $exTime );
         }
+    
     }
 }

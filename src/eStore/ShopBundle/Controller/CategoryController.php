@@ -1,23 +1,25 @@
 <?php
-/**
+
+/*
+ * This file is part of the eStore\ShopBundle
  * 
+ * @author: Marko Z. Jovanovic <markozjovanovic@gmail.com>
  */
+
 namespace eStore\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller,
     eStore\ShopBundle\Entity\Category,
     eStore\ShopBundle\Form\CategoryType;
 
-/**
- * 
- */
 class CategoryController extends Controller
 {
     /**
-     *
-     * @param type $id
-     * @param type $slug
-     * @return type 
+     * Lists products that are under passed category
+     * 
+     * @param int $id
+     * @param string $slug
+     * @return Response 
      */
     public function indexAction($id, $slug)
     {       
@@ -28,12 +30,15 @@ class CategoryController extends Controller
         $category = $repo->find($id);
         $products = $repo->getAllProductsByCategory($category);
       
-        return $this->render('eStoreShopBundle:Category:listProducts.html.twig', array( 'category'=> $category, 'products' => $products));
+        return $this->render('eStoreShopBundle:Category:listProducts.html.twig', 
+                    array( 'category'=> $category, 'products' => $products)
+                );
     }
     
     /**
-     *
-     * @return type 
+     * Lists categories - used in admin CP
+     * 
+     * @return Response 
      */
     public function listAction()
     {       
@@ -45,7 +50,10 @@ class CategoryController extends Controller
     }
     
     /**
+     * Moves category down by one step in tree hierarchy
      * 
+     * @param int $id
+     * @return Response 
      */
     public function moveDownAction($id)
     {       
@@ -61,9 +69,12 @@ class CategoryController extends Controller
         
         return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_category_list'));
     }
-    
+
     /**
+     * Moves category up by one step in tree hierarchy
      * 
+     * @param int $id
+     * @return Response 
      */
     public function moveUpAction($id)
     {       
@@ -81,9 +92,10 @@ class CategoryController extends Controller
     }
     
     /**
-     *
-     * @param type $id
-     * @return type 
+     * Removes category
+     * 
+     * @param int $id
+     * @return Response 
      */
     public function deleteAction($id) 
     {
@@ -99,9 +111,9 @@ class CategoryController extends Controller
     }
     
     /**
-     *
-     * @param type $id
-     * @return type 
+     * Shows category form - for creating new category
+     * 
+     * @return Response 
      */
     public function newAction() 
     {
@@ -115,8 +127,9 @@ class CategoryController extends Controller
     }
     
     /**
-     *
-     * @return type 
+     * Actually creates new category
+     * 
+     * @return Response 
      */
     public function createAction()
     {
@@ -141,9 +154,10 @@ class CategoryController extends Controller
     }
     
     /**
-     *
-     * @param type $id
-     * @return type 
+     * Shows category form - for editing existing category 
+     * 
+     * @param int $id
+     * @return Response 
      */
     public function editAction($id) 
     {
@@ -163,9 +177,10 @@ class CategoryController extends Controller
     }
     
     /**
+     * Actually updates/edits category
      *
-     * @param type $id
-     * @return type 
+     * @param int $id
+     * @return Response 
      */
     public function updateAction($id) 
     {

@@ -3,24 +3,28 @@
 /*
  * This file is part of the eStore\ShopBundle
  *
- * @author: Marko Z. Jovanovic <markozjovanovic@gmail.com>
+ * src/eStore/ShopBundle/Tests/Controller
  */
 
 namespace eStore\ShopBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
+/**
+ * Functional tests for Category controller
+ * 
+ * @author: Marko Z. Jovanovic <markozjovanovic@gmail.com> 
+ */
 class CategoryControllerTest extends WebTestCase
 {
     /**
-     * Symfony client
-     * 
      * @var Symfony\Bundle\FrameworkBundle\Client 
      */
     protected  $client;
     
     /**
      * Called before every test method
+     * Loads fixtures and creates client
      */
     public function setUp()
     {
@@ -50,11 +54,11 @@ class CategoryControllerTest extends WebTestCase
     }
     
     /**
-     * Test moving category down in tree hierarchy, using gedmo extensions 
+     * Test listing of categories
      */
-    public function testMoveDown()
+    public function testList()
     {
-        $crawler = $this->client->request('GET', '/admin/categories/move/down/2');
+        $crawler = $this->client->request('GET', '/admin/categories/list');
         $crawler = $this->client->followRedirect();
         
         $this->assertTrue($crawler->filter('legend:contains("Login Form")')->count() > 0);
@@ -70,9 +74,181 @@ class CategoryControllerTest extends WebTestCase
         );
 
         $crawler = $this->client->followRedirect();
-        $crawler = $this->client->followRedirect();
-        $this->assertTrue($crawler->filter('html:contains("Category was moved down successfully!")')->count() > 0);
+        
+        $this->assertTrue($crawler->filterXpath('//tr[position()=8]/td')->text() == 'Pants');
     }
+    
+    /**
+     * Test moving category down in tree hierarchy, using gedmo extensions 
+     */
+    public function testMoveUp()
+    {
+        $crawler = $this->client->request('GET', '/admin/categories/list');
+        $crawler = $this->client->followRedirect();
+        
+        $this->assertTrue($crawler->filter('legend:contains("Login Form")')->count() > 0);
+        
+        $form = $crawler->selectButton('Login')->form();
+
+        $crawler = $this->client->submit(
+            $form,
+            array(
+                '_username' => 'okram666',
+                '_password' => 'password'
+            )
+        );
+
+        $crawler = $this->client->followRedirect();
+        $this->assertTrue($crawler->filterXpath('//tr[position()=8]/td')->text() == 'Pants');
+        
+        
+        $crawler = $this->client->request('GET', '/admin/categories/move/down/9');
+        
+        $crawler = $this->client->followRedirect();
+        
+        $this->assertTrue($crawler->filter('html:contains("Category was moved down successfully!")')->count() > 0);
+        $this->assertTrue($crawler->filterXpath('//tr[position()=10]/td')->text() == 'Pants');
+    }
+    
+    /**
+     * Test moving category down in tree hierarchy, using gedmo extensions 
+     */
+    public function testMoveDown()
+    {
+        $crawler = $this->client->request('GET', '/admin/categories/list');
+        $crawler = $this->client->followRedirect();
+        
+        $this->assertTrue($crawler->filter('legend:contains("Login Form")')->count() > 0);
+        
+        $form = $crawler->selectButton('Login')->form();
+
+        $crawler = $this->client->submit(
+            $form,
+            array(
+                '_username' => 'okram666',
+                '_password' => 'password'
+            )
+        );
+
+        $crawler = $this->client->followRedirect();
+        $this->assertTrue($crawler->filterXpath('//tr[position()=8]/td')->text() == 'Pants');
+        
+        
+        $crawler = $this->client->request('GET', '/admin/categories/move/up/9');
+        
+        $crawler = $this->client->followRedirect();
+        
+        $this->assertTrue($crawler->filter('html:contains("Category was moved up successfully!")')->count() > 0);
+        $this->assertTrue($crawler->filterXpath('//tr[position()=7]/td')->text() == 'Pants');
+    }
+    
+    /**
+     * Test removing category
+     */
+    public function testDelete()
+    {
+        $crawler = $this->client->request('GET', '/admin/categories/list');
+        $crawler = $this->client->followRedirect();
+        
+        $this->assertTrue($crawler->filter('legend:contains("Login Form")')->count() > 0);
+        
+        $form = $crawler->selectButton('Login')->form();
+
+        $crawler = $this->client->submit(
+            $form,
+            array(
+                '_username' => 'okram666',
+                '_password' => 'password'
+            )
+        );
+
+        $crawler = $this->client->followRedirect();
+        $this->assertTrue($crawler->filterXpath('//tr[position()=8]/td')->text() == 'Pants');
+        
+        
+        $crawler = $this->client->request('GET', '/admin/categories/delete/9');
+        
+        $crawler = $this->client->followRedirect();
+        
+        $this->assertTrue($crawler->filter('html:contains("Category was removed successfully!")')->count() > 0);
+        $this->assertTrue($crawler->filter('html:contains("Pants")')->count() == 0);
+    }
+    
+    /**
+     * Test creating new category record
+     */
+    public function testCreateCategory()
+    {
+        $crawler = $this->client->request('GET', '/admin/categories/new');
+        $crawler = $this->client->followRedirect();
+        
+        $this->assertTrue($crawler->filter('legend:contains("Login Form")')->count() > 0);
+        
+        $form = $crawler->selectButton('Login')->form();
+
+        $crawler = $this->client->submit(
+            $form,
+            array(
+                '_username' => 'okram666',
+                '_password' => 'password'
+            )
+        );
+
+        $crawler = $this->client->followRedirect();
+        
+        $form = $crawler->selectButton('Create')->form();
+        
+        $crawler = $this->client->submit(
+            $form,
+            array(
+                'estore_shopbundle_categorytype[name]' => 'TestCat',
+                'estore_shopbundle_categorytype[description]' => 'Lorem ipsum'
+            )
+        );
+        
+        $crawler = $this->client->followRedirect();
+        
+        $this->assertTrue($crawler->filter('html:contains("TestCat")')->count() > 0);
+    }
+
+    /**
+     * Test editing existing category record
+     */
+    public function testEditCategory()
+    {
+        $crawler = $this->client->request('GET', '/admin/categories/edit/9');
+        $crawler = $this->client->followRedirect();
+        
+        $this->assertTrue($crawler->filter('legend:contains("Login Form")')->count() > 0);
+        
+        $form = $crawler->selectButton('Login')->form();
+
+        $crawler = $this->client->submit(
+            $form,
+            array(
+                '_username' => 'okram666',
+                '_password' => 'password'
+            )
+        );
+
+        $crawler = $this->client->followRedirect();
+        
+        $this->assertTrue($crawler->filter('html:contains("Pants")')->count() > 0);
+        
+        $form = $crawler->selectButton('Edit')->form();
+        
+        $crawler = $this->client->submit(
+            $form,
+            array(
+                'estore_shopbundle_categorytype[name]' => 'TestCat',
+                'estore_shopbundle_categorytype[description]' => 'Lorem ipsum'
+            )
+        );
+        
+        $crawler = $this->client->followRedirect();
+        
+        $this->assertTrue($crawler->filter('html:contains("TestCat")')->count() > 0);
+    }    
     
     /**
      * 

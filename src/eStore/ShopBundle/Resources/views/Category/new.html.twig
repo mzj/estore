@@ -7,7 +7,7 @@
     <form action="{{ path('eStoreShopBundleAdmin_category_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
         <p>
-            <button type="submit">Create</button>
+            <input type="submit" name="submit_category" value="Create">
         </p>
     </form>
 

@@ -8,7 +8,8 @@
 
 namespace eStore\ShopBundle\Tests\Controller;
 
-use Liip\FunctionalTestBundle\Test\WebTestCase;
+use Liip\FunctionalTestBundle\Test\WebTestCase,
+    eStore\ShopBundle\DataFixtures\ORM\UserFixtures;
 
 /**
  * Functional tests for Category controller
@@ -68,8 +69,8 @@ class CategoryControllerTest extends WebTestCase
         $crawler = $this->client->submit(
             $form,
             array(
-                '_username' => 'okram666',
-                '_password' => 'password'
+                '_username' => UserFixtures::USERNAME,
+                '_password' => UserFixtures::PASSWORD
             )
         );
 
@@ -93,8 +94,8 @@ class CategoryControllerTest extends WebTestCase
         $crawler = $this->client->submit(
             $form,
             array(
-                '_username' => 'okram666',
-                '_password' => 'password'
+                '_username' => UserFixtures::USERNAME,
+                '_password' => UserFixtures::PASSWORD
             )
         );
 
@@ -125,8 +126,8 @@ class CategoryControllerTest extends WebTestCase
         $crawler = $this->client->submit(
             $form,
             array(
-                '_username' => 'okram666',
-                '_password' => 'password'
+                '_username' => UserFixtures::USERNAME,
+                '_password' => UserFixtures::PASSWORD
             )
         );
 
@@ -157,8 +158,8 @@ class CategoryControllerTest extends WebTestCase
         $crawler = $this->client->submit(
             $form,
             array(
-                '_username' => 'okram666',
-                '_password' => 'password'
+                '_username' => UserFixtures::USERNAME,
+                '_password' => UserFixtures::PASSWORD
             )
         );
 
@@ -189,8 +190,8 @@ class CategoryControllerTest extends WebTestCase
         $crawler = $this->client->submit(
             $form,
             array(
-                '_username' => 'okram666',
-                '_password' => 'password'
+                '_username' => UserFixtures::USERNAME,
+                '_password' => UserFixtures::PASSWORD
             )
         );
 
@@ -226,8 +227,8 @@ class CategoryControllerTest extends WebTestCase
         $crawler = $this->client->submit(
             $form,
             array(
-                '_username' => 'okram666',
-                '_password' => 'password'
+                '_username' => UserFixtures::USERNAME,
+                '_password' => UserFixtures::PASSWORD
             )
         );
 

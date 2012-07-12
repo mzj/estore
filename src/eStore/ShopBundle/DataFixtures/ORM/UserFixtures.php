@@ -21,6 +21,16 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
      * @var ContainerInterface 
      */
     private $container;
+    
+    /**
+     * 
+     */
+    const USERNAME = 'okram666';
+    
+    /**
+     * 
+     */
+    const PASSWORD = 'password';
 
     /**
      * 
@@ -41,9 +51,9 @@ class UserFixtures extends AbstractFixture implements OrderedFixtureInterface, C
         $userManager = $this->container->get('fos_user.user_manager');
         $user = $userManager->createUser();
         
-        $user->setUsername('okram666');
+        $user->setUsername(self::USERNAME);
         $user->setEmail('markozjovanovic@gmail.com');
-        $user->setPlainPassword('password');
+        $user->setPlainPassword(self::PASSWORD);
         $user->setEnabled(true);
         $user->addRole(User::ROLE_SUPER_ADMIN);
         

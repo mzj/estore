@@ -4,9 +4,9 @@
  */
 namespace eStore\ShopBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\ORM\Mapping as ORM,
+    Doctrine\Common\Collections\ArrayCollection,
+    Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * eStore\ShopBundle\Entity\Product

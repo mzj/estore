@@ -84,10 +84,10 @@ class ApiController extends Controller
             'products' => $products,
             'cart' => $cartProducts,
             'pagerfanta' => array(
-                'currentPage'  => $pagedProducts->getCurrentPage(),
-                'nbPages'      => $pagedProducts->getNbPages(), 
-                'nbResults'    => $pagedProducts->getNbResults(),
-                )
+                'currentPage' => $pagedProducts->getCurrentPage(),
+                'nbPages'     => $pagedProducts->getNbPages(),
+                'nbResults'   => $pagedProducts->getNbResults()
+            )
           ));
         
         $view->setTemplate('eStoreShopBundle:Api:getProducts.html.twig');

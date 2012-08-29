@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM,
     Gedmo\Mapping\Annotation as Gedmo,
     JMS\SerializerBundle\Annotation\ExclusionPolicy,
     JMS\SerializerBundle\Annotation\Exclude;
-
+        
 /**
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="eStore\ShopBundle\Repository\CategoryRepository")
@@ -101,7 +101,8 @@ class Category
     private $indentName;
     private $indentNameFilter;
     
-
+    
+    
     public function __construct() 
     {
         $this->products = new ArrayCollection();
@@ -348,4 +349,7 @@ class Category
     {
         return $this->products;
     }
+    
+    
+
 }

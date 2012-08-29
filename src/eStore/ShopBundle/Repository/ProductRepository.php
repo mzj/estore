@@ -124,6 +124,7 @@ class ProductRepository extends EntityRepository
         
         $query = $this->_em->createQuery($dql);
         
+       
         
         $query->setParameters($parameters);
         
@@ -144,7 +145,7 @@ class ProductRepository extends EntityRepository
                                    ");
          $query->setParameter(1, $id);
          $cat = $query->getSingleResult();
-         //exit(print_r($cat));
+         
          return $cat;
     }
 }

@@ -19,7 +19,8 @@ class CartController extends Controller
     public function viewCartAction()
     {     
         $cart = $this->getCart();
-        $productsIds = $cart->getProducts();
+        $cartProducts = $cart->getProducts();
+        $productsIds  = $cart->getProductsIds();     
         
         $em = $this->getDoctrine()
                    ->getEntityManager();
@@ -27,7 +28,10 @@ class CartController extends Controller
         $repo = $em->getRepository('eStoreShopBundle:Product');
         $products = $repo->getProductById($productsIds);
         
-        return $this->render('eStoreShopBundle:Cart:view.html.twig', array('products' => $products));
+        return $this->render('eStoreShopBundle:Cart:view.html.twig', array(
+            'products' => $products,
+            'cart' => $cart
+            ));
     }
     
     

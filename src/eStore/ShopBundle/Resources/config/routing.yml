@@ -50,6 +50,18 @@ eStoreShopBundle_emptyCart:
     requirements:
         _method:  GET
         
+eStoreShopBundle_orderStatus:
+    pattern:  /order/status
+    defaults: { _controller: eStoreShopBundle:Order:orderStatus }
+    requirements:
+        _method:  POST   
+        
+eStoreShopBundle_order:
+    pattern:  /order
+    defaults: { _controller: eStoreShopBundle:Order:order }
+    requirements:
+        _method:  POST 
+        
 eStoreShopBundleApi:
     resource: "@eStoreShopBundle/Resources/config/routing_api.yml"
     prefix:   /api

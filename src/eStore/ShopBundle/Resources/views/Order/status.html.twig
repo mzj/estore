@@ -27,13 +27,16 @@
 
 {% block main %}
     
-    <form method="post" action="{{ path('eStoreShopBundle_orderStatus') }}">
+    <form method="post" action="{{ path('eStoreShopBundle_order') }}">
         {% for product in products %}
-            {{ product }} - 
-            <input type="text" value="{{ cart.quantity(product.id) }}" name="{{ product.id }}">
+            {{ product }} 
+            - quantity: {{ cart.quantity(product.id) }} 
+            - price: {{ product.price }}$ = {{ product.price * cart.quantity(product.id) }}$
             <br /> 
         {% endfor %}
-            <input type="submit">
+        ---------------------------------------------------------------------<br /> 
+        Sum: 546455$<br /> 
+        <input type="submit" value="Order">
     </form>
 
 {% endblock %}

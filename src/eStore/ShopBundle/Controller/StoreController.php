@@ -98,7 +98,7 @@ class StoreController extends Controller
         $helper = $this;
         
         /**
-         * Generate hierarchical categories menu with unorderd list
+         * Generate hierarchical categories menu with unordered list
          */
         $categories = $repo->buildTree($categories, array('decorate' => true, 
                     'nodeDecorator' => function($node) use ($helper) {

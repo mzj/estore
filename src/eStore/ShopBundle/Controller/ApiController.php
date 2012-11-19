@@ -4,7 +4,7 @@
  * Desc: RESTFul Api controller - Uses FOSRestBundle for content negotiation
  * as well as serialization of the entities 
  * Author: markozjovanovic@gmail.com 
- * Date: Dec. 2011
+ * Date: Aug. 2012
  */
 
 namespace eStore\ShopBundle\Controller;
@@ -29,36 +29,22 @@ class ApiController extends Controller
      * @param int $page
      * @return Response 
      */
-    public function getProductsAction(Request $request)
+    public function getProductsAction()
     {
-        $search = $request->query->get('search');
-        $colours = $request->query->get('colours');
-        $gender = $request->query->get('gender');
-        $size = $request->query->get('size');
-        $productsPerPage = $request->query->get('ppp');
-        $orderByPrice = $request->query->get('obp');
-        $priceMin = $request->query->get('minprice');
-        $priceMax = $request->query->get('maxprice');
-        $colours = $request->query->get('colours');
-        $category = $request->query->get('category');
-        $page = $request->query->get('page');
-        $page = $page ? $page : 1;
-        $cartCont = $this->container->get('estore_shop.cart.controller');
-        $cart = $cartCont->getCart();
-        $cartProducts = $cart->getProducts();
+        $productsPerPage = $this->getParam('ppp');
+        $page = $this->getPage();
         
         $params = array(
-                'search' => $search, 
-                'colours' => $colours, 
-                'gender' => $gender, 
-                'size' =>  $size, 
+                'search'          => $this->getParam('search'), 
+                'colours'         => $this->getParam('colours'), 
+                'gender'          => $this->getParam('gender'), 
+                'size'            => $this->getParam('size'), 
+                'orderByPrice'    => $this->getParam('obp'), 
+                'priceMin'        => $this->getParam('minprice'), 
+                'priceMax'        => $this->getParam('maxprice'), 
+                'category'        => $this->getParam('category'), 
                 'productsPerPage' => $productsPerPage, 
-                'orderByPrice' => $orderByPrice, 
-                'priceMin' => $priceMin, 
-                'priceMax' => $priceMax, 
-                'page' => $page,
-                'colours' => $colours,
-                'category' => $category
+                'page'            => $page,
             );
         
         $em = $this->getDoctrine()
@@ -82,7 +68,7 @@ class ApiController extends Controller
         $view = View::create();
         $view->setData(array(
             'products' => $products,
-            'cart' => $cartProducts,
+            'cart' => $this->getCartProducts(),
             'pagerfanta' => array(
                 'currentPage' => $pagedProducts->getCurrentPage(),
                 'nbPages'     => $pagedProducts->getNbPages(),
@@ -93,5 +79,39 @@ class ApiController extends Controller
         $view->setTemplate('eStoreShopBundle:Api:getProducts.html.twig');
         
         return $view;
+    }
+    
+    /**
+     * 
+     */
+    private function getParam($paramName) 
+    {
+        $request = $this->getRequest();
+        
+        return $request->query->get($paramName);
+    }
+    
+    /**
+     * Get current page - fallback on 1
+     * 
+     * @return int
+     */
+    private function getPage()
+    {
+        $page = $this->getParam('page');
+        $page = $page ? $page : 1;
+        
+        return $page;
+    }
+    
+    /**
+     * 
+     */
+    private function getCartProducts()
+    {
+        $cartCont = $this->container->get('estore_shop.cart.controller');
+        $cart = $cartCont->getCart();
+        
+        return $cart->getProductsIds(); 
     }
 }

@@ -18,20 +18,20 @@ class Cart
     {        
         $productId = (int)$productId;
         
-        if(!$this->isUnique($productId)) {
+        if(!empty($this->products[$productId])) {
             throw new AlreadyExistException();
         }
         
-        $this->products[] = $productId;
+        $this->products[$productId] = 1;
     }
     
     /**
      *
      * @param type $id 
      */
-    public function remove($id) 
+    public function remove($productId) 
     {
-        $this->products = $this->removeByValue($this->products, $id);
+        unset($this->products[$productId]);
     }
     
     /**
@@ -41,6 +41,16 @@ class Cart
     public function getProducts()
     {
         return $this->products;
+    }
+    
+    
+    /**
+     *
+     * @return type 
+     */
+    public function getProductsIds()
+    {
+        return array_keys($this->products);
     }
     
     /**
@@ -53,36 +63,18 @@ class Cart
     }
     
     /**
-     *
-     * @param type $array
-     * @param type $val
-     * @param type $preserve_keys
-     * @return type 
+     * 
      */
-    private function removeByValue($array, $val = '', $preserve_keys = false) 
+    public function getQuantity($productId)
     {
-	if (empty($array) || !is_array($array)) return null;
-	if (!in_array($val, $array)) return $array;
-
-	foreach($array as $key => $value) {
-		if ($value == $val) unset($array[$key]);
-	}
-
-	return ($preserve_keys === true) ? $array : array_values($array);
+        return $this->products[$productId];
     }
     
     /**
-     *
-     * @param type $id
-     * @return type 
+     * 
      */
-    private function isUnique($id)
+    public function setQuantity($productId, $quantity)
     {
-        if (in_array($id, $this->products)) {
-            return false;
-        } 
-        
-        return true;
+        $this->products[$productId] = $quantity;
     }
-
 }

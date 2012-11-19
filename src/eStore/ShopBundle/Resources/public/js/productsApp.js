@@ -1,3 +1,11 @@
+/**
+ * File: productsApp.js
+ * Desc: Main application for real time products presentation/filtering
+ * Using backbone.js as structure framework
+ * Author: markozjovanovic@gmail.com	
+ * Date: Nov. 2012
+ */
+
 function productsApp() {
     var baseUrl = location.href;
     var hash = window.location.hash;
@@ -13,13 +21,13 @@ function productsApp() {
     var pagerfanta;
     
     /**
-     *
+     * Product model
      */
     var Product = Backbone.Model.extend({
     });
 
     /**
-     *
+     * Products collection
      */
     var Products = Backbone.Collection.extend({
         
@@ -43,7 +51,7 @@ function productsApp() {
 
 
     /**
-     *
+     * Backbone product view
      */	
     var ProductsView = Backbone.View.extend({
         template: $("#products-template").html(),
@@ -72,7 +80,7 @@ function productsApp() {
     });
     
     /**
-     *
+     * Backbone filter view
      */
     var FilterView = Backbone.View.extend({
         el: '#formFilter',
@@ -99,7 +107,7 @@ function productsApp() {
     
 
     /**
-     *
+     * Application - backbone router
      */
     var App = Backbone.Router.extend({
         views: {},
@@ -184,6 +192,9 @@ function productsApp() {
         };
     }
     
+    /**
+     * Adding/removing from cart
+     */
     function cartAction(el)
     {
         var id  = $(el).attr('id');

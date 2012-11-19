@@ -118,11 +118,10 @@ a.login:hover {
 
 #page {
 	width: 960px;
-	margin-left:auto;
-	margin-right:auto;
 	background-color:#FFF;
 	margin-top: 50px;
 	padding-bottom: 150px;
+        margin-left: 25%;
 }
 
 /* Clear Fix - Need for web kit based browsers */
@@ -156,7 +155,7 @@ a.login:hover {
 }
 
 #top-nav li:first-child {
-	margin-left:-40px;
+	margin-left:-140px;
 }
 
 #top-nav li:hover a {

@@ -29,8 +29,16 @@ class ProductController extends Controller
          
         $repo = $em->getRepository('eStoreShopBundle:Product');
         $product = $repo->getProductById($id);
+        $cartCont = $this->container->get('estore_shop.cart.controller');
+        $cart = $cartCont->getCart();
+        $productsCart = $cart->getProducts();
+        if(array_key_exists($product->getId(), $productsCart)) {
+            $inCart = true;
+        } else {
+            $inCart = false;
+        }
       
-        return $this->render('eStoreShopBundle:Product:view.html.twig', array( 'product' => $product ));
+        return $this->render('eStoreShopBundle:Product:view.html.twig', array( 'product' => $product, 'inCart' => $inCart ));
     }
     
     /**

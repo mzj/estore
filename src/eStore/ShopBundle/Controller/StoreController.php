@@ -46,7 +46,7 @@ class StoreController extends Controller
     {
         $response = $this->render('eStoreShopBundle:Store:about.html.twig');
         $response->setSharedMaxAge(60);
-        
+
         return $response;
     }
     

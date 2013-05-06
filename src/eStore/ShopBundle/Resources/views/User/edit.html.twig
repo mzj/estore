@@ -3,23 +3,9 @@
 {% block container %}
     
 
-    <form action="{{ path('eStoreShopBundleAdmin_brand_update', { 'id': brand.id }) }}" method="post" {{ form_enctype(form) }} id="product-edit">
+    <form action="{{ path('eStoreShopBundleAdmin_user_update', { 'id': user.id }) }}" method="post" {{ form_enctype(form) }} id="product-edit">
         
-        {{ form_errors(form) }}
-        <fieldset class="main">
-            <legend>Brand edit</legend>
-            
-            <fieldset class="nested"> 
-                <legend>Basic data</legend>
-                <ol>
-                    <li>
-                        {{ form_label(form.name) }}
-                        {{ form_errors(form.name) }}
-                        {{ form_widget(form.name) }}
-                    </li>
-                </ol>
-            </fieldset>
-        {{ form_rest(form) }}
+        {{ form_widget(form) }}
         
         <p>
             <input type="submit" value="Edit"/>

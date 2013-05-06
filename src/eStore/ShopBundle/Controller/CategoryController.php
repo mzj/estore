@@ -172,7 +172,7 @@ class CategoryController extends Controller
         
         return $this->render('eStoreShopBundle:Category:edit.html.twig', array(
             'category'    => $category,
-            'edit_form'   => $editForm->createView()
+            'form'   => $editForm->createView()
         ));        
     }
     
@@ -207,7 +207,7 @@ class CategoryController extends Controller
 
         return $this->render('eStoreShopBundle:Category:edit.html.twig', array(
             'category'    => $category,
-            'edit_form'   => $editForm->createView()
+            'form'   => $editForm->createView()
         ));        
     }
 }

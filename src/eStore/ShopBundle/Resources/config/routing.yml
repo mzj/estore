@@ -52,9 +52,7 @@ eStoreShopBundle_emptyCart:
         
 eStoreShopBundle_orderStatus:
     pattern:  /order/status
-    defaults: { _controller: eStoreShopBundle:Order:orderStatus }
-    requirements:
-        _method:  POST   
+    defaults: { _controller: eStoreShopBundle:Order:orderStatus }  
         
 eStoreShopBundle_order:
     pattern:  /order

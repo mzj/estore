@@ -2,41 +2,79 @@
 
 {% block container %}
 
-   <h2>Product creation</h2>
-
     <form action="{{ path('eStoreShopBundleAdmin_product_create') }}" method="post" {{ form_enctype(form) }}>
        
+          {{ form_errors(form) }}
+        <fieldset class="main">
+            <legend>Product edit</legend>
             
-        {{ form_errors(form) }}
+            <fieldset class="nested"> 
+                <legend>Basic data</legend>
+                <ol>
+                    <li>
+                        {{ form_label(form.name) }}
+                        {{ form_errors(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.code) }}
+                        {{ form_errors(form.code) }}
+                        {{ form_widget(form.code) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.active) }}
+                        {{ form_errors(form.active) }}
+                        {{ form_widget(form.active) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.description) }}
+                        {{ form_errors(form.description) }}
+                        {{ form_widget(form.description) }}
+                    </li>                    
+                    <li>
+                        {{ form_label(form.price) }}
+                        {{ form_errors(form.price) }}
+                        {{ form_widget(form.price) }}
+                    </li>
+                </ol>
+            </fieldset>
+  
+            
+            <fieldset class="nested"> 
+                <legend>Additional data</legend>
+                <ol>
+                    <li>
+                        {{ form_widget(form.gender) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.brand) }}
+                        {{ form_errors(form.brand) }}
+                        {{ form_widget(form.brand) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.categories) }}
+                        {{ form_errors(form.categories) }}
+                        {{ form_widget(form.categories) }}
+                    </li>
+                </ol>
+            </fieldset>
 
-        <fieldset style="border: 1px solid #ccc;"> <legend>Basic data</legend>
-            {{ form_label(form.name) }}
-            {{ form_errors(form.name) }}
-            {{ form_widget(form.name) }}
-            <br />
-            {{ form_label(form.description) }}
-            {{ form_errors(form.description) }}
-            {{ form_widget(form.description) }}
-            <br />  
-            {{ form_label(form.price) }}
-            {{ form_errors(form.price) }}
-            {{ form_widget(form.price) }}
-        </fieldset>
-
-        <fieldset style="border: 1px solid #ccc;"> <legend>Additional data</legend>
-            {{ form_row(form.categories) }}
-        </fieldset>
+            <fieldset class="nested"> 
+                <legend>Image</legend>
+                
+                <ol>
+                    <li>
+                        {{ form_label(form.file) }}
+                        {{ form_errors(form.file) }}
+                        {{ form_widget(form.file) }}
+                    </li>
+                </ol>
+            </fieldset>
         
-       <fieldset style="border: 1px solid #ccc;"> <legend>Image</legend>
-            {{ form_label(form.file) }}
-            {{ form_errors(form.file) }}
-            {{ form_widget(form.file) }}
-        </fieldset>
-
         {{ form_rest(form) }}
+        
         <p>
-            <input type="submit" value="Create"/>
-        </p>
+            <input type="submit" value="Edit"/>
+        </p> 
     </form>
-   
 {% endblock %}

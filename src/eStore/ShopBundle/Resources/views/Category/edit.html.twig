@@ -2,26 +2,38 @@
 
 {% block container %}
 
-    <h2>Category edit</h2>
 
-    <form action="{{ path('eStoreShopBundleAdmin_category_update', { 'id': category.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-        {{ form_widget(edit_form) }}
+    <form action="{{ path('eStoreShopBundleAdmin_category_update', { 'id': category.id }) }}" method="post" {{ form_enctype(form) }}>
+        
+        {{ form_errors(form) }}
+        <fieldset class="main">
+            <legend>Category edit</legend>
+            
+            <fieldset class="nested"> 
+                <legend>Basic data</legend>
+                <ol>
+                    <li>
+                        {{ form_label(form.name) }}
+                        {{ form_errors(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.description) }}
+                        {{ form_errors(form.description) }}
+                        {{ form_widget(form.description) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.parent) }}
+                        {{ form_errors(form.parent) }}
+                        {{ form_widget(form.parent) }}
+                    </li>
+                </ol>
+            </fieldset>
+        {{ form_rest(form) }}
+        
+        
         <p>
-            <input type="submit" value="Edit">
-        </p>
+            <input type="submit" value="Edit"/>
+        </p> 
     </form>
-
-    <ul class="record_actions">
-        <li>
-            <a href="">
-                Back to the list
-            </a>
-        </li>
-        <li>
-            <form action="" method="post">
-                
-                <input type="submit" value="Delete">
-            </form>
-        </li>
-    </ul>
 {% endblock %}

@@ -26,17 +26,21 @@
 {% endblock %}
 
 {% block main %}
-    
-    <form method="post" action="{{ path('eStoreShopBundle_order') }}">
-        {% for product in products %}
-            {{ product }} 
-            - quantity: {{ cart.quantity(product.id) }} 
-            - price: {{ product.price }}$ = {{ product.price * cart.quantity(product.id) }}$
-            <br /> 
-        {% endfor %}
-        ---------------------------------------------------------------------<br /> 
-        Sum: 546455$<br /> 
-        <input type="submit" value="Order">
-    </form>
-
+    <div style="margin-top: 50px;">
+        <form method="post" action="{{ path('eStoreShopBundle_order') }}">
+            {% set summ = 0 %}
+            {% for product in products %}
+                {% set quantity = cart.quantity(product.id) %}
+                {% set price = product.price %}
+                {% set miniSum = price * quantity %}
+                {% set summ = summ + miniSum %}
+                {{ product }} -- {{ price }}$ * {{ quantity }} = <span style="font-weight: bold;">{{ miniSum }}$</span>
+                <br /> 
+            {% endfor %}
+            --------------------------------------------------------------<br />
+            Sum: <span style="color: red; font-weight: bold;">{{ summ }}$</span><br /> <br /> 
+            {{ form_widget(cform) }}
+            <input type="submit" value="Order">
+        </form>
+    </div>
 {% endblock %}

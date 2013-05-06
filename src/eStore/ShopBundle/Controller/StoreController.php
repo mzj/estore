@@ -57,7 +57,7 @@ class StoreController extends Controller
     public function contactAction()
     {
         $contact = new Contact();
-        $form = $this->createForm(new ContactType());
+        $form = $this->createForm(new ContactType(), $contact);
 
         $request = $this->getRequest();
         if ($request->getMethod() == 'POST') {
@@ -71,11 +71,11 @@ class StoreController extends Controller
                     ->setBody($this->renderView('eStoreShopBundle:Store:contactEmail.txt.twig', array('contact' => $contact)));
                 $this->get('mailer')->send($message);
 
-                $this->get('session')->setFlash('estore-notice', 'Your contact data was successfully sent. Thank you!');
+                $this->get('session')->setFlash('notice', 'Your contact data was successfully sent. Thank you!');
 
                 // Redirect - This is important to prevent users re-posting
                 // the form if they refresh the page
-                return $this->redirect($this->generateUrl('eStoreShopBundle_contact'));
+                return $this->redirect($this->generateUrl('eStoreShopBundle_home'));
             }
         }
         return $this->render('eStoreShopBundle:Store:contact.html.twig', 

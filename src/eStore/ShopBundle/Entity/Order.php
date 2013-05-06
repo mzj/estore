@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * eStore\ShopBundle\Entity\Product
+ * eStore\ShopBundle\Entity\Order
  *
  * @ORM\Table(name="estore_order")
  * @ORM\Entity(repositoryClass="eStore\ShopBundle\Repository\OrderRepository")
@@ -28,14 +28,22 @@ class Order
     
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Garment", inversedBy="orders")
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="orders")
      */
-    private $garment;
+    private $product;
+    
     
     /**
      * @ORM\Column(name="quantity", type="integer")
      */
     private $quantity;
+    
+    
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="orders")
+     */
+    private $customer;
     
     
     /**
@@ -73,16 +81,16 @@ class Order
      *
      * @return integer 
      */
-    public function getGarment()
+    public function setProduct($product)
     {
-        return $this->garment;
+        return $this->product = $product;
     }
     
     /**
      */
-    public function setGarment($garment)
+    public function setCustomer($customer)
     {
-        $this->garment = $garments;
-        $garment->addOrder($this);
+        $this->customer = $customer;
+        //$customer->addOrder($this);
     }
 }

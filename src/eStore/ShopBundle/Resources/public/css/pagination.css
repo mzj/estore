@@ -12,6 +12,7 @@
     width: 100%;
     text-align: center;
     font-size: 13px;
+    margin-bottom: 10px;
     
 }
 
@@ -26,9 +27,13 @@
     height:15px;
 }
 
+#pagination li a {
+    color: #333;
+    text-decoration: none;
+}
 
 #pagination li:hover {
     background-color: #FAA;
-    color: #FFF;
+    font-weight: bold;
     cursor: pointer;
 }

@@ -9,7 +9,7 @@
             {{ app.session.flash('estore-notice') }}
         </div>
     {% endif %}
-    <p>Want to contact symblog?</p>
+    <p><h2 class="contact-title">Contact eStore</h2></p>
 
     <form action="{{ path('eStoreShopBundle_contact') }}" method="post" {{ form_enctype(form) }} class="estore">
         {{ form_errors(form) }}
@@ -21,7 +21,7 @@
 
         {{ form_rest(form) }}
 
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Contact" />
     </form>
 
 {% endblock %}

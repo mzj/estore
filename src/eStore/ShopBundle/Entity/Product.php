@@ -117,6 +117,11 @@ class Product
      * @ORM\OneToMany(targetEntity="Garment", mappedBy="product", cascade={"all"},orphanRemoval=true)
      */
     private $garments;
+   
+    /**
+     * @ORM\OneToMany(targetEntity="Order", mappedBy="product")
+     */
+    private $orders;
     
     /**
      *
@@ -309,27 +314,103 @@ class Product
     {
         return $this->updated;
     }
+    
+    
+    
+        /**
+* Add categories
+*
+* @param MZJ\YabBundle\Entity\Category $categories
+* @return Post
+*/
+    public function addCategorie(\eStore\ShopBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    
+        return $this;
+    }
+
+    /**
+* Remove categories
+*
+* @param MZJ\YabBundle\Entity\Category $categories
+*/
+    public function removeCategorie(\eStore\ShopBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+* Get categories
+*
+* @return Doctrine\Common\Collections\Collection
+*/
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+    
+    
+    public function removeCategories() 
+    {
+        foreach($this->categories as $cat) {
+            $this->categories->removeElement($cat);
+        }
+    }
+    /**
+* Add categories
+*
+* @param MZJ\YabBundle\Entity\Category $categories
+* @return Post
+*/
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+    
+        return $this;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /**
      * Add categories
      *
      * @param eStore\ShopBundle\Entity\Category $categories
      */
-    public function addCategory(\eStore\ShopBundle\Entity\Category $category)
+    /*public function addCategory(\eStore\ShopBundle\Entity\Category $category)
     {
         //$category->addProduct($this);
         $this->categories[] = $category;
-    }
+    }*/
 
+
+    
     /**
      * Get categories
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getCategories()
+    /*public function getCategories()
     {
         return $this->categories;
-    }
+    }*/
+    
+    
+    
 
     /**
      * Set slug
@@ -473,7 +554,9 @@ class Product
     public function removeUpload()
     {
         if ($file = $this->getAbsolutePath()) {
-            unlink($file);
+            if(file_exists($file)) {
+                unlink($file);
+            }
         }
     }
 

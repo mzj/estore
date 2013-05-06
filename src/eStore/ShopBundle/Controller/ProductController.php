@@ -149,6 +149,10 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $product = $em->getRepository('eStoreShopBundle:Product')->find($id);
         
+        $product->removeCategories();
+        $em->persist($product);
+        $em->flush();
+        
         $em->remove($product);
         $em->flush();
         

@@ -9,10 +9,9 @@
     {% endif %}
 
     <p class="create create-product">
-        <a href="">
-            <img src="/bundles/estoreshop/img/add-gray.png" />
-            Create a new entry
-        </a>
+            <a href="{{ path('eStoreShopBundleAdmin_user_new') }}"> 
+                <img src="/bundles/estoreshop/img/add-gray.png" />Create a new entry
+            </a>
     </p>
     <table id="entity-list" class="records_list">
         <caption><h2>User list</h2></caption>
@@ -22,7 +21,6 @@
                 <th>Username</th>
                 <th>Email</th>
                 <th>Roles</th>
-                <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </thead>
@@ -42,11 +40,9 @@
                         {% endif %}
                     {% endfor %}
                 </td>
+                
                 <td>
-                    <a href="{{ path('eStoreShopBundleAdmin_brand_edit', {'id' : user.id}) }}">Edit</a>
-                </td>
-                <td>
-                    <a href="{{ path('eStoreShopBundleAdmin_brand_delete', {'id' : user.id}) }}">Delete</a>
+                    <a href="{{ path('eStoreShopBundleAdmin_user_delete', {'id' : user.id}) }}">Delete</a>
                 </td>
             </tr>
             {% else %}

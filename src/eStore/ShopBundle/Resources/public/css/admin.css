@@ -368,7 +368,7 @@ div.buttonsContainer
 
 fieldset.nested select {
     width: 300px;
-    height: 200px;
+    /*height: 200px;*/
 }
 
 #estore_shopbundle_producttype_gender label {

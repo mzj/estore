@@ -2,13 +2,50 @@
 
 {% block container %}
 
-   <h2>Register Admin</h2>
 
     <form action="{{ path('eStoreShopBundleAdmin_user_create') }}" {{ form_enctype(form) }} method="POST">
-        {{ form_widget(form) }}
-        <div>
-            <input type="submit" value="Create User" />
-        </div>
+        
+        {{ form_errors(form) }}
+        <fieldset class="main">
+            <legend>Create Administrator</legend>
+
+            <fieldset class="nested"> 
+                <legend>Basic data</legend>
+            
+                <ol>
+                    <li>
+                        {{ form_label(form.username) }}
+                        {{ form_errors(form.username) }}
+                        {{ form_widget(form.username) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.email) }}
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email) }}
+                    </li>
+                   <li>
+                        {{ form_label(form.plainPassword.first) }}
+                        {{ form_errors(form.plainPassword.first) }}
+                        {{ form_widget(form.plainPassword.first) }}
+                    </li>                    
+                   <li>
+                        {{ form_label(form.plainPassword.second) }}
+                        {{ form_errors(form.plainPassword.second) }}
+                        {{ form_widget(form.plainPassword.second) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.roles) }}
+                        {{ form_errors(form.roles) }}
+                        {{ form_widget(form.roles) }}
+                    </li>
+                </ol>
+            
+            {{ form_rest(form) }}
+          
+        </fieldset>
+         <p>
+            <input type="submit" value="Add" />
+         </p>
     </form>
    
 {% endblock %}

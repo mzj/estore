@@ -203,3 +203,10 @@ eStoreShopBundleAdmin_user_create:
     defaults: { _controller: eStoreShopBundle:User:create }
     requirements:
         _method:  POST
+        
+eStoreShopBundleAdmin_user_delete:
+    pattern:  /users/delete/{id}
+    defaults: { _controller: eStoreShopBundle:User:delete }
+    requirements:
+        _method:  GET
+        id: \d+

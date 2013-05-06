@@ -80,6 +80,7 @@ h3 {
 .cart-items-number {
 	font-size:20px;
 	font-weight:bold;
+        color: #666;
 }
 
 .signup {
@@ -100,8 +101,9 @@ a.login:hover {
 }
 
 .checkout-link {
-    margin-top: 5px;
+    margin-top: 10px;
     display: block;
+    color: #666;
 }
 
 .shadow {
@@ -299,7 +301,7 @@ a.login:hover {
 }
 
 #footer-content {
-	margin-left:31%;
+	margin-left:36%;
 	margin-top:10px;	
 }
 
@@ -327,3 +329,5 @@ form.estore input[type="email"]
 form.estore textarea { width: 500px; height: 150px; line-height: 26px; font-size: 20px; }
 form.estore input[type="submit"] { margin-left: 110px; width: 508px; line-height: 26px; font-size: 20px; min-height: 26px; }
 form.estore ul li { color: #ff0000; margin-bottom: 5px; }
+
+.contact-title {margin-bottom: 30px; margin-left:40%;}

@@ -6,7 +6,11 @@
  */
 namespace eStore\ShopBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller,
+    eStore\ShopBundle\Form\CustomerType,
+    eStore\ShopBundle\Entity\Customer,
+    eStore\ShopBundle\Entity\Order;
+
 /**
  * Description of OrderController
  *
@@ -19,6 +23,10 @@ class OrderController extends Controller
      */
     public function orderStatusAction()
     {
+        $customer = new Customer(); 
+        
+        $cform = $this->createForm(new CustomerType(), $customer);
+        
         $req = $this->getRequest();
         $cartC = $this->get('estore_shop.cart.controller');
         $cart = $cartC->getCart();
@@ -26,7 +34,7 @@ class OrderController extends Controller
         $productsIds  = $cart->getProductsIds();     
         
         foreach($productsIds as $pid) {
-            $quantity = $req->get($pid);
+            $quantity = $req->get($pid) >= 1 ? $req->get($pid) : 1;
             $cart->setQuantity($pid, $quantity);
         }
         $cartC->saveCart($cart);
@@ -39,7 +47,8 @@ class OrderController extends Controller
         
         return $this->render('eStoreShopBundle:Order:status.html.twig', array(
                 'products' => $products,
-                'cart' => $cart
+                'cart' => $cart,
+                'cform' => $cform->createView()
             ));
     }
     
@@ -48,7 +57,46 @@ class OrderController extends Controller
      */
     public function orderAction()
     {
-        
+        $customer  = new Customer();
+        $request = $this->getRequest();
+        $form    = $this->createForm(new CustomerType(), $customer);
+        $form->bindRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($customer);
+            
+            $cartC = $this->get('estore_shop.cart.controller');
+            $cart = $cartC->getCart();
+            
+            $products  = $cart->getProducts();     
+
+            foreach($products as $pid => $quantity) {
+                $repo = $em->getRepository('eStoreShopBundle:Product');
+                $product = $repo->find($pid);
+                
+                $order = new Order();
+                $order->setQuantity($quantity);
+                $order->setProduct($product);
+                $order->setCustomer($customer);
+                
+                $em->persist($order);
+            }
+            
+            $em->flush();
+            $this->get('session')->setFlash(
+                'notice',
+                'Your order was saved!'
+            );
+            $cartC->emptyCartAction();
+            return $this->redirect($this->generateUrl('eStoreShopBundle_home'));
+        }
+
+        $this->get('session')->setFlash(
+                'notice',
+                'There were some problems with your order!'
+            );
+        return $this->redirect($this->generateUrl('eStoreShopBundle_orderStatus'));
     }
 }
 

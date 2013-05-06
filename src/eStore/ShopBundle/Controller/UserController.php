@@ -16,7 +16,7 @@ class UserController extends Controller
     public function listAction()
     {       
         $em = $this->getDoctrine()->getEntityManager();
-        $users = $em->getRepository('eStoreShopBundle:User')->getUsersByRoles('ADMIN');
+        $users = $em->getRepository('eStoreShopBundle:User')->findAll();
         
         return $this->render('eStoreShopBundle:User:list.html.twig', array( 'users' => $users ));
 
@@ -84,67 +84,13 @@ class UserController extends Controller
     public function deleteAction($id) 
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $colour = $em->getRepository('eStoreShopBundle:Colour')->find($id);
+        $user = $em->getRepository('eStoreShopBundle:User')->find($id);
         
-        $em->remove($colour);
+        $em->remove($user);
         $em->flush();
         
-        $this->get('session')->setFlash('category-notice', 'Colour was removed successfully!');
+        $this->get('session')->setFlash('category-notice', 'User was removed successfully!');
         
-        return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_colour_list'));
-    }
-    
-    /**
-     *
-     * @param type $id
-     * @return type 
-     */
-    public function editAction($id) 
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $colour = $em->getRepository('eStoreShopBundle:Colour')->find($id);
-        if (!$colour) {
-            throw $this->createNotFoundException('Unable to find colour entity.');
-        }
-
-        $editForm = $this->createForm(new ColourType(), $colour);
-        
-        return $this->render('eStoreShopBundle:Colour:edit.html.twig', array(
-            'colour'  => $colour,
-            'form'     => $editForm->createView()
-        ));        
-    }
-    
-    /**
-     *
-     * @param type $id
-     * @return type 
-     */
-    public function updateAction($id) 
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $colour = $em->getRepository('eStoreShopBundle:Colour')->find($id);
-
-        if (!$colour) {
-            throw $this->createNotFoundException('Unable to find Colour entity.');
-        }
-
-        $editForm   = $this->createForm(new ColourType(), $colour);
-        $request = $this->getRequest();
-        $editForm->bindRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->persist($colour);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_colour_edit', array('id' => $id)));
-        }
-
-        return $this->render('eStoreShopBundle:Colour:edit.html.twig', array(
-            'colour' => $colour,
-            'form'    => $editForm->createView()
-        ));        
+        return $this->redirect($this->generateUrl('eStoreShopBundleAdmin_user_list'));
     }
 }

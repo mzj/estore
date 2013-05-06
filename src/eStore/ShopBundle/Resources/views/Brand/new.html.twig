@@ -2,23 +2,29 @@
 
 {% block container %}
 
-   <h2>Brand creation</h2>
 
-    <form action="{{ path('eStoreShopBundleAdmin_brand_create') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('eStoreShopBundleAdmin_brand_create') }}" method="post" {{ form_enctype(form) }} >
        
             
-        {{ form_errors(form) }}
-
-        <fieldset style="border: 1px solid #ccc;"> <legend>Basic data</legend>
-            {{ form_label(form.name) }}
-            {{ form_errors(form.name) }}
-            {{ form_widget(form.name) }}
-        </fieldset>
-
+ {{ form_errors(form) }}
+        <fieldset class="main">
+            <legend>Brand create</legend>
+            
+            <fieldset class="nested"> 
+                <legend>Basic data</legend>
+                <ol>
+                    <li>
+                        {{ form_label(form.name) }}
+                        {{ form_errors(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </li>
+                </ol>
+            </fieldset>
         {{ form_rest(form) }}
+        
         <p>
-            <input type="submit" value="Create"/>
-        </p>
+            <input type="submit" value="Add"/>
+        </p> 
     </form>
    
 {% endblock %}

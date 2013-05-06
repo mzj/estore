@@ -85,9 +85,14 @@
                 <!-- slider-wrapper end -->
         		</div>
                 
-                
                 <div id="products-wrapper">
-                	<h2>Popular products</h2>
+                    {% if app.session.hasFlash('notice') %}
+                        <div style="border:1px solid #ECECEC; background-color: #EBFFC1; height: 20px; margin-top: 10px; margin-bottom: 10px; padding: 10px;">
+                            {{ app.session.flash('notice') }}
+                        </div>
+                    {% endif %}
+                    
+                	<h2>Products</h2>
                     <div class="line line-products"></div>
                     
 

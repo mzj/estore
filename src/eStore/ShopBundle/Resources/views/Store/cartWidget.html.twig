@@ -1,6 +1,6 @@
 <p>
     {% if app.user %}
-        Hi <a href="{{ path('fos_user_profile_show') }}" style="color:#3F70B0;">{{ app.user.username }}</a> - 
+        Hi <!--<a href="{{ path('fos_user_profile_show') }}" style="color:#3F70B0;">-->{{ app.user.username }}<!--</a>--> - 
         <a href="{{ path('fos_user_security_logout') }}">logout!</a>
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('eStoreShopBundleAdmin_index') }}" class="checkout-link">Admin CP</a>
@@ -14,6 +14,6 @@
 <a href="{{ path('eStoreShopBundle_cart') }}">
     <img src="{{ asset('bundles/estoreshop/img/icon-cart.png') }}" /> <span class="cart-items-number"> {{ nbOfProducts }} </span> </a> items in cart
 
-<a href="{{ path('eStoreShopBundle_cart') }}" class="checkout-link" >Check out!</a>
+<!--<a href="{{ path('eStoreShopBundle_cart') }}" class="checkout-link" >Check out!</a>-->
 
 <br class="clear" />

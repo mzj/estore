@@ -339,7 +339,15 @@ class Category
         $product->addCategory($this);
         $this->products[] = $product;
     }
-
+    /**
+* Remove posts
+*
+* @param MZJ\YabBundle\Entity\Post $posts
+*/
+    public function removeProduct(\eStore\ShopBundle\Entity\Product $posts)
+    {
+        $this->products->removeElement($posts);
+    }
     /**
      * Get products
      *

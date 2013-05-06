@@ -2,21 +2,40 @@
 
 {% block container %}
 
-   <h2>Category creation</h2>
 
     <form action="{{ path('eStoreShopBundleAdmin_category_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
+               
+          
+        {{ form_errors(form) }}
+        <fieldset class="main">
+            <legend>Category create</legend>
+            
+            <fieldset class="nested"> 
+                <legend>Basic data</legend>
+                <ol>
+                    <li>
+                        {{ form_label(form.name) }}
+                        {{ form_errors(form.name) }}
+                        {{ form_widget(form.name) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.description) }}
+                        {{ form_errors(form.description) }}
+                        {{ form_widget(form.description) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.parent) }}
+                        {{ form_errors(form.parent) }}
+                        {{ form_widget(form.parent) }}
+                    </li>
+                </ol>
+            </fieldset>
+        {{ form_rest(form) }}
+        
+        
         <p>
-            <input type="submit" name="submit_category" value="Create">
-        </p>
+            <input type="submit" value="Add"/>
+        </p> 
     </form>
-
-    <ul class="record_actions">
-        <li>
-            <a href="">
-                Back to the list
-            </a>
-        </li>
-    </ul>
    
 {% endblock %}

@@ -62,7 +62,7 @@ class Garment
     private $quantity;
     
     /**
-     * @ORM\OneToMany(targetEntity="Order", mappedBy="garment")
+     * ORM\OneToMany(targetEntity="Order", mappedBy="garment")
      */
     private $orders;
     
